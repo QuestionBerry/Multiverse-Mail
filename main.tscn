@@ -1,0 +1,190 @@
+[gd_scene load_steps=20 format=3 uid="uid://3fqo2a6fx2k3"]
+
+[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_rrgje"]
+[ext_resource type="Script" path="res://ObjectRotation.gd" id="2_cg1sd"]
+[ext_resource type="Script" path="res://Package.gd" id="2_g54rq"]
+[ext_resource type="Script" path="res://ObjectMovement.gd" id="3_gyrf5"]
+[ext_resource type="Script" path="res://StickerPlacerNode.gd" id="4_6o6e0"]
+[ext_resource type="Script" path="res://Scale.gd" id="5_rbmrm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4necf"]
+size = Vector3(1.775, 1, 3.295)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nkdpu"]
+points = PackedVector3Array(-0.868057, -0.5, -1.59028, 0.882286, 0.5, 1.61035, 0.871311, -0.5, 1.59028, 0.882286, 0.5, -1.61035, -0.879032, 0.5, 1.61035, -0.879032, 0.5, -1.61035, 0.871311, -0.5, -1.59028, -0.868057, -0.5, 1.59028)
+
+[sub_resource type="Environment" id="Environment_blgyi"]
+background_mode = 1
+background_color = Color(0.376471, 0.517647, 0.988235, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5eho7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bt4l7"]
+lightmap_size_hint = Vector2i(9, 13)
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vvi38"]
+points = PackedVector3Array(-0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d45gu"]
+lightmap_size_hint = Vector2i(9, 13)
+size = Vector3(0.5, 0.98, 0.815)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_inkh0"]
+points = PackedVector3Array(-0.25, -0.482694, -0.402786, 0.25, 0.487003, 0.400244, -0.25, 0.482694, 0.396675, 0.25, 0.487003, -0.406355, 0.25, -0.487003, 0.400244, 0.25, -0.487003, -0.406355, -0.25, -0.482694, 0.396675, -0.25, 0.482694, -0.402786)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_luow8"]
+size = Vector3(0.166879, 0.183567, 0.00645095)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b73s3"]
+points = PackedVector3Array(-0.368262, -0.0725, -0.391111, 0.398255, 0.0808333, 0.426667, -0.401588, 0.0808333, 0.426667, 0.398255, 0.0808333, -0.426667, 0.364928, -0.0725, 0.391111, -0.401588, 0.0808333, -0.426667, -0.368262, -0.0725, 0.391111, 0.364928, -0.0725, -0.391111)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iht4u"]
+size = Vector3(0.79, 0.145, 0.84)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ktgbk"]
+size = Vector3(0.695, 0.02, 0.805)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ws8da"]
+size = Vector3(0.699978, 0.0385643, 0.783272)
+
+[node name="Main" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Desk" type="StaticBody3D" parent="World" groups=["desk"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Desk"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0247412, 0, -1.08581)
+mesh = SubResource("BoxMesh_4necf")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Desk"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0247412, 0, -1.08581)
+shape = SubResource("ConvexPolygonShape3D_nkdpu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_blgyi")
+camera_attributes = SubResource("CameraAttributesPractical_5eho7")
+
+[node name="Marker3D" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.997576, 0.0695824, 0, -0.0695824, 0.997576, -0.091145, 1.25547, 0.517326)
+gizmo_extents = 0.6
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.191289, 0.981534, 0, -0.981534, 0.191289, 0.0024209, 2.70679, 0.0112426)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["camera"]]
+transform = Transform3D(1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, -0.091145, 1.74775, 0.997848)
+fov = 60.0
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Sprite3D" type="Sprite3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05713, -0.253039)
+texture = ExtResource("1_rrgje")
+
+[node name="Package" type="RigidBody3D" parent="." groups=["package"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12881, -1.16556)
+mass = 2.0
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("2_g54rq")
+weight = 5.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Package"]
+mesh = SubResource("BoxMesh_bt4l7")
+
+[node name="Sprite3D" type="Sprite3D" parent="Package/MeshInstance3D"]
+transform = Transform3D(-1.13056e-08, 0, -0.258642, 0, 0.258642, 0, 0.258642, 0, -1.13056e-08, -0.259723, 0, 0)
+texture = ExtResource("1_rrgje")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Package"]
+shape = SubResource("ConvexPolygonShape3D_vvi38")
+
+[node name="RotationNode" type="Node" parent="Package"]
+process_mode = 1
+script = ExtResource("2_cg1sd")
+
+[node name="MovementNode" type="Node" parent="Package"]
+script = ExtResource("3_gyrf5")
+lift_height = 0.25
+
+[node name="Package2" type="RigidBody3D" parent="." groups=["package"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.649211, 1.12881, -1.16556)
+mass = 2.0
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("2_g54rq")
+weight = 15.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Package2"]
+mesh = SubResource("BoxMesh_d45gu")
+
+[node name="Sprite3D" type="Sprite3D" parent="Package2/MeshInstance3D"]
+transform = Transform3D(-1.13056e-08, 0, -0.258642, 0, 0.258642, 0, 0.258642, 0, -1.13056e-08, -0.259723, 0, 0)
+texture = ExtResource("1_rrgje")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Package2"]
+shape = SubResource("ConvexPolygonShape3D_inkh0")
+
+[node name="RotationNode" type="Node" parent="Package2"]
+process_mode = 1
+script = ExtResource("2_cg1sd")
+
+[node name="MovementNode" type="Node" parent="Package2"]
+script = ExtResource("3_gyrf5")
+lift_height = 0.25
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.619152, 0.611783, -0.574727)
+
+[node name="Sticker" type="Sprite3D" parent="Area3D"]
+transform = Transform3D(0.13, 0, 0, 0, 0.14, 0, 0, 0, 1, 0, 0, -0.00330281)
+modulate = Color(0.247059, 0.427451, 0.831373, 1)
+texture = ExtResource("1_rrgje")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_luow8")
+
+[node name="StickerNode" type="Node" parent="Area3D"]
+script = ExtResource("4_6o6e0")
+
+[node name="Scale" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10584, 0.501326, -0.798675)
+mass = 4.0
+lock_rotation = true
+script = ExtResource("5_rbmrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10641, -0.06398)
+shape = SubResource("ConvexPolygonShape3D_b73s3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10641, -0.06398)
+mesh = SubResource("BoxMesh_iht4u")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196154, -0.06398)
+mesh = SubResource("BoxMesh_ktgbk")
+
+[node name="MovementNode" type="Node" parent="Scale"]
+script = ExtResource("3_gyrf5")
+lift_height = 0.2
+
+[node name="Label3D" type="Label3D" parent="Scale"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341188, 0.111038, 0.360529)
+text = "0.0 lbs"
+font_size = 22
+outline_size = 0
+horizontal_alignment = 2
+uppercase = true
+
+[node name="Weigh Area" type="Area3D" parent="Scale"]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scale/Weigh Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208875, -0.0564782)
+shape = SubResource("BoxShape3D_ws8da")
