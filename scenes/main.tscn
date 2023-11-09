@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://brfoteqvalx36"]
+
+[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_oarbm"]
+[ext_resource type="PackedScene" uid="uid://bwjfgkynldnh" path="res://scenes/package.tscn" id="2_fjkca"]
+[ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
+[ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
+[ext_resource type="Script" path="res://scripts/StickerPlacerNode.gd" id="5_nbne5"]
+[ext_resource type="PackedScene" uid="uid://bqhrr2x273uj7" path="res://scenes/CameraSwitchUI.tscn" id="7_awbof"]
+[ext_resource type="PackedScene" uid="uid://itvqa4e6loyb" path="res://scenes/PackageTextureGenerator.tscn" id="9_d0rjt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4necf"]
+size = Vector3(10, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_korm3"]
+size = Vector3(10.0201, 5.1033, 5.00238)
+
+[sub_resource type="Environment" id="Environment_blgyi"]
+background_color = Color(0.376471, 0.517647, 0.988235, 1)
+background_energy_multiplier = 0.8
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5eho7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_luow8"]
+size = Vector3(1.29282, 1.27997, 0.00645095)
+
+[node name="Main" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Desk" type="StaticBody3D" parent="World" groups=["desk"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.20573, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Desk"]
+mesh = SubResource("BoxMesh_4necf")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Desk"]
+shape = SubResource("BoxShape3D_korm3")
+
+[node name="LetterDesk" type="StaticBody3D" parent="World" groups=["desk"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -2.15, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/LetterDesk"]
+shape = SubResource("BoxShape3D_korm3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/LetterDesk"]
+mesh = SubResource("BoxMesh_4necf")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_blgyi")
+camera_attributes = SubResource("CameraAttributesPractical_5eho7")
+
+[node name="PackageView" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.997576, 0.0695824, 0, -0.0695824, 0.997576, -0.01, 3.683, 6.745)
+gizmo_extents = 0.6
+
+[node name="EnvelopeView" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.997576, 0.0695824, 0, -0.0695824, 0.997576, 14.5414, 3.683, 6.745)
+gizmo_extents = 0.6
+
+[node name="PackageSpawn" type="Marker3D" parent="World" groups=["package_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32063, -1.11624)
+
+[node name="LetterSpawn" type="Marker3D" parent="World" groups=["letter_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8471, 1.32063, -1.11624)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.347852, 0.937549, 0, -0.937549, 0.347852, 0.0024209, 2.70679, 0.0112426)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["camera"]]
+transform = Transform3D(1, 0, 0, 0, 0.943686, 0.330844, 0, -0.330844, 0.943686, -0.01, 3.683, 6.745)
+fov = 60.0
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Sprite3D" type="Sprite3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05713, -0.253039)
+texture = ExtResource("1_oarbm")
+
+[node name="Package" parent="." instance=ExtResource("2_fjkca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.3, 0.591)
+
+[node name="Letters" type="Node3D" parent="."]
+
+[node name="Letter" parent="Letters" instance=ExtResource("2_fulo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8719, 1.32063, -1.11624)
+
+[node name="Letter2" parent="Letters" instance=ExtResource("2_fulo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3437, 1.32063, -1.11624)
+
+[node name="Letter3" parent="Letters" instance=ExtResource("2_fulo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8527, 1.32063, -1.11624)
+
+[node name="Sticker" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.77963, 1.42668, 1.99067)
+
+[node name="Sticker" type="Sprite3D" parent="Sticker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0245674)
+sorting_offset = 5.0
+modulate = Color(0.247059, 0.427451, 0.831373, 1)
+texture_filter = 0
+texture = ExtResource("1_oarbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sticker"]
+shape = SubResource("BoxShape3D_luow8")
+
+[node name="StickerNode" type="Node" parent="Sticker"]
+script = ExtResource("5_nbne5")
+
+[node name="Scale" parent="." instance=ExtResource("5_br56s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, 0.0817122)
+
+[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker") instance=ExtResource("7_awbof")]
+mouse_filter = 2
+counter_marker = NodePath("../World/PackageView")
+desk_marker = NodePath("../World/EnvelopeView")
+
+[node name="TexturePackage" parent="." groups=["package_texture"] instance=ExtResource("9_d0rjt")]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://itvqa4e6loyb"]
+
+[ext_resource type="Script" path="res://scripts/TextureMerge.gd" id="1_a3ftg"]
+[ext_resource type="Texture2D" uid="uid://r30eaof2vu01" path="res://assets/models/CubeUnwrapped3x3_ImageTexture.png" id="2_acvmi"]
+[ext_resource type="Texture2D" uid="uid://b0xg0pk83bvf8" path="res://assets/AddressBackground.png" id="3_smkby"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jriws"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+
+[node name="PackageTextureGenerator" type="Node2D"]
+script = ExtResource("1_a3ftg")
+
+[node name="PlacementTesting" type="Node2D" parent="."]
+visible = false
+
+[node name="PackageTexture2" type="Sprite2D" parent="PlacementTesting"]
+texture = ExtResource("2_acvmi")
+centered = false
+
+[node name="Address" type="Control" parent="PlacementTesting"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 443.0
+offset_right = 47.0
+offset_bottom = 483.0
+rotation = -1.5708
+
+[node name="Background" type="Sprite2D" parent="PlacementTesting/Address"]
+texture = ExtResource("3_smkby")
+centered = false
+
+[node name="From" type="Label" parent="PlacementTesting/Address"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 61.0
+text = "Davis Kimball
+Somewhere in Snoqualmie"
+label_settings = SubResource("LabelSettings_jriws")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(384, 576)
+
+[node name="PackageTexture" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("2_acvmi")
+centered = false
+
+[node name="Address2" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 443.0
+offset_right = 47.0
+offset_bottom = 483.0
+rotation = -1.5708
+
+[node name="Background" type="Sprite2D" parent="SubViewport/Address2"]
+texture = ExtResource("3_smkby")
+centered = false
+
+[node name="From" type="Label" parent="SubViewport/Address2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 61.0
+text = "Davis Kimball
+Somewhere in Snoqualmie"
+label_settings = SubResource("LabelSettings_jriws")
+
+[node name="Stamp" type="Sprite2D" parent="SubViewport"]
+centered = false
