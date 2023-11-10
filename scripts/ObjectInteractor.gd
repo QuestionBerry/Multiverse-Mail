@@ -21,6 +21,8 @@ func start_moving_object(object:RigidBody3D)->void:
 	prev_object_position = acting_object.position
 
 func start_rotating_object(object:RigidBody3D)->void:
+	if is_moving_object:
+		return
 	acting_object = object
 	is_moving_object = false
 	is_rotating_object = true
@@ -64,7 +66,7 @@ func _physics_process(delta):
 		acting_object.rotate_y((mouseMotion.x) * ROTATION_SPEED * delta)
 		acting_object.rotate_x((mouseMotion.y) * ROTATION_SPEED * delta)
 
-func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 1) -> Dictionary:	
+func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 4294967295) -> Dictionary:	
 	var parameters = PhysicsRayQueryParameters3D.new()
 	parameters.from = from
 	parameters.to = to
@@ -81,3 +83,4 @@ func raycast_below(object):
 	var from = object.position
 	var to = from + Vector3.DOWN * RAY_LENGTH
 	return raycast(from, to, [object], 1)
+

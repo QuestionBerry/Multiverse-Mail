@@ -31,7 +31,7 @@ func _process(_delta):
 		var from = camera.project_ray_origin(mouse_position)
 		var to = from + camera.project_ray_normal(mouse_position) * RAY_LENGTH
 		
-		var result = ObjectInteractor.raycast(from, to, [get_parent()], 1)
+		var result = ObjectInteractor.raycast(from, to, [get_parent()])
 		if result:
 			if result.collider.is_in_group("package") or result.collider.is_in_group("letter"):
 				target = result.collider

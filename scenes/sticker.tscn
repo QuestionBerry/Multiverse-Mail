@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwolcgff4nas1"]
+
+[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_tl5fj"]
+[ext_resource type="Script" path="res://scripts/StickerPlacerNode.gd" id="2_u2lou"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_luow8"]
+size = Vector3(1.29282, 1.27997, 0.00645095)
+
+[node name="Sticker" type="Area3D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="Sticker" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0245674)
+sorting_offset = 5.0
+modulate = Color(0.247059, 0.427451, 0.831373, 1)
+texture_filter = 0
+texture = ExtResource("1_tl5fj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_luow8")
+
+[node name="StickerNode" type="Node" parent="."]
+script = ExtResource("2_u2lou")

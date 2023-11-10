@@ -50,7 +50,7 @@ func update_scale_readout(new_weight) -> void:
 	new_weight = snappedf(new_weight, 0.01)
 	scale_readout.text = str(new_weight, " lbs")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if self.position.y <= -2:
 		self.linear_velocity = Vector3.ZERO
 		self.angular_velocity = Vector3.ZERO
