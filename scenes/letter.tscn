@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dq3jr6cjyhxea"]
+[gd_scene load_steps=12 format=3 uid="uid://dq3jr6cjyhxea"]
 
 [ext_resource type="Script" path="res://scripts/Letter.gd" id="1_jnnix"]
-[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="2_qh8pj"]
-[ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/Mail_Stamps.png" id="3_g41hv"]
+[ext_resource type="Texture2D" uid="uid://btjxrge7buf2u" path="res://assets/sprites/letters/LetterBackground-1Back.png" id="2_lxpxm"]
+[ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="3_2r8a6"]
+[ext_resource type="Texture2D" uid="uid://bs6q1fvcgugau" path="res://assets/sprites/letters/LetterBackground-1Front.png" id="3_ddaw5"]
+[ext_resource type="Shader" path="res://scripts/stamp.gdshader" id="5_3i6j8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8w4d"]
 rough = true
@@ -12,18 +14,27 @@ absorbent = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1rqm"]
 custom_solver_bias = 1.0
 margin = 0.0
-size = Vector3(1.275, 1.283, 0.0771441)
+size = Vector3(2.57679, 1.58622, 0.0771441)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyu65"]
 custom_solver_bias = 1.0
 margin = 0.0
-size = Vector3(0.5, 0.5, 0.145031)
+size = Vector3(0.344506, 0.420098, 0.111312)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6031x"]
 radius = 0.0414399
-height = 1.32315
+height = 2.62581
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p32r4"]
+render_priority = 0
+shader = ExtResource("5_3i6j8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6e17"]
+size = Vector3(2.555, 1.575, 0.09)
 
 [node name="Letter" type="RigidBody3D" groups=["letter"]]
+collision_layer = 2
+collision_mask = 3
 mass = 2.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.04, -0.04)
@@ -40,21 +51,20 @@ shape = SubResource("BoxShape3D_e1rqm")
 shape = SubResource("BoxShape3D_oyu65")
 
 [node name="TopBar" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.622032, 0.00198722)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.792488, 0.00198722)
 shape = SubResource("CapsuleShape3D_6031x")
 
 [node name="BottomBar" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.65088, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.798997, 0)
 shape = SubResource("CapsuleShape3D_6031x")
 
 [node name="Back" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0.00616267)
-modulate = Color(0.690196, 0.164706, 0.235294, 1)
 shaded = true
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("2_qh8pj")
+texture = ExtResource("2_lxpxm")
 
 [node name="Front" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00310118)
@@ -63,18 +73,23 @@ shaded = true
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("2_qh8pj")
+texture = ExtResource("3_ddaw5")
 
 [node name="Stamp" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.431678, 0.428101, 0.00488048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00872, 0.556709, 0.00488048)
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("3_g41hv")
+texture = ExtResource("3_2r8a6")
 hframes = 5
 frame = 3
 
 [node name="Seal" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_p32r4")
 shaded = true
 double_sided = false
 alpha_cut = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("BoxMesh_e6e17")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://0dv11gpbl6i0"]
+
+[ext_resource type="Script" path="res://scripts/Stamp.gd" id="1_73sk7"]
+[ext_resource type="PackedScene" uid="uid://dh13n50a3t1xk" path="res://scenes/decal.res" id="2_anhjn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_iyaly"]
+size = Vector3(0.5, 0.25, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rv4ba"]
+size = Vector3(0.5, 0.25, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2hn0"]
+size = Vector3(0.188758, 0.0197257, 0.39894)
+
+[node name="Stamp2" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 3
+lock_rotation = true
+script = ExtResource("1_73sk7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 3
+mesh = SubResource("BoxMesh_iyaly")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rv4ba")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1.90889e-15, -0.999062, -4.36704e-08, -4.36704e-08, -4.36704e-08, 0.999062, -0.999062, 0, -4.36704e-08, 0, 0.127146, 0)
+double_sided = false
+text = "STAMP
+"
+font_size = 50
+
+[node name="Stamp_Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.139171, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stamp_Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0151993, 0)
+shape = SubResource("BoxShape3D_u2hn0")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132793, 0)
+
+[node name="Decal" parent="." instance=ExtResource("2_anhjn")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, -0.132793, 0)
+distance_fade_begin = 0.01
+cull_mask = 2
+
+[connection signal="body_entered" from="Stamp_Area" to="." method="_on_stamp_area_body_entered"]

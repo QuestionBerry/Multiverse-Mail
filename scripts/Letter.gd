@@ -5,6 +5,8 @@ class_name Letter
 
 @onready var spawn_marker = get_tree().get_first_node_in_group("letter_spawn")
 
+var conditions = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	input_event.connect(on_input_event)
