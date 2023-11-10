@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq3jr6cjyhxea"]
+[gd_scene load_steps=8 format=3 uid="uid://dq3jr6cjyhxea"]
 
 [ext_resource type="Script" path="res://scripts/Letter.gd" id="1_jnnix"]
-[ext_resource type="Texture2D" uid="uid://btjxrge7buf2u" path="res://assets/sprites/letters/LetterBackground-1Back.png" id="2_lxpxm"]
+[ext_resource type="ArrayMesh" uid="uid://bpniuu8hmq575" path="res://assets/models/BasicEnvelope.res" id="2_3kep7"]
 [ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="3_2r8a6"]
-[ext_resource type="Texture2D" uid="uid://bs6q1fvcgugau" path="res://assets/sprites/letters/LetterBackground-1Front.png" id="3_ddaw5"]
-[ext_resource type="Shader" path="res://scripts/stamp.gdshader" id="5_3i6j8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8w4d"]
 rough = true
@@ -14,7 +12,7 @@ absorbent = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1rqm"]
 custom_solver_bias = 1.0
 margin = 0.0
-size = Vector3(2.57679, 1.58622, 0.0771441)
+size = Vector3(2.00416, 1.25749, 0.0771441)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyu65"]
 custom_solver_bias = 1.0
@@ -23,14 +21,7 @@ size = Vector3(0.344506, 0.420098, 0.111312)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6031x"]
 radius = 0.0414399
-height = 2.62581
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p32r4"]
-render_priority = 0
-shader = ExtResource("5_3i6j8")
-
-[sub_resource type="BoxMesh" id="BoxMesh_e6e17"]
-size = Vector3(2.555, 1.575, 0.09)
+height = 1.9966
 
 [node name="Letter" type="RigidBody3D" groups=["letter"]]
 collision_layer = 2
@@ -42,7 +33,7 @@ physics_material_override = SubResource("PhysicsMaterial_g8w4d")
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_jnnix")
-lift_height = 0.5
+lift_height = 1.0
 
 [node name="MainBox" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_e1rqm")
@@ -51,45 +42,22 @@ shape = SubResource("BoxShape3D_e1rqm")
 shape = SubResource("BoxShape3D_oyu65")
 
 [node name="TopBar" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.792488, 0.00198722)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.615657, 0.00198722)
 shape = SubResource("CapsuleShape3D_6031x")
 
 [node name="BottomBar" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.798997, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.622166, 0)
 shape = SubResource("CapsuleShape3D_6031x")
 
-[node name="Back" type="Sprite3D" parent="."]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0.00616267)
-shaded = true
-double_sided = false
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("2_lxpxm")
-
-[node name="Front" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00310118)
-sorting_use_aabb_center = false
-shaded = true
-double_sided = false
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("3_ddaw5")
+[node name="BasicEnvelope" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = ExtResource("2_3kep7")
 
 [node name="Stamp" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00872, 0.556709, 0.00488048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.787485, 0.421961, 0.0234987)
 double_sided = false
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("3_2r8a6")
 hframes = 5
 frame = 3
-
-[node name="Seal" type="Sprite3D" parent="."]
-material_override = SubResource("ShaderMaterial_p32r4")
-shaded = true
-double_sided = false
-alpha_cut = 1
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-layers = 2
-mesh = SubResource("BoxMesh_e6e17")

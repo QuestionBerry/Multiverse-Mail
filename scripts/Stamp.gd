@@ -37,6 +37,9 @@ func _on_stamp_area_body_entered(body):
 	if body is RigidBody3D and body != self:
 		print(str("Stamped ", body))
 		var new_decal :Decal= stamp_decal.instantiate()
+		new_decal.texture_albedo = stamp_sprite
 		body.add_child(new_decal)
 		new_decal.global_position = $Marker3D.global_position
 		new_decal.global_rotation = $Marker3D.global_rotation
+		print(self.global_rotation_degrees)
+		print(new_decal.global_rotation_degrees)

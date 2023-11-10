@@ -27,7 +27,7 @@ func on_input_event(_camera, event:InputEvent, _position, _normal, _shape_idx):
 	elif event.is_action_pressed("rotate_object_drag"):
 		ObjectInteractor.start_rotating_object(self)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if self.position.y <= -2:
 		self.linear_velocity = Vector3.ZERO
 		self.angular_velocity = Vector3.ZERO
