@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj64d1ubdg5n2"]
+
+[ext_resource type="Script" path="res://scripts/TextureMerge.gd" id="1_v2n3w"]
+[ext_resource type="Texture2D" uid="uid://cbmjmkepd8xco" path="res://assets/models/BasicEnvelope_Letter1-Texture.png" id="2_hv1at"]
+[ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="3_hwamq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jjak1"]
+font_size = 15
+
+[node name="LetterTextureGenerator" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_v2n3w")
+
+[node name="PlacementTesting" type="Node2D" parent="."]
+
+[node name="LetterTexture" type="Sprite2D" parent="PlacementTesting"]
+texture = ExtResource("2_hv1at")
+centered = false
+
+[node name="Stamp" type="Sprite2D" parent="PlacementTesting"]
+position = Vector2(229, 25)
+texture = ExtResource("3_hwamq")
+hframes = 5
+frame = 2
+
+[node name="OriginText" type="RichTextLabel" parent="PlacementTesting"]
+offset_left = 4.0
+offset_right = 218.0
+offset_bottom = 71.0
+mouse_filter = 2
+text = "Davis Kimball
+Big Man, Campus"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DestinationText" type="Label" parent="PlacementTesting"]
+offset_left = 4.0
+offset_top = 77.0
+offset_right = 242.0
+offset_bottom = 150.0
+text = "Konosuke Stone-Kapowski
+Uchinowa, TendayCity"
+label_settings = SubResource("LabelSettings_jjak1")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(256, 320)
+
+[node name="LetterTexture" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("2_hv1at")
+centered = false
+
+[node name="Stamp" type="Sprite2D" parent="SubViewport"]
+position = Vector2(229, 25)
+texture = ExtResource("3_hwamq")
+hframes = 5
+frame = 2
+
+[node name="OriginText" type="RichTextLabel" parent="SubViewport"]
+offset_left = 4.0
+offset_right = 218.0
+offset_bottom = 71.0
+text = "Davis Kimball
+Big Man, Campus"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DestinationText" type="RichTextLabel" parent="SubViewport"]
+offset_left = 4.0
+offset_top = 77.0
+offset_right = 242.0
+offset_bottom = 150.0
+text = "Konosuke Stone-Kapowski
+Uchinowa, TendayCity"
+fit_content = true
+text_direction = 2
+metadata/_edit_use_anchors_ = true
