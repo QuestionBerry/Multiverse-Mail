@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://0dv11gpbl6i0"]
+[gd_scene load_steps=6 format=3 uid="uid://0dv11gpbl6i0"]
 
 [ext_resource type="Script" path="res://scripts/Stamp.gd" id="1_73sk7"]
 [ext_resource type="Texture2D" uid="uid://c617bjpknhksw" path="res://assets/sprites/letters/Stamp-RTS.png" id="2_7ls37"]
-[ext_resource type="PackedScene" uid="uid://dh13n50a3t1xk" path="res://scenes/decal.res" id="2_anhjn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_iyaly"]
 size = Vector3(0.5, 0.25, 0.7)
@@ -45,10 +44,5 @@ shape = SubResource("BoxShape3D_u2hn0")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.132793, 0)
-
-[node name="Decal" parent="." instance=ExtResource("2_anhjn")]
-transform = Transform3D(4.37114e-08, -3.82137e-15, -1, -8.74228e-08, -1, 0, -1, 8.74228e-08, -4.37114e-08, 0, -0.132793, 0)
-distance_fade_begin = 0.01
-cull_mask = 2
 
 [connection signal="body_entered" from="Stamp_Area" to="." method="_on_stamp_area_body_entered"]
