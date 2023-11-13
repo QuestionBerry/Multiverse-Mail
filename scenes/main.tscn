@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=15 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_oarbm"]
 [ext_resource type="PackedScene" uid="uid://bwjfgkynldnh" path="res://scenes/package.tscn" id="2_fjkca"]
 [ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
+[ext_resource type="PackedScene" uid="uid://dj64d1ubdg5n2" path="res://scenes/LetterTextureGenerator.tscn" id="2_tms3v"]
 [ext_resource type="PackedScene" uid="uid://cwolcgff4nas1" path="res://scenes/sticker.tscn" id="4_xqxge"]
 [ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
 [ext_resource type="PackedScene" uid="uid://bqhrr2x273uj7" path="res://scenes/CameraSwitchUI.tscn" id="7_awbof"]
@@ -74,6 +75,8 @@ fov = 60.0
 
 [node name="TexturePackage" parent="." groups=["package_texture"] instance=ExtResource("9_d0rjt")]
 
+[node name="LetterTextureGenerator" parent="." groups=["letter_texture"] instance=ExtResource("2_tms3v")]
+
 [node name="Characters" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
@@ -101,14 +104,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66755, 1.89825, 2.41717)
 [node name="Scale" parent="." instance=ExtResource("5_br56s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, 0.0817122)
 
-[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker") instance=ExtResource("7_awbof")]
+[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "letter_group_node") instance=ExtResource("7_awbof")]
 mouse_filter = 2
 counter_marker = NodePath("../World/PackageView")
 desk_marker = NodePath("../World/EnvelopeView")
+letter_group_node = NodePath("../Letters")
 
-[node name="Stamp2" parent="." instance=ExtResource("8_4r25i")]
+[node name="Stamp-RTS" parent="." instance=ExtResource("8_4r25i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.5441, 2, 1)
 
-[node name="Stamp3" parent="." instance=ExtResource("8_4r25i")]
+[node name="Stamp-Approved" parent="." instance=ExtResource("8_4r25i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.1654, 1.75424, 1.61112)
 stamp_sprite = ExtResource("9_hq26l")

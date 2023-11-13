@@ -1,13 +1,23 @@
 extends Node
+#Autoload script
 
-var names = {
-	"earth_first" : earth_first_names,
-	"earth_last" : earth_last_names,
-	"magic_first" : magic_last_names,
-	"magic_last" : magic_last_names,
-	"cyber_first" : cyber_first_names,
-	"cyber_last" : cyber_last_names
-}
+enum universe {EARTH, MAGIC, CYBER}
+
+func get_random_name(from_universe)->String:
+	match from_universe:
+		universe.EARTH:
+			return generate_name(earth_first_names, earth_last_names) 
+		universe.MAGIC:
+			return generate_name(magic_first_names, magic_last_names)
+		universe.CYBER:
+			return generate_name(cyber_first_names, cyber_last_names)
+		_:
+			return "Invalid"
+
+func generate_name(first_name_list, last_name_list):
+	var first = first_name_list[randi_range(0, len(first_name_list)-1)]
+	var last = last_name_list[randi_range(0, len(last_name_list)-1)]
+	return str(first, " ", last)
 
 var earth_first_names = [
 	"Amy",
