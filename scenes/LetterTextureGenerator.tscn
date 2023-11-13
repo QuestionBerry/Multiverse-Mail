@@ -1,17 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://dj64d1ubdg5n2"]
+[gd_scene load_steps=8 format=3 uid="uid://dj64d1ubdg5n2"]
 
-[ext_resource type="Script" path="res://scripts/TextureMerge.gd" id="1_v2n3w"]
+[ext_resource type="Script" path="res://scripts/LetterTexture.gd" id="1_psq7y"]
 [ext_resource type="Texture2D" uid="uid://cbmjmkepd8xco" path="res://assets/models/BasicEnvelope_Letter1-Texture.png" id="2_hv1at"]
 [ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="3_hwamq"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="4_wmghj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_jjak1"]
-font_size = 15
+[sub_resource type="Theme" id="Theme_177qw"]
+default_font = ExtResource("4_wmghj")
+
+[sub_resource type="LabelSettings" id="LabelSettings_xtj58"]
+line_spacing = 5.0
+font = ExtResource("4_wmghj")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7nqa"]
+line_spacing = 5.0
+font = ExtResource("4_wmghj")
+font_color = Color(0, 0, 0, 1)
 
 [node name="LetterTextureGenerator" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_v2n3w")
+script = ExtResource("1_psq7y")
 
 [node name="PlacementTesting" type="Node2D" parent="."]
+visible = false
 
 [node name="LetterTexture" type="Sprite2D" parent="PlacementTesting"]
 texture = ExtResource("2_hv1at")
@@ -23,29 +35,33 @@ texture = ExtResource("3_hwamq")
 hframes = 5
 frame = 2
 
-[node name="OriginText" type="RichTextLabel" parent="PlacementTesting"]
-offset_left = 4.0
-offset_right = 218.0
-offset_bottom = 71.0
-mouse_filter = 2
+[node name="OriginText" type="Label" parent="PlacementTesting"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 222.0
+offset_bottom = 77.0
+scale = Vector2(0.9, 0.9)
+theme = SubResource("Theme_177qw")
 text = "Davis Kimball
 Big Man, Campus"
-fit_content = true
+label_settings = SubResource("LabelSettings_xtj58")
 metadata/_edit_use_anchors_ = true
 
 [node name="DestinationText" type="Label" parent="PlacementTesting"]
-offset_left = 4.0
-offset_top = 77.0
-offset_right = 242.0
-offset_bottom = 150.0
+offset_left = 14.0
+offset_top = 68.0
+offset_right = 280.0
+offset_bottom = 141.0
+scale = Vector2(0.9, 0.9)
 text = "Konosuke Stone-Kapowski
 Uchinowa, TendayCity"
-label_settings = SubResource("LabelSettings_jjak1")
+label_settings = SubResource("LabelSettings_o7nqa")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(256, 320)
+render_target_update_mode = 1
 
 [node name="LetterTexture" type="Sprite2D" parent="SubViewport"]
 texture = ExtResource("2_hv1at")
@@ -57,22 +73,26 @@ texture = ExtResource("3_hwamq")
 hframes = 5
 frame = 2
 
-[node name="OriginText" type="RichTextLabel" parent="SubViewport"]
-offset_left = 4.0
-offset_right = 218.0
-offset_bottom = 71.0
+[node name="OriginText2" type="Label" parent="SubViewport"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 222.0
+offset_bottom = 77.0
+scale = Vector2(0.9, 0.9)
+theme = SubResource("Theme_177qw")
 text = "Davis Kimball
 Big Man, Campus"
-fit_content = true
+label_settings = SubResource("LabelSettings_xtj58")
 metadata/_edit_use_anchors_ = true
 
-[node name="DestinationText" type="RichTextLabel" parent="SubViewport"]
-offset_left = 4.0
-offset_top = 77.0
-offset_right = 242.0
-offset_bottom = 150.0
+[node name="DestinationText2" type="Label" parent="SubViewport"]
+offset_left = 14.0
+offset_top = 68.0
+offset_right = 280.0
+offset_bottom = 141.0
+scale = Vector2(0.9, 0.9)
 text = "Konosuke Stone-Kapowski
 Uchinowa, TendayCity"
-fit_content = true
-text_direction = 2
+label_settings = SubResource("LabelSettings_o7nqa")
+horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true

@@ -1,23 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://itvqa4e6loyb"]
+[gd_scene load_steps=7 format=3 uid="uid://itvqa4e6loyb"]
 
-[ext_resource type="Script" path="res://scripts/TextureMerge.gd" id="1_vuqmk"]
-[ext_resource type="Texture2D" uid="uid://r30eaof2vu01" path="res://assets/models/CubeUnwrapped3x3_ImageTexture.png" id="2_acvmi"]
+[ext_resource type="Script" path="res://scripts/PackageTexturer.gd" id="1_j3hyv"]
 [ext_resource type="Texture2D" uid="uid://b0xg0pk83bvf8" path="res://assets/sprites/packages/AddressBackground.png" id="3_u6wj7"]
 [ext_resource type="Texture2D" uid="uid://t0dxxvjfpdkf" path="res://assets/models/UnitCube_Texture.png" id="4_la0ay"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="4_sorcr"]
+[ext_resource type="Texture2D" uid="uid://buby6761srrx2" path="res://assets/textures/box_3.png" id="5_pl1nj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jriws"]
-font_size = 10
+font = ExtResource("4_sorcr")
+font_size = 8
 font_color = Color(0, 0, 0, 1)
 
 [node name="PackageTextureGenerator" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_vuqmk")
+script = ExtResource("1_j3hyv")
 
 [node name="PlacementTesting" type="Node2D" parent="."]
 visible = false
 
 [node name="PackageTexture2" type="Sprite2D" parent="PlacementTesting"]
-texture = ExtResource("2_acvmi")
+texture = ExtResource("4_la0ay")
 centered = false
 
 [node name="Address" type="Control" parent="PlacementTesting"]
@@ -37,8 +39,8 @@ centered = false
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 61.0
+offset_right = 138.0
+offset_bottom = 57.0
 text = "Davis Kimball
 Somewhere in Snoqualmie"
 label_settings = SubResource("LabelSettings_jriws")
@@ -47,7 +49,7 @@ label_settings = SubResource("LabelSettings_jriws")
 size = Vector2i(384, 576)
 
 [node name="PackageTexture" type="Sprite2D" parent="SubViewport"]
-texture = ExtResource("4_la0ay")
+texture = ExtResource("5_pl1nj")
 centered = false
 
 [node name="Address2" type="Control" parent="SubViewport"]

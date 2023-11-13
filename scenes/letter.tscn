@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dq3jr6cjyhxea"]
+[gd_scene load_steps=7 format=3 uid="uid://dq3jr6cjyhxea"]
 
 [ext_resource type="Script" path="res://scripts/Letter.gd" id="1_jnnix"]
 [ext_resource type="ArrayMesh" uid="uid://bpniuu8hmq575" path="res://assets/models/BasicEnvelope.res" id="2_3kep7"]
-[ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="3_2r8a6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8w4d"]
 rough = true
@@ -52,12 +51,3 @@ shape = SubResource("CapsuleShape3D_6031x")
 [node name="BasicEnvelope" type="MeshInstance3D" parent="."]
 layers = 2
 mesh = ExtResource("2_3kep7")
-
-[node name="Stamp" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.787485, 0.421961, 0.0234987)
-double_sided = false
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("3_2r8a6")
-hframes = 5
-frame = 3
