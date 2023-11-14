@@ -14,6 +14,8 @@ const RAY_LENGTH := 100
 const ROTATION_SPEED := .2
 
 func start_moving_object(object:RigidBody3D)->void:
+	if is_moving_object or is_rotating_object:
+		return
 	acting_object = object
 	is_moving_object = true
 	is_rotating_object = false
@@ -21,7 +23,7 @@ func start_moving_object(object:RigidBody3D)->void:
 	prev_object_position = acting_object.position
 
 func start_rotating_object(object:RigidBody3D)->void:
-	if is_moving_object:
+	if is_moving_object or is_rotating_object:
 		return
 	acting_object = object
 	is_moving_object = false

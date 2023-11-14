@@ -12,12 +12,62 @@ func get_random_name(from_universe)->String:
 		universe.CYBER:
 			return generate_name(cyber_first_names, cyber_last_names)
 		_:
-			return "Invalid"
+			return "Invalid Name"
 
 func generate_name(first_name_list, last_name_list):
-	var first = first_name_list[randi_range(0, len(first_name_list)-1)]
-	var last = last_name_list[randi_range(0, len(last_name_list)-1)]
+	var first = first_name_list.pick_random()
+	var last = last_name_list.pick_random()
 	return str(first, " ", last)
+
+func get_random_location(from_universe)->String:
+	match from_universe:
+		universe.EARTH:
+			return earth_locations.pick_random()
+		universe.MAGIC:
+			return magic_locations.pick_random()
+		universe.CYBER:
+			return cyber_locations.pick_random()
+		_:
+			return "Invalid Location"
+
+var earth_locations = [
+	"New York, New York",
+	"Boring, Oregon",
+	"Graham, Washington",
+	"Duluth, Minnesota",
+	"Monowi, Nebraska",
+	"Plains, Kansas",
+	"Anaheim, California",
+	"Davis, California",
+	"Salt Lake City, Utah",
+	"Okay, Oklahoma",
+]
+
+var magic_locations = [
+	"Humptulips, Watershire",
+	"Crow, Gossam",
+	"Duckville, Solara",
+	"Shorely, Coral Canyon",
+	"Oklahoma, Maassand",
+	"Mauriks, Watershire",
+	"Boar's Hide, Canivorna",
+	"Deepsorrow, Frostbridge",
+	"Kingdom of Crabs, Coral Canyon",
+	"Kelissa, King's Landing",
+]
+
+var cyber_locations = [
+	"Neo York, Neo York",
+	"Progessi, K&K Inc.",
+	"Mocktown, Moore Pizza",
+	"Davis Park, Dog's Breath Beer",
+	"The Boneyard, Hannigans",
+	"Beachside, CaliCo",
+	"King's Head, K&K Inc.",
+	"Harrisburg, Liberty's Lighting",
+	"G23, Armament Solutions",
+	"Hope, Dog's Breath Beer",
+]
 
 var earth_first_names = [
 	"Amy",

@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://0gthddnrirr5"]
+
+[ext_resource type="FontFile" uid="uid://bbrh4b1sni3xt" path="res://assets/font/SuperLegendBoy-4w8Y.ttf" id="1_idgt7"]
+
+[resource]
+font = ExtResource("1_idgt7")
+font_size = 9
+font_color = Color(0, 0, 0, 1)

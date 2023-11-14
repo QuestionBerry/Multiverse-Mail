@@ -28,7 +28,7 @@ func move_camera(destination : Marker3D):
 func _on_create_letter_pressed():
 	var new_letter : RigidBody3D = letter.instantiate()
 	new_letter.origin_universe = NameList.universe.MAGIC
-	new_letter.destination_universe = NameList.universe.CYBER
+	new_letter.destination_universe = NameList.universe.EARTH
 	new_letter.has_stamp = true
 	
 	for child in new_letter.get_children():
