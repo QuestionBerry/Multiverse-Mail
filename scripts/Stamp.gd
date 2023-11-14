@@ -5,7 +5,8 @@ extends RigidBody3D
 @export var stamp_sprite : Texture2D
 @export var stamp_color : Color
 @export var speed : float = 0.15
-
+enum status {APPROVED, RETURNED}
+@export var stamp_type : status
 
 @onready var stamp_decal = load("res://scenes/decal.res")
 
@@ -41,5 +42,10 @@ func _on_stamp_area_body_entered(body):
 		body.add_child(new_decal)
 		new_decal.global_position = $Marker3D.global_position
 		new_decal.global_rotation = $Marker3D.global_rotation
-		print(self.global_rotation_degrees)
-		print(new_decal.global_rotation_degrees)
+		if body is Letter:
+			body.is_processed = true
+			match stamp_type:
+				status.APPROVED:
+					body.is_approved = true
+				status.RETURNED:
+					body.is_returned = true

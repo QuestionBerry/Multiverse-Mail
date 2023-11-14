@@ -5,14 +5,20 @@ class_name Letter
 
 @onready var spawn_marker = get_tree().get_first_node_in_group("letter_spawn")
 
+var has_origin := true
 var origin_universe = NameList.universe.EARTH
+
+var has_destination := true
 var destination_universe = NameList.universe.EARTH
 var has_stamp := false
 var has_seal := false
 
-#var conditions = {}
+var sorted_bin_location = null
+var is_processed := false
+var is_approved := false
+var is_returned := false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	input_event.connect(on_input_event)
 
@@ -24,6 +30,19 @@ func on_input_event(_camera, event:InputEvent, _position, _normal, _shape_idx):
 
 func _physics_process(_delta):
 	if self.position.y <= -2:
-		self.linear_velocity = Vector3.ZERO
-		self.angular_velocity = Vector3.ZERO
-		self.position = spawn_marker.position
+		respawn()
+
+func respawn()->void:
+	self.linear_velocity = Vector3.ZERO
+	self.angular_velocity = Vector3.ZERO
+	self.position = spawn_marker.position
+
+func check_if_correct()->void:
+	var is_correct = get_parent().check_letter_correct(self)
+	if is_correct:
+		Global.correct_letters += 1
+		print("Correct")
+	else:
+		Global.wrong_letters += 1
+		print("Wrong")
+	self.queue_free()
