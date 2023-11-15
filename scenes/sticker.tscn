@@ -1,24 +1,90 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwolcgff4nas1"]
+[gd_scene load_steps=8 format=3 uid="uid://cwolcgff4nas1"]
 
-[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_tl5fj"]
 [ext_resource type="Script" path="res://scripts/StickerPlacerNode.gd" id="2_u2lou"]
+[ext_resource type="FontFile" uid="uid://k1e1whgm4dap" path="res://assets/font/editundo.ttf" id="2_wp1q6"]
+[ext_resource type="Texture2D" uid="uid://bn5bj4wgxvcoo" path="res://assets/sprites/packages/WeightSticker.png" id="3_4i7oo"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_luow8"]
-size = Vector3(1.29282, 1.27997, 0.00645095)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gdr5s"]
+size = Vector3(0.642805, 0.969085, 0.00645095)
+
+[sub_resource type="Animation" id="Animation_vsoxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.02923e-28, 2.66454e-15, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jiecr"]
+resource_name = "printing"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D2:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.840826, -0.535103, -0.282495), Vector3(0.840826, -0.895248, -0.282495), Vector3(0.840826, -0.787205, -0.282495), Vector3(0.840826, -1.149, -0.282495)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iw1sv"]
+_data = {
+"RESET": SubResource("Animation_vsoxa"),
+"printing": SubResource("Animation_jiecr")
+}
 
 [node name="Sticker" type="Area3D"]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
 collision_layer = 2
 collision_mask = 3
-
-[node name="Sticker" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0245674)
-sorting_offset = 5.0
-modulate = Color(0.247059, 0.427451, 0.831373, 1)
-texture_filter = 0
-texture = ExtResource("1_tl5fj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_luow8")
-
-[node name="StickerNode" type="Node" parent="."]
+input_ray_pickable = false
 script = ExtResource("2_u2lou")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 8.07148e-43, 2.66454e-15, 0, 1, -3.02923e-28, -2.66454e-15, 3.02923e-28, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_gdr5s")
+
+[node name="Sticker2" type="Sprite3D" parent="CollisionShape3D2"]
+transform = Transform3D(1, -2.27374e-13, -1.42109e-14, 0, 1, 0, 8.88178e-16, 0, 1, -5.96046e-08, 8.07047e-05, -0.0145739)
+sorting_offset = 2.0
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_4i7oo")
+
+[node name="Label3D" type="Label3D" parent="CollisionShape3D2"]
+transform = Transform3D(-1, -3.41061e-13, -8.74226e-08, 0, 1, 1.86265e-09, 8.74228e-08, 0, -0.999998, -0.312086, 0.0141191, -0.0197806)
+sorting_offset = 3.0
+texture_filter = 0
+modulate = Color(0, 0, 0, 1)
+text = "0.0lbs"
+font = ExtResource("2_wp1q6")
+font_size = 37
+horizontal_alignment = 2
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iw1sv")
+}

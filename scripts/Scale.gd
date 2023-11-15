@@ -6,12 +6,12 @@ extends RigidBody3D
 @onready var scale_readout := $Label3D
 @onready var desk := get_tree().get_first_node_in_group("desk")
 @onready var spawn_marker = get_tree().get_first_node_in_group("package_spawn")
-
+@onready var weight_sticker = load("res://scenes/sticker.tscn")
 
 var bodies_on_scale = []
 var current_total_weight : float = 0
 var current_visual_weight : float = 0
-
+var has_sticker := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,3 +55,12 @@ func _physics_process(_delta):
 		self.linear_velocity = Vector3.ZERO
 		self.angular_velocity = Vector3.ZERO
 		self.position = spawn_marker.position
+
+
+func _on_button_area_input_event(camera, event:InputEvent, position, normal, shape_idx):
+	if event.is_action_pressed("move_object") and not has_sticker:
+		print(str("Print sticker", current_visual_weight))
+		has_sticker = true
+		var new_sticker :Sticker= weight_sticker.instantiate()
+		add_child(new_sticker)
+		new_sticker.print_out(snappedf(current_visual_weight, 0.01))

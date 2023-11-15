@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj7b3ds3ut6un"
-path.s3tc="res://.godot/imported/Stamp-Approved.png-df254f69447c38b78fe658ab9e919bac.s3tc.ctex"
+uid="uid://bn5bj4wgxvcoo"
+path.s3tc="res://.godot/imported/WeightSticker.png-70de9116e13ab558b710dafb5dcf8b8b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/letters/Stamp-Approved.png"
-dest_files=["res://.godot/imported/Stamp-Approved.png-df254f69447c38b78fe658ab9e919bac.s3tc.ctex"]
+source_file="res://assets/sprites/packages/WeightSticker.png"
+dest_files=["res://.godot/imported/WeightSticker.png-70de9116e13ab558b710dafb5dcf8b8b.s3tc.ctex"]
 
 [params]
 
