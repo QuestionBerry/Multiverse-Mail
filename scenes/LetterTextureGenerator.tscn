@@ -92,7 +92,7 @@ centered = false
 position = Vector2(229, 25)
 texture = ExtResource("3_hwamq")
 hframes = 5
-frame = 2
+vframes = 4
 
 [node name="OriginName2" type="Label" parent="SubViewport"]
 offset_left = 8.0

@@ -1,5 +1,12 @@
 extends Node2D
 
+var letter_backgrounds = [
+	"res://assets/sprites/letters/letter_0.png",
+	"res://assets/sprites/letters/letter_1.png",
+	"res://assets/sprites/letters/letter_2.png",
+	"res://assets/sprites/letters/letter_3.png"
+]
+
 
 func create_letter_texture(origin, destination, has_stamp, has_seal):
 	$SubViewport/OriginName2.text = NameList.get_random_name(origin)
@@ -10,6 +17,10 @@ func create_letter_texture(origin, destination, has_stamp, has_seal):
 	
 	if has_stamp:
 		set_stamp(origin)
+	else:
+		$SubViewport/Stamp.frame = 0
+	
+	$SubViewport/LetterTexture.texture = load(letter_backgrounds.pick_random())
 	
 	#Sets the Subviewport to render once, then waits for frame to draw
 	$SubViewport.render_target_update_mode = SubViewport.UPDATE_ONCE
@@ -24,12 +35,11 @@ func create_letter_texture(origin, destination, has_stamp, has_seal):
 func set_stamp(universe):
 	match universe:
 		NameList.universe.EARTH:
-			pass
+			$SubViewport/Stamp.frame = randi_range(1, 7)
 		NameList.universe.MAGIC:
-			#placeholder test until more sprites get added
-			$SubViewport/Stamp.frame = randi_range(0,4)
+			$SubViewport/Stamp.frame = randi_range(8, 13)
 		NameList.universe.CYBER:
-			pass
+			$SubViewport/Stamp.frame = randi_range(14, 19)
 	
 	var stamp_position = Vector2(229, 25)
 	stamp_position.x += randi_range(-4, 4)

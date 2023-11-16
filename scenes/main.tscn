@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=18 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Script" path="res://scripts/Rules.gd" id="1_ij1vq"]
-[ext_resource type="Texture2D" uid="uid://sn6pxj3n7q6i" path="res://icon.svg" id="1_oarbm"]
-[ext_resource type="PackedScene" uid="uid://bwjfgkynldnh" path="res://scenes/package.tscn" id="2_fjkca"]
+[ext_resource type="Texture2D" uid="uid://xsfijsbb8ovt" path="res://UglySprite.png" id="2_ehjcp"]
 [ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
 [ext_resource type="PackedScene" uid="uid://dj64d1ubdg5n2" path="res://scenes/LetterTextureGenerator.tscn" id="2_tms3v"]
 [ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
@@ -10,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://pnhkrjpmoreq" path="res://assets/sprites/letters/Stamp-Approved (2).png" id="7_oc5sq"]
 [ext_resource type="PackedScene" uid="uid://0dv11gpbl6i0" path="res://scenes/stamp_2.tscn" id="8_4r25i"]
 [ext_resource type="PackedScene" uid="uid://itvqa4e6loyb" path="res://scenes/PackageTextureGenerator.tscn" id="9_d0rjt"]
-[ext_resource type="PackedScene" uid="uid://376xj5lilpne" path="res://scenes/sorting_bin.tscn" id="11_3lroh"]
 [ext_resource type="PackedScene" uid="uid://clcwx7p16cn11" path="res://scenes/pneumatic_tube.tscn" id="13_8iik1"]
 [ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="14_jb6hl"]
 
@@ -83,9 +81,6 @@ skeleton = NodePath("../../../World")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PackageCounterView/Desk"]
 shape = SubResource("BoxShape3D_korm3")
 
-[node name="Package" parent="PackageCounterView" instance=ExtResource("2_fjkca")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15246, 2.48681, 0.15427)
-
 [node name="Scale" parent="PackageCounterView" instance=ExtResource("5_br56s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, 0.0817122)
 
@@ -93,15 +88,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, 0.0817122)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="Sprite3D" type="Sprite3D" parent="PackageCounterView/Characters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05713, -0.253039)
-texture = ExtResource("1_oarbm")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336787, 0.214147, -5.87503)
+visible = false
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("2_ehjcp")
 
 [node name="TexturePackage" parent="PackageCounterView" groups=["package_texture"] instance=ExtResource("9_d0rjt")]
+
+[node name="Packages" type="Node3D" parent="PackageCounterView"]
 
 [node name="LetterSortingView" type="Node3D" parent="."]
 
 [node name="LetterSpawn" type="Marker3D" parent="LetterSortingView" groups=["letter_spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8471, 1.32063, -1.11624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2359, 2.02899, 0.410733)
 
 [node name="EnvelopeView" type="Marker3D" parent="LetterSortingView"]
 transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465, 0.589914, -0.00255615, -0.589912, 0.807463, 14.9522, 4.77978, 4.91037)
@@ -121,26 +121,36 @@ stamp_type = 1
 script = ExtResource("1_ij1vq")
 
 [node name="Letter" parent="LetterSortingView/Letters" instance=ExtResource("2_fulo8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8719, 1.32063, -1.11624)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 14.4543, 4.50922, -5.21022)
 
 [node name="LetterTextureGenerator" parent="LetterSortingView" groups=["letter_texture"] instance=ExtResource("2_tms3v")]
 
 [node name="SortingBins" type="Node3D" parent="LetterSortingView"]
 
-[node name="SortingBin" parent="LetterSortingView/SortingBins" instance=ExtResource("11_3lroh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8964, 0.563641, -3.58778)
+[node name="SortingTube_RTS" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59243, 0.246839, -4.87823)
+label_text = "Return To Sender"
 
-[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "letter_group_node") instance=ExtResource("7_awbof")]
+[node name="SortingTube_Earth" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8533, 0.246839, -4.87823)
+label_text = "Earth"
+
+[node name="SortingTube_Magic" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0804, 0.246839, -4.87823)
+target_universe = 1
+label_text = "Wimbledom"
+
+[node name="SortingTube_Cyber" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.341, 0.246839, -4.87823)
+target_universe = 2
+label_text = "NeoEarth"
+
+[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "letter_group_node", "package_group_node") instance=ExtResource("7_awbof")]
 mouse_filter = 2
 counter_marker = NodePath("../PackageCounterView/PackageView")
 desk_marker = NodePath("../LetterSortingView/EnvelopeView")
 letter_group_node = NodePath("../LetterSortingView/Letters")
-
-[node name="PneumaticTube" parent="." instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8533, 0.246839, -4.17932)
-
-[node name="PneumaticTube2" parent="." instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2526, 0.246839, -4.17932)
+package_group_node = NodePath("../PackageCounterView/Packages")
 
 [node name="Table" parent="." instance=ExtResource("14_jb6hl")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.0309, 0, -0.0236025)

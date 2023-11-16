@@ -38,7 +38,7 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "Front Counter"
 
-[node name="Button" type="Button" parent="."]
+[node name="LetterButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -54,6 +54,20 @@ grow_vertical = 0
 text = "Create Letter
 Test"
 
+[node name="PackageButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -131.0
+offset_right = 140.0
+offset_bottom = -77.0
+grow_vertical = 0
+text = "Create Package
+Test"
+
 [connection signal="pressed" from="ToDesk" to="." method="_on_to_desk_pressed"]
 [connection signal="pressed" from="ToCounter" to="." method="_on_to_counter_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_create_letter_pressed"]
+[connection signal="pressed" from="LetterButton" to="." method="_on_create_letter_pressed"]
+[connection signal="pressed" from="PackageButton" to="." method="_on_package_button_pressed"]

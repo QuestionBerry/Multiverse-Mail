@@ -20,7 +20,7 @@ func _ready():
 	weigh_area.body_exited.connect(scale_body_exited)
 
 func on_input_event(_camera, event:InputEvent, _position, _normal, _shape_idx):
-	if event.is_action_pressed("move_object"):
+	if event.is_action_pressed("move_object") and not bodies_on_scale:
 		ObjectInteractor.start_moving_object(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

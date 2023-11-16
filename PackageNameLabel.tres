@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dlanvarnr2e04"]
+
+[ext_resource type="FontFile" uid="uid://bk75imaykrjua" path="res://assets/font/pixelmix_bold.ttf" id="1_24l8r"]
+
+[resource]
+font = ExtResource("1_24l8r")
+font_size = 8
+font_color = Color(0, 0, 0, 1)

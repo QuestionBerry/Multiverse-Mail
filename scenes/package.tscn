@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwjfgkynldnh"]
+[gd_scene load_steps=4 format=3 uid="uid://bwjfgkynldnh"]
 
 [ext_resource type="Script" path="res://scripts/Package.gd" id="1_rllix"]
 [ext_resource type="ArrayMesh" uid="uid://d0wbwuf7genmk" path="res://assets/models/UnitCube.res" id="2_vjx6l"]
-[ext_resource type="Script" path="res://scripts/MeshReady.gd" id="3_hmyip"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_31cmm"]
 points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
@@ -14,12 +13,11 @@ mass = 2.0
 max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_rllix")
-weight = 5.2
+weight = 2.5
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_vjx6l")
 skeleton = NodePath("../..")
-script = ExtResource("3_hmyip")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_31cmm")
