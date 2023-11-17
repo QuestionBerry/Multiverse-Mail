@@ -7,8 +7,15 @@ var letter_backgrounds = [
 	"res://assets/sprites/letters/letter_3.png"
 ]
 
+func reset_text()->void:
+	$SubViewport/OriginName2.text = ""
+	$SubViewport/OriginLocation2.text = ""
+	$SubViewport/DestinationName2.text = ""
+	$SubViewport/DestinationLocation2.text = ""
 
 func create_letter_texture(letter: Letter):
+	reset_text()
+	
 	if letter.has_origin:
 		$SubViewport/OriginName2.text = NameList.get_random_name(letter.origin_universe)
 		$SubViewport/OriginLocation2.text = NameList.get_random_location(letter.origin_universe, true)
@@ -20,6 +27,8 @@ func create_letter_texture(letter: Letter):
 		set_stamp(letter.origin_universe)
 	else:
 		$SubViewport/Stamp.frame = 0
+	
+	#TODO : Add seal in here later ########
 	
 	$SubViewport/LetterTexture.texture = load(letter_backgrounds.pick_random())
 	

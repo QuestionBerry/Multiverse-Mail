@@ -32,7 +32,7 @@ physics_material_override = SubResource("PhysicsMaterial_g8w4d")
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_jnnix")
-lift_height = 1.0
+lift_height = 2.0
 
 [node name="MainBox" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_e1rqm")

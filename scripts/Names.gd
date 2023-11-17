@@ -1,7 +1,7 @@
 extends Node
 #Autoload script
 
-enum universe {EARTH, MAGIC, CYBER}
+enum universe {RTS, EARTH, MAGIC, CYBER}
 
 func get_random_name(from_universe)->String:
 	match from_universe:

@@ -33,9 +33,7 @@ func stamp_down():
 	var tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_IN)
-	var new_position = position
-	new_position.y -= lift_height*1.5
-	tween.tween_property(self, "position", new_position, speed)
+	tween.tween_property(self, "position", Vector3.DOWN*lift_height*0.75, speed).as_relative()
 
 func stamp_animation():
 	$AnimationPlayer.play("stamp_down")

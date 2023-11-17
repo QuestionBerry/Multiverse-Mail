@@ -110,11 +110,13 @@ gizmo_extents = 0.6
 
 [node name="Stamp-Approved" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.1654, 1.75424, 1.61112)
+lift_height = 1.0
 stamp_sprite = ExtResource("7_oc5sq")
 stamp_color = Color(0.160784, 0.364706, 0.152941, 1)
 
 [node name="Stamp-RTS" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.5441, 2, 1)
+lift_height = 1.0
 stamp_color = Color(0.45098, 0.0941176, 0.117647, 1)
 stamp_type = 1
 
@@ -139,18 +141,19 @@ color = Color(0.854902, 0.0156863, 0.133333, 1)
 
 [node name="SortingTube_Earth" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.373, 0.277196, -4.87823)
+target_universe = 1
 label_text = "Earth"
 color = Color(0.4, 0.658824, 0.341176, 1)
 
 [node name="SortingTube_Magic" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6001, 0.246839, -4.87823)
-target_universe = 1
+target_universe = 2
 label_text = "The Yonder Vale"
 color = Color(0, 0.678431, 0.682353, 1)
 
 [node name="SortingTube_Cyber" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8607, 0.246839, -4.87823)
-target_universe = 2
+target_universe = 3
 label_text = "Stardock"
 color = Color(0.8, 0.670588, 0.321569, 1)
 

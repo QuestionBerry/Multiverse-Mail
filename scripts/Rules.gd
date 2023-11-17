@@ -25,15 +25,18 @@ func check_letter_correct(letter:Letter) -> bool:
 		#If there are errors, but was not stamped RTS
 		if not letter.is_returned:
 			errors.append("Stamped Approved Incorrectly")
-		#If there are errors and stamped RTS, but placed in wrong bin.
-		elif letter.sorted_bin_location != letter.origin_universe:
+		#If there are errors, stamped RTS, no origin, but not sorted to RTS bin
+		elif not letter.has_origin and letter.sorted_bin_location != NameList.universe.RTS:
+			errors.append("Not returned to RTS")
+		#If there are errors and stamped RTS, has origin but returned to wrong bin.
+		elif letter.has_origin and letter.sorted_bin_location != letter.origin_universe:
 			errors.append("Returned to wrong origin")
 		else:
 			#If there are errors, stamped RTS and placed in RTS bin correctly
 			print(str("Caught errors: ", errors))
 			return true
 	
-	print(errors)
+	print(str("\n", errors))
 	if errors:
 		return false
 	else:

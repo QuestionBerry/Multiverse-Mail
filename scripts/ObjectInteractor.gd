@@ -31,7 +31,9 @@ func start_rotating_object(object:RigidBody3D)->void:
 	acting_object.freeze = true
 	prev_mouse_position = get_viewport().get_mouse_position()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	acting_object.position.y += acting_object.lift_height
+	var below_result = raycast_below(object)
+	if below_result:
+		acting_object.position.y = below_result.position.y + acting_object.lift_height
 
 func stop_interacting()->void:
 	acting_object.freeze = false
@@ -65,7 +67,7 @@ func _physics_process(delta):
 				return
 			var below_result = raycast_below(acting_object)
 			if below_result:
-				acting_object.position.y = prev_object_position.y + below_result.position.y + acting_object.lift_height
+				acting_object.position.y = below_result.position.y + acting_object.lift_height
 			acting_object.position.x = raycast_result.position.x 
 			acting_object.position.z = raycast_result.position.z
 	elif is_rotating_object:
@@ -80,10 +82,10 @@ func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 42
 	parameters.collision_mask = collision_mask
 	return camera.get_world_3d().direct_space_state.intersect_ray(parameters)
 
-func is_anything_above() -> bool:
-	var from = acting_object.position
-	var to = from + Vector3.UP * RAY_LENGTH
-	return true if raycast(from, to, [acting_object], 1) else false
+#func is_anything_above() -> bool:
+#	var from = acting_object.position
+#	var to = from + Vector3.UP * RAY_LENGTH
+#	return true if raycast(from, to, [acting_object], 1) else false
 
 func raycast_below(object):
 	var from = object.position
