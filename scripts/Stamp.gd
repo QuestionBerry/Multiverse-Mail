@@ -56,6 +56,10 @@ func _on_stamp_area_body_entered(body):
 			body.is_processed = true
 			match stamp_type:
 				status.APPROVED:
+					if body.is_returned: #Return To Sender Overrides Approved
+						return
 					body.is_approved = true
 				status.RETURNED:
+					if body.is_approved: # Return To Sender Overrides Approved
+						body.is_approved = false
 					body.is_returned = true

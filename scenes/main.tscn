@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=19 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Script" path="res://scripts/Rules.gd" id="1_ij1vq"]
 [ext_resource type="Texture2D" uid="uid://xsfijsbb8ovt" path="res://UglySprite.png" id="2_ehjcp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://pnhkrjpmoreq" path="res://assets/sprites/letters/Stamp-Approved (2).png" id="7_oc5sq"]
 [ext_resource type="PackedScene" uid="uid://0dv11gpbl6i0" path="res://scenes/stamp_2.tscn" id="8_4r25i"]
 [ext_resource type="PackedScene" uid="uid://itvqa4e6loyb" path="res://scenes/PackageTextureGenerator.tscn" id="9_d0rjt"]
+[ext_resource type="PackedScene" uid="uid://optctsa5o7ag" path="res://scenes/mail_chute.tscn" id="12_6pf6y"]
 [ext_resource type="PackedScene" uid="uid://clcwx7p16cn11" path="res://scenes/pneumatic_tube.tscn" id="13_8iik1"]
 [ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="14_jb6hl"]
 
@@ -101,10 +102,10 @@ texture = ExtResource("2_ehjcp")
 [node name="LetterSortingView" type="Node3D" parent="."]
 
 [node name="LetterSpawn" type="Marker3D" parent="LetterSortingView" groups=["letter_spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2359, 2.02899, 0.410733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7545, 2.02899, 0.410733)
 
 [node name="EnvelopeView" type="Marker3D" parent="LetterSortingView"]
-transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465, 0.589914, -0.00255615, -0.589912, 0.807463, 14.9522, 4.77978, 4.91037)
+transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465, 0.589914, -0.00255615, -0.589912, 0.807463, 15.1193, 5.64575, 5.36457)
 gizmo_extents = 0.6
 
 [node name="Stamp-Approved" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
@@ -117,40 +118,47 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.544
 stamp_color = Color(0.45098, 0.0941176, 0.117647, 1)
 stamp_type = 1
 
+[node name="MailChute" parent="LetterSortingView" node_paths=PackedStringArray("letter_group_node") groups=["mail_chute"] instance=ExtResource("12_6pf6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.29301, 3.84741, -0.379074)
+letter_group_node = NodePath("../Letters")
+
 [node name="Letters" type="Node3D" parent="LetterSortingView"]
 script = ExtResource("1_ij1vq")
 
 [node name="Letter" parent="LetterSortingView/Letters" instance=ExtResource("2_fulo8")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 14.4543, 4.50922, -5.21022)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 14.4543, 4.50922, 0.44084)
 
 [node name="LetterTextureGenerator" parent="LetterSortingView" groups=["letter_texture"] instance=ExtResource("2_tms3v")]
 
 [node name="SortingBins" type="Node3D" parent="LetterSortingView"]
 
 [node name="SortingTube_RTS" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59243, 0.246839, -4.87823)
-label_text = "Return To Sender"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1121, 0.246839, -4.87823)
+label_text = "No Return"
+color = Color(0.854902, 0.0156863, 0.133333, 1)
 
 [node name="SortingTube_Earth" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8533, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.373, 0.277196, -4.87823)
 label_text = "Earth"
+color = Color(0.4, 0.658824, 0.341176, 1)
 
 [node name="SortingTube_Magic" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0804, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6001, 0.246839, -4.87823)
 target_universe = 1
-label_text = "Wimbledom"
+label_text = "The Yonder Vale"
+color = Color(0, 0.678431, 0.682353, 1)
 
 [node name="SortingTube_Cyber" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.341, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8607, 0.246839, -4.87823)
 target_universe = 2
-label_text = "NeoEarth"
+label_text = "Stardock"
+color = Color(0.8, 0.670588, 0.321569, 1)
 
-[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "letter_group_node", "package_group_node") instance=ExtResource("7_awbof")]
+[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "package_group_node") instance=ExtResource("7_awbof")]
 mouse_filter = 2
 counter_marker = NodePath("../PackageCounterView/PackageView")
 desk_marker = NodePath("../LetterSortingView/EnvelopeView")
-letter_group_node = NodePath("../LetterSortingView/Letters")
 package_group_node = NodePath("../PackageCounterView/Packages")
 
 [node name="Table" parent="." instance=ExtResource("14_jb6hl")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.0309, 0, -0.0236025)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.5495, 0, -0.0236025)

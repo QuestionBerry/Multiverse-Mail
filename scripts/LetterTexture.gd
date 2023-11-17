@@ -8,15 +8,16 @@ var letter_backgrounds = [
 ]
 
 
-func create_letter_texture(origin, destination, has_stamp, has_seal):
-	$SubViewport/OriginName2.text = NameList.get_random_name(origin)
-	$SubViewport/OriginLocation2.text = NameList.get_random_location(origin)
+func create_letter_texture(letter: Letter):
+	if letter.has_origin:
+		$SubViewport/OriginName2.text = NameList.get_random_name(letter.origin_universe)
+		$SubViewport/OriginLocation2.text = NameList.get_random_location(letter.origin_universe, true)
+	if letter.has_destination:
+		$SubViewport/DestinationName2.text = NameList.get_random_name(letter.destination_universe)
+		$SubViewport/DestinationLocation2.text = NameList.get_random_location(letter.destination_universe, true)
 	
-	$SubViewport/DestinationName2.text = NameList.get_random_name(destination)
-	$SubViewport/DestinationLocation2.text = NameList.get_random_location(destination)
-	
-	if has_stamp:
-		set_stamp(origin)
+	if letter.has_stamp:
+		set_stamp(letter.origin_universe)
 	else:
 		$SubViewport/Stamp.frame = 0
 	
@@ -31,6 +32,7 @@ func create_letter_texture(origin, destination, has_stamp, has_seal):
 	img.resize(256*2, 320*2, Image.INTERPOLATE_NEAREST)
 	var newTexture := ImageTexture.create_from_image(img)
 	return newTexture
+
 
 func set_stamp(universe):
 	match universe:

@@ -1,8 +1,8 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://crhooi8gebdfy"]
 
-[ext_resource type="FontFile" uid="uid://cpegse2xjk60l" path="res://assets/font/PixgamerRegular-OVD6A.ttf" id="1_6q44t"]
+[ext_resource type="FontFile" uid="uid://k1e1whgm4dap" path="res://assets/font/editundo.ttf" id="1_ofqix"]
 
 [resource]
-font = ExtResource("1_6q44t")
-font_size = 32
+font = ExtResource("1_ofqix")
+font_size = 18
 font_color = Color(0, 0, 0, 1)

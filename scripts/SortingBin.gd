@@ -4,11 +4,13 @@ class_name Bin
 @export var target_universe : NameList.universe
 @export var rotation_speed : float = 1.0
 @export var label_text : String
+@export var color : Color = Color.WHITE
 
 var objects_in_area = []
 
 func _ready():
 	$Label3D.text = label_text
+	$SpotLight.light_color = color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

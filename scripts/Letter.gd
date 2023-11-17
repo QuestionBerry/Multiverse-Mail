@@ -46,3 +46,4 @@ func check_if_correct()->void:
 		Global.wrong_letters += 1
 		print("Wrong")
 	self.queue_free()
+	get_tree().get_first_node_in_group("mail_chute").create_letter()

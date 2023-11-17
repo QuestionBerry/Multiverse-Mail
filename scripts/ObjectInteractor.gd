@@ -59,6 +59,7 @@ func _physics_process(delta):
 		var to = from + camera.project_ray_normal(mouse_position) * RAY_LENGTH
 		var raycast_result = raycast(from, to, [acting_object])
 		if raycast_result:
+			#if Bin, lets Bin process() modify position instead
 			if raycast_result.collider is Bin and acting_object is Letter:
 				raycast_result.collider.hold_in_bin(acting_object)
 				return

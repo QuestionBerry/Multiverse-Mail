@@ -47,12 +47,10 @@ var box_address_locations = [
 
 func create_package_texture(origin, destination):
 	$SubViewport/Address2/OriginName.text = NameList.get_random_name(origin)
-	var from_location = NameList.get_random_location(origin)
-	$SubViewport/Address2/OriginLocation.text = insert_newline(from_location)
+	$SubViewport/Address2/OriginLocation.text = NameList.get_random_location(origin, true)
 
 	$SubViewport/Address2/DestinationName.text = NameList.get_random_name(destination)
-	var to_location = NameList.get_random_location(destination)
-	$SubViewport/Address2/DestinationLocation.text = insert_newline(to_location)
+	$SubViewport/Address2/DestinationLocation.text = NameList.get_random_location(destination, true)
 	
 	$SubViewport/PackageTexture.texture = load(box_textures.pick_random())
 	var address_transform = box_address_locations.pick_random()
@@ -69,7 +67,3 @@ func create_package_texture(origin, destination):
 	img.resize(384*2, 576*2, Image.INTERPOLATE_NEAREST)
 	var newTexture := ImageTexture.create_from_image(img)
 	return newTexture
-
-#Adds newline after comma +1
-func insert_newline(text:String):
-	return text.insert(text.find(",")+2, "\n")

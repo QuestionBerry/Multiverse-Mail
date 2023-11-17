@@ -19,16 +19,26 @@ func generate_name(first_name_list, last_name_list):
 	var last = last_name_list.pick_random()
 	return str(first, " ", last)
 
-func get_random_location(from_universe)->String:
+func get_random_location(from_universe, newline = false)->String:
 	match from_universe:
 		universe.EARTH:
+			if newline:
+				return insert_newline(earth_locations.pick_random())
 			return earth_locations.pick_random()
 		universe.MAGIC:
+			if newline:
+				return insert_newline(magic_locations.pick_random())
 			return magic_locations.pick_random()
 		universe.CYBER:
+			if newline:
+				return insert_newline(cyber_locations.pick_random())
 			return cyber_locations.pick_random()
 		_:
 			return "Invalid Location"
+
+#Adds newline after comma +1
+func insert_newline(text:String):
+	return text.insert(text.find(",")+2, "\n")
 
 var earth_locations = [
 	"New York, New York",
