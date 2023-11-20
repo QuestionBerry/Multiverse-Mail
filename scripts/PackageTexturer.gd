@@ -64,6 +64,6 @@ func create_package_texture(origin, destination):
 	#Otherwise all instance would reference the same dynamic viewport texture
 	print(address_transform)
 	var img : Image = $SubViewport.get_texture().get_image()
-	img.resize(384*2, 576*2, Image.INTERPOLATE_NEAREST)
+#	img.resize(384*3, 576*3, Image.INTERPOLATE_NEAREST)
 	var newTexture := ImageTexture.create_from_image(img)
 	return newTexture

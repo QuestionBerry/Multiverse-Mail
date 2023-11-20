@@ -28,7 +28,10 @@ func create_letter_texture(letter: Letter):
 	else:
 		$SubViewport/Stamp.frame = 0
 	
-	#TODO : Add seal in here later ########
+	if letter.has_seal:
+		$SubViewport/Seal.frame = randi_range(1,5)
+	else:
+		$SubViewport/Seal.frame = 0
 	
 	$SubViewport/LetterTexture.texture = load(letter_backgrounds.pick_random())
 	

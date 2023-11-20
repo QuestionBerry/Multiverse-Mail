@@ -1,7 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Script" path="res://scripts/Rules.gd" id="1_ij1vq"]
-[ext_resource type="Texture2D" uid="uid://xsfijsbb8ovt" path="res://UglySprite.png" id="2_ehjcp"]
 [ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
 [ext_resource type="PackedScene" uid="uid://dj64d1ubdg5n2" path="res://scenes/LetterTextureGenerator.tscn" id="2_tms3v"]
 [ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://0dv11gpbl6i0" path="res://scenes/stamp_2.tscn" id="8_4r25i"]
 [ext_resource type="PackedScene" uid="uid://itvqa4e6loyb" path="res://scenes/PackageTextureGenerator.tscn" id="9_d0rjt"]
 [ext_resource type="PackedScene" uid="uid://optctsa5o7ag" path="res://scenes/mail_chute.tscn" id="12_6pf6y"]
+[ext_resource type="PackedScene" uid="uid://bwbtoad5i7d0y" path="res://scenes/notebook.tscn" id="12_m60oy"]
 [ext_resource type="PackedScene" uid="uid://clcwx7p16cn11" path="res://scenes/pneumatic_tube.tscn" id="13_8iik1"]
 [ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="14_jb6hl"]
 
@@ -93,7 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336787, 0.214147, -5.87503)
 visible = false
 pixel_size = 0.05
 texture_filter = 0
-texture = ExtResource("2_ehjcp")
 
 [node name="TexturePackage" parent="PackageCounterView" groups=["package_texture"] instance=ExtResource("9_d0rjt")]
 
@@ -119,6 +118,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.544
 lift_height = 1.0
 stamp_color = Color(0.45098, 0.0941176, 0.117647, 1)
 stamp_type = 1
+
+[node name="Table" parent="LetterSortingView" instance=ExtResource("14_jb6hl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.5495, 0, -0.0236025)
 
 [node name="MailChute" parent="LetterSortingView" node_paths=PackedStringArray("letter_group_node") groups=["mail_chute"] instance=ExtResource("12_6pf6y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.29301, 3.84741, -0.379074)
@@ -163,5 +165,4 @@ counter_marker = NodePath("../PackageCounterView/PackageView")
 desk_marker = NodePath("../LetterSortingView/EnvelopeView")
 package_group_node = NodePath("../PackageCounterView/Packages")
 
-[node name="Table" parent="." instance=ExtResource("14_jb6hl")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.5495, 0, -0.0236025)
+[node name="Notebook" parent="." instance=ExtResource("12_m60oy")]

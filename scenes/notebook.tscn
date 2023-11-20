@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwbtoad5i7d0y"]
+
+[ext_resource type="Texture2D" uid="uid://cfi3spm5yyk7g" path="res://assets/sprites/Book.png" id="1_v70cr"]
+[ext_resource type="Script" path="res://scripts/notebook.gd" id="1_vwbg2"]
+[ext_resource type="Texture2D" uid="uid://bmgmap4g8us25" path="res://assets/sprites/Bookmark-sheet.png" id="2_re62h"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="3_wkua8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxmri"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hbi5y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="Theme" id="Theme_hjb0b"]
+default_font = ExtResource("3_wkua8")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+RichTextLabel/constants/text_highlight_h_padding = 3
+RichTextLabel/constants/text_highlight_v_padding = 3
+RichTextLabel/font_sizes/bold_font_size = 16
+RichTextLabel/font_sizes/bold_italics_font_size = 16
+RichTextLabel/font_sizes/italics_font_size = 16
+RichTextLabel/font_sizes/mono_font_size = 16
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_bxmri")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_hbi5y")
+
+[node name="Notebook" type="Node2D"]
+script = ExtResource("1_vwbg2")
+
+[node name="Book" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(993, 613)
+scale = Vector2(2, 2)
+texture = ExtResource("1_v70cr")
+vframes = 2
+frame = 1
+
+[node name="Bookmark-Red" type="Sprite2D" parent="Book"]
+position = Vector2(-204.333, -146.667)
+texture = ExtResource("2_re62h")
+hframes = 6
+vframes = 2
+frame = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Book"]
+offset_left = 19.5
+offset_top = -124.5
+offset_right = 230.5
+offset_bottom = 70.5
+mouse_filter = 2
+theme = SubResource("Theme_hjb0b")
+text = "Regulations:
+Mail must be stamped.
+Blah blah blah
+Drawing of dicks"
+
+[node name="VisiblePosition" type="Marker2D" parent="."]
+position = Vector2(993, 594)
+
+[node name="HiddenPosition" type="Marker2D" parent="."]
+position = Vector2(993, 1527)
+gizmo_extents = 95.0

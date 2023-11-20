@@ -42,7 +42,11 @@ func roll_letter_properties(rules: Spawn_Rules)->Dictionary:
 		rules.cyber_chance
 	)
 	properties.has_stamp = true if randf() < rules.stamp_chance else false
-	properties.has_seal = true if randf() < rules.seal_chance else false
+	#Only has a chance for seal if origin is Magic
+	if properties.origin_universe == NameList.universe.MAGIC:
+		properties.has_seal = true if randf() < rules.seal_chance else false
+	else:
+		properties.has_seal = false
 	print(properties)
 	return properties
 

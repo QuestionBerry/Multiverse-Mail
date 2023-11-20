@@ -10,6 +10,11 @@ extends Control
 
 @export var package_group_node : Node3D
 
+#### DEBUGGING QUIT : MOVE OR REMOVE LATER
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
+
 func _on_to_desk_pressed():
 	move_camera(desk_marker)
 
