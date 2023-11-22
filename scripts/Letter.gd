@@ -19,6 +19,7 @@ var is_approved := false
 var is_returned := false
 
 
+
 func _ready():
 	input_event.connect(on_input_event)
 

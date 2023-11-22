@@ -26,6 +26,11 @@ func _process(_delta):
 			target.add_child(self)
 			self.global_transform = prev_transform
 			
+			#Add layering so new sticker renders in front of old
+			if "sticker_offset" in target:
+				$CollisionShape3D2/Sticker2.sorting_offset = target.sticker_offset + 1
+				$CollisionShape3D2/Label3D.sorting_offset = target.sticker_offset + 2
+				target.sticker_offset += 2
 			#Disable Input
 			input_ray_pickable = false
 			set_process(false)
@@ -53,6 +58,9 @@ func on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event.is_action_pressed("move_object"):
 		is_dragging = true
 		$AnimationPlayer2.play("RESET")
+		#Rendering offset so sticker renders in front of others on surface
+		$CollisionShape3D2/Sticker2.sorting_offset = 99
+		$CollisionShape3D2/Label3D.sorting_offset = 100
 
 func print_out(scale_weight: float)->void:
 	$CollisionShape3D2/Label3D.text = str(scale_weight, "lbs")

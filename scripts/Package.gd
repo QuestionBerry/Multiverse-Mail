@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name Package
 
 @export var weight :float= 0.0
 @export var lift_height : float = 1.0
@@ -13,6 +14,8 @@ var destination_universe = NameList.universe.EARTH
 var is_priority_mail := false
 var is_fragile := false
 
+var sticker_offset :int= 0
+
 #Used in checking if it is fully on the Scale
 var is_touching_desk := false
 
@@ -20,6 +23,7 @@ func _ready():
 	self.body_entered.connect(on_body_entered)
 	self.body_exited.connect(on_body_exited)
 	self.input_event.connect(on_input_event)
+	respawn()
 
 func _physics_process(_delta):
 	if self.position.y <= -2:
