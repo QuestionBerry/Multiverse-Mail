@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://0dv11gpbl6i0"]
+[gd_scene load_steps=19 format=3 uid="uid://0dv11gpbl6i0"]
 
 [ext_resource type="Script" path="res://scripts/Stamp.gd" id="1_73sk7"]
 [ext_resource type="Texture2D" uid="uid://c617bjpknhksw" path="res://assets/sprites/letters/Stamp-RTS.png" id="2_7ls37"]
+[ext_resource type="AudioStream" uid="uid://0wfaryxut43" path="res://assets/audio/Open Door 4.mp3" id="3_88k6m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rv4ba"]
 size = Vector3(0.369429, 0.422689, 0.788104)
@@ -233,5 +234,9 @@ texture_albedo = ExtResource("2_7ls37")
 libraries = {
 "": SubResource("AnimationLibrary_tp7gt")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_88k6m")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Stamp_Area" to="." method="_on_stamp_area_body_entered"]

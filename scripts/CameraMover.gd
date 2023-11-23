@@ -26,8 +26,8 @@ func move_camera(destination : Marker3D):
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_parallel(true)
-	tween.tween_property(camera, "position", destination.position, move_time)
-	tween.tween_property(camera, "rotation", destination.rotation, move_time)
+	tween.tween_property(camera, "position", destination.global_position, move_time)
+	tween.tween_property(camera, "rotation", destination.global_rotation, move_time)
 
 
 func _on_package_button_pressed():

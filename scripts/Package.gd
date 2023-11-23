@@ -14,6 +14,8 @@ var destination_universe = NameList.universe.EARTH
 var is_priority_mail := false
 var is_fragile := false
 
+var is_processed = false
+
 var sticker_offset :int= 0
 
 #Used in checking if it is fully on the Scale

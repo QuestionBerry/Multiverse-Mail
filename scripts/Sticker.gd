@@ -31,6 +31,7 @@ func _process(_delta):
 				$CollisionShape3D2/Sticker2.sorting_offset = target.sticker_offset + 1
 				$CollisionShape3D2/Label3D.sorting_offset = target.sticker_offset + 2
 				target.sticker_offset += 2
+				target.is_processed = true
 			#Disable Input
 			input_ray_pickable = false
 			set_process(false)

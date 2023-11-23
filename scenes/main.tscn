@@ -1,8 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=32 format=3 uid="uid://brfoteqvalx36"]
 
+[ext_resource type="Texture2D" uid="uid://i4xt5sghrv60" path="res://assets/sprites/HallDecorations.png" id="1_cekco"]
+[ext_resource type="Material" uid="uid://cg4eo2302bqc1" path="res://assets/Material-Wall.tres" id="1_isret"]
 [ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
 [ext_resource type="PackedScene" uid="uid://dj64d1ubdg5n2" path="res://scenes/LetterTextureGenerator.tscn" id="2_tms3v"]
 [ext_resource type="Script" path="res://scripts/CharacterManager.gd" id="2_uy5or"]
+[ext_resource type="PackedScene" uid="uid://db5ltuqfaw083" path="res://assets/models/POBoxes.glb" id="3_pyuv5"]
 [ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
 [ext_resource type="PackedScene" uid="uid://bqhrr2x273uj7" path="res://scenes/CameraSwitchUI.tscn" id="7_awbof"]
 [ext_resource type="Texture2D" uid="uid://pnhkrjpmoreq" path="res://assets/sprites/letters/Stamp-Approved (2).png" id="7_oc5sq"]
@@ -12,7 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://optctsa5o7ag" path="res://scenes/mail_chute.tscn" id="12_6pf6y"]
 [ext_resource type="PackedScene" uid="uid://bwbtoad5i7d0y" path="res://scenes/notebook.tscn" id="12_m60oy"]
 [ext_resource type="PackedScene" uid="uid://clcwx7p16cn11" path="res://scenes/pneumatic_tube.tscn" id="13_8iik1"]
+[ext_resource type="PackedScene" uid="uid://376xj5lilpne" path="res://scenes/sorting_bin.tscn" id="14_0vkqf"]
 [ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="14_jb6hl"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_n2ps8"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 12.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4orbl"]
 sky_top_color = Color(0.458824, 0.545098, 0.831373, 1)
@@ -26,7 +34,32 @@ background_mode = 2
 background_color = Color(0.376471, 0.517647, 0.988235, 1)
 sky = SubResource("Sky_mcsa4")
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5eho7"]
+[sub_resource type="BoxMesh" id="BoxMesh_6x73x"]
+material = ExtResource("1_isret")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv84u"]
+albedo_color = Color(0.411765, 0.282353, 0.243137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wevuu"]
+material = SubResource("StandardMaterial3D_cv84u")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b7l6y"]
+noise_type = 2
+frequency = 0.448
+fractal_lacunarity = 2.205
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yhit3"]
+noise = SubResource("FastNoiseLite_b7l6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu6dc"]
+albedo_color = Color(0.368627, 0.34902, 0.34902, 1)
+albedo_texture = SubResource("NoiseTexture2D_yhit3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t4o41"]
+material = SubResource("StandardMaterial3D_yu6dc")
+
+[sub_resource type="BoxMesh" id="BoxMesh_losrk"]
+material = ExtResource("1_isret")
 
 [sub_resource type="BoxMesh" id="BoxMesh_4necf"]
 size = Vector3(10, 5, 5)
@@ -40,6 +73,7 @@ size = Vector3(10.0201, 5.1033, 5.00238)
 
 [node name="Camera3D" type="Camera3D" parent="World" groups=["camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.931342, 0.364145, 0, -0.364145, 0.931342, -0.01, 3.9431, 6.22654)
+attributes = SubResource("CameraAttributesPractical_n2ps8")
 current = true
 fov = 60.0
 
@@ -50,19 +84,90 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_blgyi")
-camera_attributes = SubResource("CameraAttributesPractical_5eho7")
 
 [node name="DayTimer" type="Timer" parent="World"]
 
 [node name="PackageTimer" type="Timer" parent="World"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4217, 9.0696, 0)
-light_color = Color(0.854902, 0.752941, 0.752941, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271799, 9.0696, -6.87822)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
 light_energy = 5.724
 light_indirect_energy = 1.611
 shadow_enabled = true
-omni_range = 8.21094
+omni_range = 10.8788
+
+[node name="Hallway" type="Node" parent="World"]
+
+[node name="HallwayWall" type="MeshInstance3D" parent="World/Hallway"]
+transform = Transform3D(28.5034, 0, 0, 0, 14.6941, 0, 0, 0, 2.23555, 21.4162, 2.07151, 0.686306)
+mesh = SubResource("BoxMesh_6x73x")
+
+[node name="Achievement" type="Sprite3D" parent="World/Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7833, 2.91545, 1.91525)
+pixel_size = 0.03
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+
+[node name="Clock" type="Sprite3D" parent="World/Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7832, 4.59556, 1.99587)
+pixel_size = 0.03
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+frame = 1
+
+[node name="Flower" type="Sprite3D" parent="World/Hallway"]
+transform = Transform3D(2.3401, 0, 0, 0, 2.3401, 0, 0, 0, 1, 26.0894, 2.85689, 1.84433)
+pixel_size = 0.03
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+frame = 3
+
+[node name="Flower3" type="Sprite3D" parent="World/Hallway/Flower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.156752)
+sorting_offset = 1.0
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+frame = 5
+
+[node name="Flower2" type="Sprite3D" parent="World/Hallway/Flower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.250622)
+sorting_offset = 1.0
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+frame = 4
+
+[node name="WallEndLeft" type="MeshInstance3D" parent="World/Hallway"]
+transform = Transform3D(0.493646, 0, 0, 0, 15.2489, 0, 0, 0, 2.51508, 7.27106, 1.86885, 0.686306)
+mesh = SubResource("BoxMesh_wevuu")
+
+[node name="WallEndRight" type="MeshInstance3D" parent="World/Hallway"]
+transform = Transform3D(0.493646, 0, 0, 0, 15.2489, 0, 0, 0, 2.51508, 35.6228, 1.86885, 0.686306)
+mesh = SubResource("BoxMesh_wevuu")
+
+[node name="FrontRoom" type="Node" parent="World"]
+
+[node name="Floor" type="MeshInstance3D" parent="World/FrontRoom"]
+transform = Transform3D(48.3047, 0, 0, 0, 1, 0, 0, 0, 44.1044, 19.3863, -4.70911, -5.18899)
+mesh = SubResource("PlaneMesh_t4o41")
+
+[node name="Wall" type="MeshInstance3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 14.031, 0, 0, 0, 8.35441, 7.72485, 2.32917, -4.64081)
+mesh = SubResource("BoxMesh_losrk")
+
+[node name="POBoxes" parent="World/FrontRoom/Wall" instance=ExtResource("3_pyuv5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.0712708, 0, 1.04643e-08, 0, -0.119697, 0.399579, -0.166001, -0.245324)
 
 [node name="PackageCounterView" type="Node3D" parent="."]
 
@@ -109,45 +214,50 @@ autostart = true
 
 [node name="TexturePackage" parent="PackageCounterView" groups=["package_texture"] instance=ExtResource("9_d0rjt")]
 
+[node name="SortingBin" parent="PackageCounterView" instance=ExtResource("14_0vkqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.21449, 0.502239, 0.117587)
+label_text = "gdfgd"
+
 [node name="Packages" type="Node3D" parent="PackageCounterView"]
 
 [node name="LetterSortingView" type="Node3D" parent="."]
 
 [node name="LetterSpawn" type="Marker3D" parent="LetterSortingView" groups=["letter_spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7545, 2.02899, 0.410733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.3746, 2.02899, 0.410733)
 
 [node name="EnvelopeView" type="Marker3D" parent="LetterSortingView"]
-transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465, 0.589914, -0.00255615, -0.589912, 0.807463, 15.1193, 5.64575, 5.36457)
+transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465, 0.589914, -0.00255615, -0.589912, 0.807463, 44.7394, 5.64575, 5.36457)
 gizmo_extents = 0.6
 
 [node name="Stamp-Approved" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.1654, 1.75424, 1.61112)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.7855, 1.75424, 1.61112)
 lift_height = 1.0
 stamp_sprite = ExtResource("7_oc5sq")
 stamp_color = Color(0.160784, 0.364706, 0.152941, 1)
 
 [node name="Stamp-RTS" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.5441, 2, 1)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 42.1642, 2, 1)
 lift_height = 1.0
 stamp_color = Color(0.45098, 0.0941176, 0.117647, 1)
 stamp_type = 1
 
 [node name="Table" parent="LetterSortingView" instance=ExtResource("14_jb6hl")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.5495, 0, -0.0236025)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.1696, 0, -0.0236025)
 
 [node name="MailChute" parent="LetterSortingView" node_paths=PackedStringArray("letter_group_node") groups=["mail_chute"] instance=ExtResource("12_6pf6y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.29301, 3.84741, -0.379074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9131, 3.84741, -0.379074)
 letter_group_node = NodePath("../Letters")
 
 [node name="Letters" type="Node3D" parent="LetterSortingView"]
 script = ExtResource("8_k0h4r")
 
 [node name="Letter" parent="LetterSortingView/Letters" instance=ExtResource("2_fulo8")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 14.4543, 4.50922, 0.44084)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 44.0744, 4.50922, 0.44084)
 
 [node name="LetterTextureGenerator" parent="LetterSortingView" groups=["letter_texture"] instance=ExtResource("2_tms3v")]
 
 [node name="SortingBins" type="Node3D" parent="LetterSortingView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6201, 0, 0)
 
 [node name="SortingTube_RTS" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1121, 0.246839, -4.87823)

@@ -11,7 +11,7 @@ var prev_object_position : Vector3
 var mouseMotion : Vector2
 
 const RAY_LENGTH := 100
-const ROTATION_SPEED := .2
+const ROTATION_SPEED := .02
 
 func start_moving_object(object:RigidBody3D)->void:
 	if is_moving_object or is_rotating_object:
@@ -62,11 +62,13 @@ func _physics_process(delta):
 		var raycast_result = raycast(from, to, [acting_object])
 		if raycast_result:
 			#if Bin, lets Bin process() modify position instead
-			if raycast_result.collider is Bin and acting_object is Letter:
+			if raycast_result.collider is Bin and (acting_object is Letter or acting_object is Package) :
 				raycast_result.collider.hold_in_bin(acting_object)
 				return
 			var below_result = raycast_below(acting_object)
 			if below_result:
+				print(acting_object.position.y)
+				print(below_result.position.y + acting_object.lift_height)
 				acting_object.position.y = below_result.position.y + acting_object.lift_height
 			acting_object.position.x = raycast_result.position.x 
 			acting_object.position.z = raycast_result.position.z
@@ -90,5 +92,5 @@ func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 42
 func raycast_below(object):
 	var from = object.position
 	var to = from + Vector3.DOWN * RAY_LENGTH
-	return raycast(from, to, [object], 1)
+	return raycast(from, to, [object])
 

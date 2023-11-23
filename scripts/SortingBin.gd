@@ -9,8 +9,11 @@ class_name Bin
 var objects_in_area = []
 
 func _ready():
-	$Label3D.text = label_text
-	$SpotLight.light_color = color
+	for child in get_children():
+		if child is Label3D:
+			$Label3D.text = label_text
+		if child is SpotLight3D:
+			$SpotLight.light_color = color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -27,6 +30,12 @@ func _physics_process(delta):
 					object.sorted_bin_location = target_universe
 					objects_in_area.remove_at(objects_in_area.find(object))
 					send_mail(object)
+		elif object is Package:
+			if not object.is_processed:
+					print(str(object.name, " not processed"))
+					object.respawn()
+			else:
+				pass
 
 func send_mail(target):
 	var tween = get_tree().create_tween()
@@ -38,7 +47,10 @@ func send_mail(target):
 func hold_in_bin( target: RigidBody3D)->void:
 	var delta = get_viewport().get_process_delta_time()
 	target.global_position = $Marker3D.global_position
-	target.rotate_x(rotation_speed * delta)
+	if target is Letter:
+		target.rotate_x(rotation_speed * delta)
+	if target is Package:
+		target.rotate_y(rotation_speed * delta)
 	pass
 
 #Doesn't enter until mouse is let go because rigidbody is frozen

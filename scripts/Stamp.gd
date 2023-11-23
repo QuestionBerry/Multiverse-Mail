@@ -37,7 +37,11 @@ func stamp_down():
 
 func stamp_animation():
 	$AnimationPlayer.play("stamp_down")
+	$AudioStreamPlayer3D.stream = load("res://assets/audio/Lights On.mp3")
+	$AudioStreamPlayer3D.play()
 	await get_tree().create_timer(0.5).timeout
+	$AudioStreamPlayer3D.stream = load("res://assets/audio/Lights Off.mp3")
+	$AudioStreamPlayer3D.play()
 	$AnimationPlayer.play("stamp_up")
 
 func _on_stamp_area_body_entered(body):

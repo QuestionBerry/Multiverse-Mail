@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://s4ehirx5bwl1"
+path="res://.godot/imported/Lights Off.mp3-6cb3948a254cd383f35729cd5c91d988.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Lights Off.mp3"
+dest_files=["res://.godot/imported/Lights Off.mp3-6cb3948a254cd383f35729cd5c91d988.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

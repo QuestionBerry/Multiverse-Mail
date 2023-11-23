@@ -1,0 +1,26 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cg4eo2302bqc1"]
+
+[sub_resource type="Gradient" id="Gradient_v81ty"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uyop3"]
+gradient = SubResource("Gradient_v81ty")
+fill_from = Vector2(0.545788, 1)
+fill_to = Vector2(0.52381, 0.298535)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5v75x"]
+seed = -15
+frequency = 0.1565
+offset = Vector3(-118.3, 0, 0)
+fractal_gain = -1.06
+domain_warp_enabled = true
+domain_warp_amplitude = -11.6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cup7a"]
+in_3d_space = true
+noise = SubResource("FastNoiseLite_5v75x")
+
+[resource]
+albedo_color = Color(0.698039, 0.729412, 0.780392, 1)
+albedo_texture = SubResource("GradientTexture2D_uyop3")
+metallic_specular = 0.61
+roughness_texture = SubResource("NoiseTexture2D_cup7a")
