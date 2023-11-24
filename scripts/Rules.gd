@@ -42,3 +42,57 @@ func check_letter_correct(letter:Letter) -> bool:
 	else:
 		#No errors, Sorted Correctly
 		return true
+
+
+func check_package_correct(package : Package):
+	errors.clear()
+	
+	var stickers = []
+	for child in package.get_children():
+		if child is Sticker:
+			stickers.append(child)
+	
+	var weight_label_stickers = 0
+	var has_destination_sticker = false
+	var has_fragile_sticker = false
+	var has_expedited_sticker = false
+	
+	for sticker in stickers:
+		if Global.game_day >= 3:
+			if sticker.type == Sticker.WEIGHT:
+				weight_label_stickers += 1
+				if sticker.weight > package.weight + 0.6 or sticker.weight < package.weight - 0.6:
+					errors.append("Incorrect weight")
+			if sticker.type == Sticker.DESTINATION:
+				has_destination_sticker = true
+				if sticker.destination != package.destination_universe:
+					errors.append("Incorrect destination sticker")
+		
+		if Global.game_day >= 4:
+			if sticker.type == Sticker.FRAGILE:
+				has_fragile_sticker = true
+				if not package.is_fragile:
+					errors.append("Labeled fragile incorrectly")
+		if Global.game_day >= 5:
+			if sticker.type == Sticker.EXPEDITED:
+				has_expedited_sticker = true
+				if not package.is_priority_mail:
+					errors.append("Labeled expedited incorrectly")
+	
+	
+	if weight_label_stickers > 1:
+		errors.append("Too many weight labels")
+	if not has_destination_sticker:
+		errors.append("Missing destination sticker")
+	if package.is_fragile and not has_fragile_sticker:
+		errors.append("Missing fragile sticker")
+	if package.is_priority_mail and not has_expedited_sticker:
+		errors.append("Missing expedited sticker")
+	
+	print(str("\n", errors))
+	if errors:
+		return false
+	else:
+		#No errors, Sorted Correctly
+		print("Shipped Correctly")
+		return true

@@ -9,6 +9,7 @@ var exit_text : String
 var origin_universe :
 	set(value):
 		origin_universe = value
+		pick_sprite()
 		pick_destination()
 var destination_universe
 var is_fragile := false
@@ -32,9 +33,22 @@ var colors = [
 
 
 func _ready():
-	$Sprite3D.modulate = colors.pick_random()
+	var color :Color= colors.pick_random().darkened(0.4)
+	$Sprite3D.modulate = color 
 	$Sprite3D.frame = randi()%3
 	$AnimationPlayer.play("idle")
+
+func get_sprite()->Sprite3D:
+	return $Sprite3D
+
+func pick_sprite():
+	match origin_universe:
+		NameList.universe.EARTH:
+			$Sprite3D.frame = randi_range(0,9)
+		NameList.universe.MAGIC:
+			$Sprite3D.frame = randi_range(10,19)
+		NameList.universe.CYBER:
+			$Sprite3D.frame = randi_range(20,29)
 
 func pick_destination():
 	var possible_destinations = []

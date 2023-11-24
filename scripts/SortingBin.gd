@@ -35,13 +35,19 @@ func _physics_process(delta):
 					print(str(object.name, " not processed"))
 					object.respawn()
 			else:
-				pass
+				objects_in_area.remove_at(objects_in_area.find(object))
+				send_package(object)
 
-func send_mail(target):
+func send_mail(target : Letter):
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(target, "rotation_degrees", Vector3(0,0,-90), 0.2)
 	await tween.tween_property(target, "position", Vector3.UP*5, 0.5).as_relative().finished
+	target.check_if_correct()
+
+func send_package(target : Package):
+	var tween = get_tree().create_tween()
+	await tween.tween_property(target, "position", Vector3.LEFT*3, 2).as_relative().finished
 	target.check_if_correct()
 
 func hold_in_bin( target: RigidBody3D)->void:

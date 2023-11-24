@@ -3,10 +3,15 @@ class_name Sticker
 
 @onready var camera : Camera3D = get_tree().get_first_node_in_group("camera")
 
+enum {WEIGHT, DESTINATION, FRAGILE, EXPEDITED}
 var is_dragging := false
 var target = null
 var label_text = "0.0lbs"
+
+var type = WEIGHT
+
 var weight : float
+var destination : NameList
 
 const RAY_LENGTH = 100
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvj285knrwnlw"]
 
-[ext_resource type="Texture2D" uid="uid://6rnclo5hmcib" path="res://assets/sprites/Test-Characterst.png" id="1_rx5cs"]
+[ext_resource type="Texture2D" uid="uid://dftrjfjglvenv" path="res://assets/sprites/Silhouettes.png" id="2_apxvp"]
 [ext_resource type="Script" path="res://scripts/Character.gd" id="2_wpqi8"]
 
 [sub_resource type="Animation" id="Animation_c5qt5"]
@@ -46,10 +46,10 @@ script = ExtResource("2_wpqi8")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.05
-alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("1_rx5cs")
-hframes = 3
+texture = ExtResource("2_apxvp")
+hframes = 6
+vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

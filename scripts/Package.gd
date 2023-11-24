@@ -36,6 +36,18 @@ func respawn()->void:
 	self.angular_velocity = Vector3.ZERO
 	self.position = spawn_marker.position
 
+func check_if_correct()->void:
+	var is_correct = get_parent().check_package_correct(self)
+	if is_correct:
+		Global.correct_packages += 1
+		print("Correct")
+	else:
+		Global.wrong_packages += 1
+		print("Wrong")
+	
+	self.queue_free()
+	get_tree().get_first_node_in_group("character_manager").move_up_queue()
+
 func on_body_entered(body: Node):
 	if body.is_in_group("desk"):
 		is_touching_desk = true

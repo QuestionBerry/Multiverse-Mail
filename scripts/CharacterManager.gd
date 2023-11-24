@@ -9,7 +9,7 @@ extends Node3D
 @onready var character_scene = load("res://scenes/Character.tscn")
 @onready var package_scene = load("res://scenes/package.tscn")
 
-var position_markers = [marker1, marker2, marker3]
+@onready var position_markers = [marker1, marker2, marker3]
 var character_queue = []
 
 class Character_Rules:
@@ -103,11 +103,18 @@ func spawn_package(character:Character):
 	packages.add_child(new_package)
 	pass
 
-#func move_up_queue():
-#	for character in character_queue:
-#		var tween = get_tree().create_tween()
-#		var next_position = character_queue.find(character)-1
-#		if next_position <= 0:
-#			continue
-#		else:
-#			await tween.tween_property(character, "position", position_markers[next_position].position, 1.5).as_relative().finished
+func move_up_queue():
+	await remove_character(character_queue.pop_front())
+	
+	for character in character_queue:
+		var tween = get_tree().create_tween()
+		var next_position = position_markers[character_queue.find(character)].global_position
+		await tween.tween_property(character, "position", next_position, 1).finished
+		#If they move to the front, spawn their package
+		if character_queue.find(character) == 0:
+			spawn_package(character)
+
+func remove_character(character: Character)->void:
+	var tween = get_tree().create_tween()
+	await tween.tween_property(character.get_sprite(), "modulate:a", 0, 0.75).finished
+	character.queue_free()
