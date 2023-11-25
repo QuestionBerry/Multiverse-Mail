@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3dcs0l8jvipy"]
+
+[ext_resource type="ArrayMesh" uid="uid://dnl562juifovy" path="res://assets/models/Dispenser.res" id="1_itq63"]
+[ext_resource type="Script" path="res://scripts/sticker_dispenser.gd" id="1_iubod"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffsi4"]
+size = Vector3(0.94599, 0.537453, 0.875957)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_klxyr"]
+size = Vector3(0.998815, 0.0684997, 0.934377)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6487r"]
+height = 0.868168
+radius = 0.411762
+
+[node name="StickerDispenser" type="RigidBody3D"]
+lock_rotation = true
+script = ExtResource("1_iubod")
+type = 1
+
+[node name="Dispenser" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1.05, 0, 1, 0, 1, 0, -4.5897e-08, 0.0326468, 0.185059, -0.0326468)
+mesh = ExtResource("1_itq63")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0326468, -0.00292552, 0.0326801)
+shape = SubResource("BoxShape3D_ffsi4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0326468, -0.304308, 0.0320371)
+shape = SubResource("BoxShape3D_klxyr")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.0326468, 0.276271, -0.0320703)
+shape = SubResource("CylinderShape3D_6487r")

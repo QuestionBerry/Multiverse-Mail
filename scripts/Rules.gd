@@ -59,22 +59,22 @@ func check_package_correct(package : Package):
 	
 	for sticker in stickers:
 		if Global.game_day >= 3:
-			if sticker.type == Sticker.WEIGHT:
+			if sticker.type == Sticker.types.WEIGHT:
 				weight_label_stickers += 1
 				if sticker.weight > package.weight + 0.6 or sticker.weight < package.weight - 0.6:
 					errors.append("Incorrect weight")
-			if sticker.type == Sticker.DESTINATION:
+			if sticker.type == Sticker.types.DESTINATION:
 				has_destination_sticker = true
 				if sticker.destination != package.destination_universe:
 					errors.append("Incorrect destination sticker")
 		
 		if Global.game_day >= 4:
-			if sticker.type == Sticker.FRAGILE:
+			if sticker.type == Sticker.types.FRAGILE:
 				has_fragile_sticker = true
 				if not package.is_fragile:
 					errors.append("Labeled fragile incorrectly")
 		if Global.game_day >= 5:
-			if sticker.type == Sticker.EXPEDITED:
+			if sticker.type == Sticker.types.EXPEDITED:
 				has_expedited_sticker = true
 				if not package.is_priority_mail:
 					errors.append("Labeled expedited incorrectly")

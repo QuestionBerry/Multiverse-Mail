@@ -3,15 +3,15 @@ class_name Sticker
 
 @onready var camera : Camera3D = get_tree().get_first_node_in_group("camera")
 
-enum {WEIGHT, DESTINATION, FRAGILE, EXPEDITED}
+enum types {WEIGHT, DESTINATION, FRAGILE, EXPEDITED}
 var is_dragging := false
 var target = null
 var label_text = "0.0lbs"
 
-var type = WEIGHT
+var type = types.WEIGHT
 
 var weight : float
-var destination : NameList
+var destination : NameList.universe
 
 const RAY_LENGTH = 100
 
@@ -27,6 +27,10 @@ func _process(_delta):
 			print("Stuck to package")
 			var prev_transform = self.global_transform
 			get_parent().has_sticker = false
+			
+			if type == types.DESTINATION:
+				get_parent().create_sticker()
+			
 			get_parent().remove_child(self)
 			target.add_child(self)
 			self.global_transform = prev_transform
@@ -34,9 +38,10 @@ func _process(_delta):
 			#Add layering so new sticker renders in front of old
 			if "sticker_offset" in target:
 				$CollisionShape3D2/Sticker2.sorting_offset = target.sticker_offset + 1
-				$CollisionShape3D2/Label3D.sorting_offset = target.sticker_offset + 2
+				if type == types.WEIGHT:
+					$CollisionShape3D2/Label3D.sorting_offset = target.sticker_offset + 2
+					target.is_processed = true
 				target.sticker_offset += 2
-				target.is_processed = true
 			#Disable Input
 			input_ray_pickable = false
 			set_process(false)
@@ -63,10 +68,11 @@ func _process(_delta):
 func on_input_event(_camera, event: InputEvent, _position, _normal, _shape_idx):
 	if event.is_action_pressed("move_object"):
 		is_dragging = true
-		$AnimationPlayer2.play("RESET")
 		#Rendering offset so sticker renders in front of others on surface
 		$CollisionShape3D2/Sticker2.sorting_offset = 99
-		$CollisionShape3D2/Label3D.sorting_offset = 100
+		if type == types.WEIGHT:
+			$AnimationPlayer2.play("RESET")
+			$CollisionShape3D2/Label3D.sorting_offset = 100
 
 func print_out(scale_weight: float)->void:
 	$CollisionShape3D2/Label3D.text = str(scale_weight, "lbs")
