@@ -47,7 +47,7 @@ func scale_body_exited(body:Node3D):
 
 func update_scale_readout(new_weight) -> void:
 	current_visual_weight = new_weight
-	new_weight = snappedf(new_weight, 0.01)
+	new_weight = snappedf(new_weight, 0.1)
 	scale_readout.text = str(new_weight, " lbs")
 
 func _physics_process(_delta):
@@ -63,4 +63,4 @@ func _on_button_area_input_event(camera, event:InputEvent, position, normal, sha
 		has_sticker = true
 		var new_sticker :Sticker= weight_sticker.instantiate()
 		add_child(new_sticker)
-		new_sticker.print_out(snappedf(current_visual_weight, 0.01))
+		new_sticker.print_out(snappedf(current_visual_weight, 0.1))

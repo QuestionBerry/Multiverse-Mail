@@ -73,6 +73,7 @@ func create_character()->Character:
 		0:
 			new_position = marker1.position
 			spawn_package(new_character)
+			add_dialogue(new_character)
 		1:
 			new_position = marker2.position
 		2:
@@ -87,6 +88,7 @@ func spawn_package(character:Character):
 	new_package.destination_universe = character.destination_universe
 	new_package.is_fragile = character.is_fragile
 	new_package.is_priority_mail = character.is_priority
+	new_package.weight = randf_range(2.0, 15.0)
 	
 	for child in new_package.get_children():
 		if child is MeshInstance3D:
@@ -101,7 +103,6 @@ func spawn_package(character:Character):
 	print("New package made")
 	
 	packages.add_child(new_package)
-	pass
 
 func move_up_queue():
 	await remove_character(character_queue.pop_front())
@@ -113,8 +114,22 @@ func move_up_queue():
 		#If they move to the front, spawn their package
 		if character_queue.find(character) == 0:
 			spawn_package(character)
+			add_dialogue(character)
 
 func remove_character(character: Character)->void:
 	var tween = get_tree().create_tween()
 	await tween.tween_property(character.get_sprite(), "modulate:a", 0, 0.75).finished
 	character.queue_free()
+
+func add_dialogue(character : Character) -> void:
+	if character.origin_universe == NameList.universe.EARTH:
+		get_tree().get_first_node_in_group("dialogue").add_dialogue("earth")
+	elif character.origin_universe == NameList.universe.MAGIC:
+		get_tree().get_first_node_in_group("dialogue").add_dialogue("magic")
+	else:
+		get_tree().get_first_node_in_group("dialogue").add_dialogue("cyber")
+	
+	if character.is_fragile:
+		get_tree().get_first_node_in_group("dialogue").add_dialogue("fragile")
+	if character.is_priority:
+		get_tree().get_first_node_in_group("dialogue").add_dialogue("expedited")

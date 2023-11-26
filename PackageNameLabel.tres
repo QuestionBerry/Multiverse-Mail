@@ -4,5 +4,4 @@
 
 [resource]
 font = ExtResource("1_24l8r")
-font_size = 8
 font_color = Color(0, 0, 0, 1)
