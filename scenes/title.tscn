@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://db1oev5putyof"]
+
+[ext_resource type="FontFile" uid="uid://k1e1whgm4dap" path="res://assets/font/editundo.ttf" id="1_aj0wj"]
+[ext_resource type="Script" path="res://scripts/Title.gd" id="1_b1nfk"]
+[ext_resource type="AudioStream" uid="uid://dccc6ckkpv3tl" path="res://assets/audio/Music/Title.mp3" id="3_23go2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_krrwv"]
+font_size = 72
+
+[sub_resource type="Theme" id="Theme_ja4gv"]
+Button/font_sizes/font_size = 72
+Button/fonts/font = ExtResource("1_aj0wj")
+
+[sub_resource type="Theme" id="Theme_3ncjn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjmc7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b1nfk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -465.0
+offset_top = 165.0
+offset_right = 465.0
+offset_bottom = 267.0
+grow_horizontal = 2
+text = "Hello, I'm your title screen."
+label_settings = SubResource("LabelSettings_krrwv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -6.0
+offset_right = 120.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ja4gv")
+text = "Start"
+
+[node name="SpacerPanel3" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_3ncjn")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ja4gv")
+text = "Options"
+
+[node name="SpacerPanel2" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_3ncjn")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ja4gv")
+text = "Credits"
+
+[node name="SpacerPanel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_3ncjn")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ja4gv")
+text = "Quit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_23go2")
+bus = &"Music"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

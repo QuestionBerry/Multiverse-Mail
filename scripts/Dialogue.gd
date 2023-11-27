@@ -1,10 +1,12 @@
 extends RichTextLabel
 
+const WAIT_TIME = 3.5
 
 var queue = []
 var print_speed = 15.0
 var next_char_count = 0.0
 var done_printing = true
+
 
 func _ready():
 	set_process(false)
@@ -20,7 +22,7 @@ func _process(delta):
 
 func line_complete():
 	set_process(false)
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(WAIT_TIME).timeout
 	queue.pop_front()
 	if len(queue) >= 1: #Process next line
 		self.visible_characters = 0 
@@ -60,7 +62,7 @@ var earth_dialogue = [
 	"It's my first time in a post office!",
 	"Hoping to get this shipped, if you can handle it.",
 	"Hi there! Looking to ship a package.",
-	"Hello, hoping to ship some records.",
+	"Hello, I'm hoping to ship some records.",
 	"Thank goodness you're open, I just remembered my kid's birthday.",
 	"Hope you're havin a nice day!",
 ]
@@ -71,7 +73,7 @@ var magic_dialogue = [
 	"I need these ingredients shipped, post haste!",
 	"Is this the famous Multi-universal Mail Service?",
 	"I'd love to learn more about how this establishment works!",
-	"I need these scolls sent to my colleagues.",
+	"I need these scrolls sent to my colleagues.",
 	"I'd teleport this myself, but I don't know how yet.",
 	"I'm shipping some cloaks to kids in need.",
 	"I'm surprised I could fit all my tomes in there.",
@@ -80,7 +82,7 @@ var magic_dialogue = [
 
 var cyber_dialogue = [
 	"Sick place, love what you guys do.",
-	"Need this *beep* shipped. Aw *beep* I'm beeping again.",
+	"Need this [shake]*beep*[/shake] shipped. Aw [shake]*beep*[/shake] I'm beeping again.",
 	"I need something sent to myself, in the future!",
 	"Man, I miss the good old days when shipments were slower.",
 	"Hope you're having a Coporation-riffic day!",

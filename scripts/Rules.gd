@@ -37,6 +37,7 @@ func check_letter_correct(letter:Letter) -> bool:
 			return true
 	
 	print(str("\n", errors))
+	get_tree().get_first_node_in_group("error").show_errors(errors)
 	if errors:
 		return false
 	else:
@@ -79,7 +80,8 @@ func check_package_correct(package : Package):
 				if not package.is_priority_mail:
 					errors.append("Labeled expedited incorrectly")
 	
-	
+	if weight_label_stickers == 0:
+		errors.append("Missing weight label")
 	if weight_label_stickers > 1:
 		errors.append("Too many weight labels")
 	if not has_destination_sticker:
@@ -90,6 +92,7 @@ func check_package_correct(package : Package):
 		errors.append("Missing expedited sticker")
 	
 	print(str("\n", errors))
+	get_tree().get_first_node_in_group("error").show_errors(errors)
 	if errors:
 		return false
 	else:

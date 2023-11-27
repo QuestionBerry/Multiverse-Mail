@@ -6,11 +6,7 @@ class_name Character
 var entry_text : String
 var exit_text : String
 
-var origin_universe :
-	set(value):
-		origin_universe = value
-		pick_sprite()
-		pick_destination()
+var origin_universe 
 var destination_universe
 var is_fragile := false
 var is_priority := false
@@ -49,6 +45,8 @@ func pick_sprite():
 			$Sprite3D.frame = randi_range(10,19)
 		NameList.universe.CYBER:
 			$Sprite3D.frame = randi_range(20,29)
+	print(str("Origin Universe: ", origin_universe))
+	print(str("Sprite frame: ", $Sprite3D.frame))
 
 func pick_destination():
 	var possible_destinations = []

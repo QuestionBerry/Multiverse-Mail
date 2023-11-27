@@ -12,6 +12,12 @@ var speed := 0.75
 var pages = [0, 1, 6, 7, 8]
 var tabs = [letter, package, earth, yonder, stardock]
 
+var page_sounds = [
+	"res://assets/audio/SFX/page flip 2.wav",
+	"res://assets/audio/SFX/page flip 3.wav",
+	"res://assets/audio/SFX/pageflip1.wav"
+]
+
 func update_available_pages()->void:
 	match Global.game_day:
 		2:
@@ -54,8 +60,16 @@ func move_notebook()->void:
 		tween.set_ease(Tween.EASE_IN )
 		tween.tween_property($Book , "position", $HiddenPosition.position, speed)
 
+func play_sound() -> void:
+	if $Book.frame == 0:
+		$AudioStreamPlayer2D.stream = load("res://assets/audio/SFX/open journal.wav")
+	else:
+		$AudioStreamPlayer2D.stream = load(page_sounds.pick_random())
+	$AudioStreamPlayer2D.play()
 
 func change_page(page):
+	play_sound()
+	
 	$Book.frame = page
 	$Book/PreviousPage.visible = true
 	match page:

@@ -13,6 +13,7 @@ var mouseMotion : Vector2
 const RAY_LENGTH := 100
 const ROTATION_SPEED := .05
 
+
 func start_moving_object(object:RigidBody3D)->void:
 	if is_moving_object or is_rotating_object:
 		return

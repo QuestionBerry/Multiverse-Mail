@@ -1,6 +1,6 @@
 extends Node
 
-var game_day : int = 1
+var game_day : int = 3
 #Put progression stats here
 
 var correct_letters : int = 0

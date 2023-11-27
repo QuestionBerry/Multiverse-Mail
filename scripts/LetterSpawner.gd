@@ -4,6 +4,12 @@ extends StaticBody3D
 
 @onready var letter = load("res://scenes/letter.tscn")
 
+var metal_sounds = [
+	"res://assets/audio/SFX/metal thunk 1.wav",
+	"res://assets/audio/SFX/metal thunk 2.wav",
+	"res://assets/audio/SFX/metal thunk 3.wav"
+]
+
 class Spawn_Rules:
 	var earth_chance : float
 	var magic_chance : float
@@ -23,8 +29,23 @@ class Spawn_Rules:
 		seal_chance = _seal_chance
 
 								#Earth, magic, cyber, origin, dest, stamp, seal
-var day1rules := Spawn_Rules.new( 1.0,  1.0,    1.0,   1.0,   1.0,   0.75, 0.0)
-var rules = { 1 : day1rules} #add in later
+var day1rules := Spawn_Rules.new( 1.0,  1.0,    1.0,    1.0,   1.0,   0.75, 0.0)
+var day2rules := Spawn_Rules.new( 0.75,  1.0,    0.6,   0.9,   0.75,  0.8,  0.7)
+var day3rules := Spawn_Rules.new( 0.75, 0.75,   1.0,    0.8,   0.75,  0.75, 0.75)
+var day4rules := Spawn_Rules.new( 1.0,   1.0,    1.0,  0.75,   0.8,   0.6,  0.8)
+var day5rules := Spawn_Rules.new( 0.5,  0.75,    0.8,   0.6,   0.9,   0.8,  0.6)
+var day6rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.9,   1.0,   0.8,  0.75)
+var day7rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.7,   0.8,   0.7,  0.6)
+
+var rules = { 
+	1 : day1rules,
+	2 : day2rules,
+	3 : day3rules,
+	4 : day4rules,
+	5 : day5rules,
+	6 : day6rules,
+	7 : day7rules
+}
 
 
 func roll_letter_properties(rules: Spawn_Rules)->Dictionary:
@@ -84,3 +105,5 @@ func create_letter():
 	new_letter.linear_velocity = Vector3.RIGHT * 18
 	new_letter.angular_velocity = Vector3(randi()%5, randi()%5, randi()%5)
 	
+	$AudioStreamPlayer3D.stream = load(metal_sounds.pick_random())
+	$AudioStreamPlayer3D.play()

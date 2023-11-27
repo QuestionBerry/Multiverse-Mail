@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck3tcq6xnc2qu"]
+[gd_scene load_steps=7 format=3 uid="uid://ck3tcq6xnc2qu"]
 
 [ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="1_d366s"]
 [ext_resource type="Script" path="res://scripts/Dialogue.gd" id="2_okrwh"]
+[ext_resource type="FontFile" uid="uid://n3hxg34fb75q" path="res://assets/font/PressStart2P-vaV7.ttf" id="3_aox2a"]
+[ext_resource type="Script" path="res://scripts/ErrorAlert.gd" id="3_cs6ue"]
 
 [sub_resource type="Theme" id="Theme_edksr"]
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 10
 RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("1_d366s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8q83"]
+font = ExtResource("3_aox2a")
+font_size = 32
+font_color = Color(0.972549, 0.533333, 0.533333, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -32,3 +41,18 @@ fit_content = true
 scroll_active = false
 visible_characters = 0
 script = ExtResource("2_okrwh")
+
+[node name="ErrorAlert" type="Label" parent="." groups=["error"]]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_l8q83")
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_cs6ue")

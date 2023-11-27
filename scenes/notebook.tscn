@@ -158,6 +158,10 @@ position = Vector2(993, 594)
 position = Vector2(993, 1527)
 gizmo_extents = 95.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 8.0
+bus = &"SFX"
+
 [connection signal="gui_input" from="Book/Tab-Letter/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [1]]
 [connection signal="gui_input" from="Book/Tab-Package/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [4]]
 [connection signal="gui_input" from="Book/Tab-Earth/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [6]]

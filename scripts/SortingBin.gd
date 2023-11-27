@@ -7,6 +7,11 @@ class_name Bin
 @export var color : Color = Color.WHITE
 
 var objects_in_area = []
+var tube_sounds = [
+	"res://assets/audio/SFX/tube 1.wav",
+	"res://assets/audio/SFX/tube 2.wav",
+	"res://assets/audio/SFX/tube 3.wav",
+]
 
 func _ready():
 	for child in get_children():
@@ -31,17 +36,19 @@ func _physics_process(delta):
 					objects_in_area.remove_at(objects_in_area.find(object))
 					send_mail(object)
 		elif object is Package:
-			if not object.is_processed:
-					print(str(object.name, " not processed"))
-					object.respawn()
-			else:
-				objects_in_area.remove_at(objects_in_area.find(object))
-				send_package(object)
+#			if not object.is_processed:
+#					print(str(object.name, " not processed"))
+#					object.respawn()
+#			else:
+			objects_in_area.remove_at(objects_in_area.find(object))
+			send_package(object)
 
 func send_mail(target : Letter):
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(target, "rotation_degrees", Vector3(0,0,-90), 0.2)
+	$AudioStreamPlayer3D.stream = load(tube_sounds.pick_random())
+	$AudioStreamPlayer3D.play()
 	await tween.tween_property(target, "position", Vector3.UP*5, 0.5).as_relative().finished
 	target.check_if_correct()
 
@@ -68,3 +75,4 @@ func _on_area_3d_body_entered(body):
 func _on_area_3d_body_exited(body):
 	if body in objects_in_area:
 		objects_in_area.remove_at(objects_in_area.find(body))
+

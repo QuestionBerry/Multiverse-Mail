@@ -27,21 +27,22 @@ class Character_Rules:
 		priority_chance = _priority_chance
 
 #                     spawn_chance, spawn_time,    universe,  fragile, priority
-var day1 = Character_Rules.new(0.9, 10, NameList.universe.EARTH, 0.0, 0.0)
-var day2 = Character_Rules.new(0.75, 15, NameList.universe.MAGIC, 0.5, 0.0)
-var day3 = Character_Rules.new(0.8, 20, NameList.universe.CYBER, 0.3, 0.5)
+var day1 = Character_Rules.new(0.0, 1000, NameList.universe.EARTH, 0.0, 0.0)
+var day2 = Character_Rules.new(0.0, 1000, NameList.universe.EARTH, 0.0, 0.0)
+var day3 = Character_Rules.new(0.9, 15, NameList.universe.EARTH, 0.0, 0.0)
+var day4 = Character_Rules.new(0.75, 15, NameList.universe.MAGIC, 0.5, 0.0)
+var day5 = Character_Rules.new(0.8, 25, NameList.universe.CYBER, 0.3, 0.0)
+var day6 = Character_Rules.new(0.8, 25, NameList.universe.EARTH, 0.2, 0.7)
+var day7 = Character_Rules.new(0.6, 15, NameList.universe.MAGIC, 0.5, 0.5)
 
-var rules = [null, day1, day2, day3]
+var rules = [null, null, null, day3, day4, day5, day6, day7]
 
 func _ready():
 	spawn_countdown.wait_time = 5
-#Spawning: generate character flags, pass to character
-#Track character positions in queue,
-#animate characters between positions; pass positions and let characters self animate
+
+#Patience counter? Maybe instead of patience, deduct points if the line gets too long.
 #If position == 1 and player.view != package counter:
 #     start patience countdown
-#IF position == 1: spawn package from character needs,
-#  Play character dialo
 
 func on_timer_ended():
 	if len(character_queue) >= 3:
@@ -60,6 +61,7 @@ func on_timer_ended():
 func create_character()->Character:
 	var new_character :Character= character_scene.instantiate()
 	new_character.origin_universe = rules[Global.game_day].origin_universe
+	new_character.pick_destination()
 	if randf() < rules[Global.game_day].fragile_chance:
 		new_character.is_fragile = true
 	if randf() < rules[Global.game_day].priority_chance:
@@ -67,6 +69,9 @@ func create_character()->Character:
 	
 	self.add_child(new_character)
 	character_queue.append(new_character)
+	
+	#Must update sprite AFTER adding node to SceneTree
+	new_character.pick_sprite()
 	
 	var new_position
 	match character_queue.find(new_character):
