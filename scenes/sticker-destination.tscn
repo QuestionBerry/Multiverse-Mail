@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://7l5sukjyxyrj"]
 
 [ext_resource type="Script" path="res://scripts/Sticker.gd" id="1_mrdld"]
-[ext_resource type="Texture2D" uid="uid://bsdpiae1ek7ie" path="res://assets/sprites/packages/Destination-Stickers.png" id="2_bighd"]
+[ext_resource type="Texture2D" uid="uid://cuefe5tvm01p8" path="res://assets/sprites/packages/Stickers.png" id="2_kt2v4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ssyw2"]
 size = Vector3(0.648156, 0.649498, 0.00645095)
@@ -17,8 +17,11 @@ transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, -1.80322e-14, -3.55271e-15,
 shape = SubResource("BoxShape3D_ssyw2")
 
 [node name="Sticker2" type="Sprite3D" parent="CollisionShape3D2"]
-transform = Transform3D(-1, -1.74846e-07, 1.50996e-07, -1.74846e-07, 1, 8.74228e-08, -1.50996e-07, 8.74228e-08, -1, -5.96046e-08, 8.07047e-05, -0.0145739)
+transform = Transform3D(-1, -1.74846e-07, 1.50996e-07, -1.74846e-07, 1, 8.74228e-08, -1.50996e-07, 8.74228e-08, -1, -5.96046e-08, 8.07049e-05, -0.0202089)
 shaded = true
 texture_filter = 0
-texture = ExtResource("2_bighd")
-hframes = 3
+texture = ExtResource("2_kt2v4")
+hframes = 5
+frame = 3
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

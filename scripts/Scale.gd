@@ -57,12 +57,15 @@ func _physics_process(_delta):
 		self.position = spawn_marker.position
 
 
-func _on_button_area_input_event(camera, event:InputEvent, position, normal, shape_idx):
+func _on_button_area_input_event(_camera, event:InputEvent, _position, _normal, _shape_idx):
 	if event.is_action_pressed("move_object") and not has_sticker:
 		print(str("Print sticker", current_visual_weight))
 		has_sticker = true
+		
 		var new_sticker :Sticker= weight_sticker.instantiate()
 		add_child(new_sticker)
+		new_sticker.position = $Marker3D.position
 		new_sticker.print_out(snappedf(current_visual_weight, 0.1))
+		
 		await get_tree().create_timer(0.4).timeout
 		$AudioStreamPlayer3D.play()

@@ -21,7 +21,7 @@ func _ready():
 			$SpotLight.light_color = color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if objects_in_area.is_empty():
 		return
 	for object in objects_in_area:

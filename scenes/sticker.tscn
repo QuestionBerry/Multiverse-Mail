@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwolcgff4nas1"]
+[gd_scene load_steps=5 format=3 uid="uid://cwolcgff4nas1"]
 
 [ext_resource type="Script" path="res://scripts/Sticker.gd" id="1_payq2"]
 [ext_resource type="FontFile" uid="uid://k1e1whgm4dap" path="res://assets/font/editundo.ttf" id="2_wp1q6"]
@@ -6,55 +6,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gdr5s"]
 size = Vector3(0.642805, 0.969085, 0.00645095)
-
-[sub_resource type="Animation" id="Animation_vsoxa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(3.02923e-28, 2.66454e-15, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jiecr"]
-resource_name = "printing"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3D2:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.7, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.840826, -0.535103, -0.282495), Vector3(0.840826, -0.895248, -0.282495), Vector3(0.840826, -0.787205, -0.282495), Vector3(0.840826, -1.149, -0.282495)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iw1sv"]
-_data = {
-"RESET": SubResource("Animation_vsoxa"),
-"printing": SubResource("Animation_jiecr")
-}
 
 [node name="Sticker" type="Area3D"]
 transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
@@ -83,7 +34,4 @@ font = ExtResource("2_wp1q6")
 font_size = 37
 horizontal_alignment = 2
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_iw1sv")
-}
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
