@@ -14,7 +14,7 @@ stardock = NodePath("Book/Tab-Stardock")
 
 [node name="Book" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(993, 612)
+position = Vector2(993, 1527)
 scale = Vector2(2, 2)
 texture = ExtResource("1_v70cr")
 hframes = 3

@@ -15,6 +15,8 @@ const ROTATION_SPEED := .05
 
 
 func start_moving_object(object:RigidBody3D)->void:
+	if not Global.can_interact:
+		return
 	if is_moving_object or is_rotating_object:
 		return
 	acting_object = object
@@ -24,6 +26,8 @@ func start_moving_object(object:RigidBody3D)->void:
 	prev_object_position = acting_object.position
 
 func start_rotating_object(object:RigidBody3D)->void:
+	if not Global.can_interact:
+		return
 	if is_moving_object or is_rotating_object:
 		return
 	acting_object = object
@@ -37,14 +41,15 @@ func start_rotating_object(object:RigidBody3D)->void:
 		acting_object.position.y = below_result.position.y + acting_object.lift_height
 
 func stop_interacting()->void:
-	acting_object.freeze = false
-	acting_object = null
-	is_moving_object = false
-	is_rotating_object = false
-	if prev_mouse_position:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		Input.warp_mouse(prev_mouse_position)
-		prev_mouse_position = Vector2.ZERO
+	if acting_object:
+		acting_object.freeze = false
+		acting_object = null
+		is_moving_object = false
+		is_rotating_object = false
+		if prev_mouse_position:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Input.warp_mouse(prev_mouse_position)
+			prev_mouse_position = Vector2.ZERO
 
 func _input(event):
 	if event.is_action_released("move_object") and is_moving_object:

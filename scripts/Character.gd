@@ -49,15 +49,14 @@ func pick_sprite():
 	print(str("Sprite frame: ", $Sprite3D.frame))
 
 func pick_destination():
-	var possible_destinations = []
-	match origin_universe:
-		NameList.universe.EARTH:
-			possible_destinations.append(NameList.universe.MAGIC)
-			possible_destinations.append(NameList.universe.CYBER)
-		NameList.universe.MAGIC:
-			possible_destinations.append(NameList.universe.EARTH)
-			possible_destinations.append(NameList.universe.CYBER)
-		NameList.universe.CYBER:
-			possible_destinations.append(NameList.universe.MAGIC)
-			possible_destinations.append(NameList.universe.EARTH)
-	destination_universe = possible_destinations.pick_random()
+	var possible_destinations = [
+		NameList.universe.EARTH,
+		NameList.universe.MAGIC,
+		NameList.universe.CYBER,
+		]
+	if randf() < 0.2: #Smaller chance that destination will be same as origin
+		destination_universe = origin_universe
+	else:
+		possible_destinations.remove_at(possible_destinations.find(origin_universe))
+		destination_universe = possible_destinations.pick_random()
+

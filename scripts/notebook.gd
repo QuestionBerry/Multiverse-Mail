@@ -6,7 +6,7 @@ extends Node2D
 @export var yonder : Sprite2D
 @export var stardock : Sprite2D
 
-var is_shown := true
+var is_shown := false
 var speed := 0.75
 
 var pages = [0, 1, 6, 7, 8]

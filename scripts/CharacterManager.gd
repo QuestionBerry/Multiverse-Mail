@@ -10,7 +10,9 @@ extends Node3D
 @onready var package_scene = load("res://scenes/package.tscn")
 
 @onready var position_markers = [marker1, marker2, marker3]
+
 var character_queue = []
+var failed_attempts : int = 0
 
 class Character_Rules:
 	var spawn_chance : float
@@ -35,26 +37,32 @@ var day5 = Character_Rules.new(0.8, 25, NameList.universe.CYBER, 0.3, 0.0)
 var day6 = Character_Rules.new(0.8, 25, NameList.universe.EARTH, 0.2, 0.7)
 var day7 = Character_Rules.new(0.6, 15, NameList.universe.MAGIC, 0.5, 0.5)
 
-var rules = [null, null, null, day3, day4, day5, day6, day7]
+var rules = [null, day1, day2, day3, day4, day5, day6, day7]
 
 func _ready():
 	spawn_countdown.wait_time = 5
 
-#Patience counter? Maybe instead of patience, deduct points if the line gets too long.
-#If position == 1 and player.view != package counter:
-#     start patience countdown
+func stop_timer() -> void:
+	$SpawnerCountdown.stop()
+
 
 func on_timer_ended():
 	if len(character_queue) >= 3:
 		print("Too many Characters")
 		spawn_countdown.start(rules[Global.game_day].spawn_time)
 	elif randf() < rules[Global.game_day].spawn_chance:
+		failed_attempts = 0
 		create_character()
 		print("Spawned Character")
+		spawn_countdown.start(rules[Global.game_day].spawn_time)
+	elif failed_attempts >= 3:
+		failed_attempts = 0
+		create_character()
 		spawn_countdown.start(rules[Global.game_day].spawn_time)
 	else:
 		#If spawn failed, restart timer with original short duration
 		print("Restarting Timer")
+		failed_attempts += 1
 		spawn_countdown.start()
 
 
@@ -77,8 +85,11 @@ func create_character()->Character:
 	match character_queue.find(new_character):
 		0:
 			new_position = marker1.position
-			spawn_package(new_character)
-			add_dialogue(new_character)
+			if Global.player_at_counter:
+				spawn_package(new_character)
+				add_dialogue(new_character)
+			else:
+				wait_for_player()
 		1:
 			new_position = marker2.position
 		2:
@@ -86,6 +97,15 @@ func create_character()->Character:
 	new_character.position = new_position
 	
 	return new_character
+
+func wait_for_player():
+	if Global.player_at_counter:
+		spawn_package(character_queue[0])
+		add_dialogue(character_queue[0])
+	else:
+		await get_tree().create_timer(1).timeout
+		wait_for_player()
+
 
 func spawn_package(character:Character):
 	var new_package :Package= package_scene.instantiate()

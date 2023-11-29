@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck3tcq6xnc2qu"]
+[gd_scene load_steps=8 format=3 uid="uid://ck3tcq6xnc2qu"]
 
 [ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="1_d366s"]
 [ext_resource type="Script" path="res://scripts/Dialogue.gd" id="2_okrwh"]
 [ext_resource type="FontFile" uid="uid://n3hxg34fb75q" path="res://assets/font/PressStart2P-vaV7.ttf" id="3_aox2a"]
 [ext_resource type="Script" path="res://scripts/ErrorAlert.gd" id="3_cs6ue"]
+[ext_resource type="PackedScene" uid="uid://c0q1a28fcipbc" path="res://scenes/eod_screen.tscn" id="5_exe7p"]
 
 [sub_resource type="Theme" id="Theme_edksr"]
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -56,3 +57,6 @@ label_settings = SubResource("LabelSettings_l8q83")
 horizontal_alignment = 1
 vertical_alignment = 2
 script = ExtResource("3_cs6ue")
+
+[node name="EODScreen" parent="." instance=ExtResource("5_exe7p")]
+layout_mode = 1

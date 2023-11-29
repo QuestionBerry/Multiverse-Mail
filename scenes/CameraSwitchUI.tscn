@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/CameraMover.gd" id="1_mfp05"]
 
-[node name="Control" type="Control"]
+[node name="CameraControl" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_mfp05")
 
 [node name="ToDesk" type="Button" parent="."]
@@ -38,19 +39,5 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "Front Counter"
 
-[node name="PackageButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = -131.0
-offset_right = 140.0
-offset_bottom = -77.0
-grow_vertical = 0
-text = "Create Package
-Test"
-
 [connection signal="pressed" from="ToDesk" to="." method="_on_to_desk_pressed"]
 [connection signal="pressed" from="ToCounter" to="." method="_on_to_counter_pressed"]
-[connection signal="pressed" from="PackageButton" to="." method="_on_package_button_pressed"]

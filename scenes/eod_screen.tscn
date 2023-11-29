@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0q1a28fcipbc"]
+
+[ext_resource type="Script" path="res://scripts/eod_screen.gd" id="1_0gvq3"]
+[ext_resource type="FontFile" uid="uid://bk75imaykrjua" path="res://assets/font/pixelmix_bold.ttf" id="1_ob58c"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="3_6rd8e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xm6cy"]
+font = ExtResource("1_ob58c")
+font_size = 112
+
+[sub_resource type="LabelSettings" id="LabelSettings_hxttr"]
+font = ExtResource("1_ob58c")
+font_size = 64
+
+[node name="EODScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0gvq3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0313726, 0.027451, 0.0431373, 0)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -497.0
+offset_top = 58.0
+offset_right = 497.0
+offset_bottom = 173.0
+grow_horizontal = 2
+text = "END OF DAY 1"
+label_settings = SubResource("LabelSettings_xm6cy")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -272.0
+offset_right = 458.0
+offset_bottom = 348.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="LettersTotal" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(825, 100)
+layout_mode = 2
+text = "Letters Sorted: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="LettersTotalNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="LettersCorrect" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Correct: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="LettersCorrectNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="LettersWrong" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Wrong: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="LettersWrongNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="PackagesTotal" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Packages Sorted: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="PackagesTotalNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="PackagesCorrect" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Correct: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="PackagesCorrectNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="PackagesWrong" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Wrong: "
+label_settings = SubResource("LabelSettings_hxttr")
+horizontal_alignment = 2
+
+[node name="PackagesWrongNumber" type="Label" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_hxttr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -171.0
+offset_right = 148.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0.427451, 0.513726, 0.772549, 1)
+theme_override_fonts/font = ExtResource("3_6rd8e")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

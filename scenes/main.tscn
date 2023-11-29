@@ -3,28 +3,31 @@
 [ext_resource type="Texture2D" uid="uid://i4xt5sghrv60" path="res://assets/sprites/HallDecorations.png" id="1_cekco"]
 [ext_resource type="Material" uid="uid://cg4eo2302bqc1" path="res://assets/Material-Wall.tres" id="1_isret"]
 [ext_resource type="Script" path="res://scripts/MainController.gd" id="1_qxsum"]
-[ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="2_fulo8"]
 [ext_resource type="PackedScene" uid="uid://dj64d1ubdg5n2" path="res://scenes/LetterTextureGenerator.tscn" id="2_tms3v"]
 [ext_resource type="Script" path="res://scripts/CharacterManager.gd" id="2_uy5or"]
 [ext_resource type="PackedScene" uid="uid://db5ltuqfaw083" path="res://assets/models/POBoxes.glb" id="3_pyuv5"]
 [ext_resource type="PackedScene" uid="uid://cus6hcew5tkq0" path="res://scenes/scale.tscn" id="5_br56s"]
+[ext_resource type="Texture2D" uid="uid://d1nxl5e41pdmj" path="res://assets/sprites/Decorations.png" id="6_o5tf4"]
 [ext_resource type="PackedScene" uid="uid://bqhrr2x273uj7" path="res://scenes/CameraSwitchUI.tscn" id="7_awbof"]
 [ext_resource type="Texture2D" uid="uid://pnhkrjpmoreq" path="res://assets/sprites/letters/Stamp-Approved (2).png" id="7_oc5sq"]
 [ext_resource type="PackedScene" uid="uid://0dv11gpbl6i0" path="res://scenes/stamp_2.tscn" id="8_4r25i"]
 [ext_resource type="Script" path="res://scripts/Rules.gd" id="8_k0h4r"]
+[ext_resource type="PackedScene" uid="uid://bc80bnoahq46q" path="res://scenes/simple_conveyor.tscn" id="9_4n3k8"]
 [ext_resource type="PackedScene" uid="uid://itvqa4e6loyb" path="res://scenes/PackageTextureGenerator.tscn" id="9_d0rjt"]
 [ext_resource type="PackedScene" uid="uid://optctsa5o7ag" path="res://scenes/mail_chute.tscn" id="12_6pf6y"]
 [ext_resource type="PackedScene" uid="uid://bwbtoad5i7d0y" path="res://scenes/notebook.tscn" id="12_m60oy"]
 [ext_resource type="PackedScene" uid="uid://clcwx7p16cn11" path="res://scenes/pneumatic_tube.tscn" id="13_8iik1"]
-[ext_resource type="PackedScene" uid="uid://376xj5lilpne" path="res://scenes/sorting_bin.tscn" id="14_0vkqf"]
 [ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="14_jb6hl"]
 [ext_resource type="PackedScene" uid="uid://b3dcs0l8jvipy" path="res://scenes/sticker_dispenser.tscn" id="18_okqmw"]
 [ext_resource type="PackedScene" uid="uid://ck3tcq6xnc2qu" path="res://scenes/gui.tscn" id="19_06uec"]
+[ext_resource type="PackedScene" uid="uid://xabmhldjoyyg" path="res://scenes/table-front.tscn" id="20_8xc2i"]
+[ext_resource type="PackedScene" uid="uid://c7w7g57rfw1t" path="res://assets/models/Ugly_wall.glb" id="22_0rlda"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_n2ps8"]
 dof_blur_far_enabled = true
-dof_blur_far_distance = 20.0
-dof_blur_amount = 0.05
+dof_blur_far_distance = 15.0
+dof_blur_far_transition = 10.0
+dof_blur_amount = 0.06
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4orbl"]
 sky_top_color = Color(0.458824, 0.545098, 0.831373, 1)
@@ -37,6 +40,7 @@ sky_material = SubResource("ProceduralSkyMaterial_4orbl")
 background_mode = 2
 background_color = Color(0.376471, 0.517647, 0.988235, 1)
 sky = SubResource("Sky_mcsa4")
+volumetric_fog_density = 0.0941
 
 [sub_resource type="BoxMesh" id="BoxMesh_6x73x"]
 material = ExtResource("1_isret")
@@ -65,34 +69,31 @@ material = SubResource("StandardMaterial3D_yu6dc")
 [sub_resource type="BoxMesh" id="BoxMesh_losrk"]
 material = ExtResource("1_isret")
 
-[sub_resource type="GDScript" id="GDScript_7arku"]
+[sub_resource type="GDScript" id="GDScript_5hs3f"]
 script/source = "extends StaticBody3D
 
 var sticker_offset = 0
 "
 
-[sub_resource type="BoxMesh" id="BoxMesh_4necf"]
-size = Vector3(10, 5, 5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_korm3"]
-size = Vector3(10.0201, 5.1033, 5.00238)
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_qxsum")
 
 [node name="DayTimer" type="Timer" parent="."]
-wait_time = 480.0
+wait_time = 5.0
+one_shot = true
+autostart = true
 
 [node name="World" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="World" groups=["camera"]]
-transform = Transform3D(1, 0, 0, 0, 0.931342, 0.364145, 0, -0.364145, 0.931342, -0.01, 3.9431, 6.22654)
+transform = Transform3D(1, 0, 0, 0, 0.912649, 0.408744, 0, -0.408744, 0.912649, -0.387223, 4.1724, 6.13241)
 attributes = SubResource("CameraAttributesPractical_n2ps8")
 current = true
 fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.236177, 0.97171, 0, -0.97171, 0.236177, 0.0024209, 6.44262, 11.5085)
+visible = false
 light_energy = 1.5
 shadow_enabled = true
 
@@ -100,14 +101,6 @@ shadow_enabled = true
 environment = SubResource("Environment_blgyi")
 
 [node name="PackageTimer" type="Timer" parent="World"]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62609, 9.0696, -8.21505)
-light_color = Color(0.756863, 0.780392, 0.843137, 1)
-light_energy = 6.859
-light_indirect_energy = 1.611
-shadow_enabled = true
-omni_range = 20.816
 
 [node name="Hallway" type="Node" parent="World"]
 
@@ -170,9 +163,84 @@ mesh = SubResource("BoxMesh_wevuu")
 
 [node name="FrontRoom" type="Node" parent="World"]
 
+[node name="OmniLight3D" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7776, 9.0696, -32.1393)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 6.178
+light_indirect_energy = 1.611
+omni_range = 62.3328
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9285, 9.0696, -32.1393)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 6.292
+light_indirect_energy = 1.611
+omni_range = 62.3328
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52609, 8.78693, -14.5951)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 7.54
+light_indirect_energy = 1.611
+omni_range = 62.3328
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43314, 9.0696, 8.18122)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 7.54
+light_indirect_energy = 1.611
+shadow_enabled = true
+omni_range = 62.3328
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1331, 8.72113, 8.18122)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 7.54
+light_indirect_energy = 1.611
+shadow_enabled = true
+omni_range = 62.3328
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6828, 7.69869, 8.18122)
+light_color = Color(0.756863, 0.780392, 0.843137, 1)
+light_energy = 7.54
+light_indirect_energy = 1.611
+shadow_enabled = true
+omni_range = 62.3328
+
+[node name="Achievement2" type="Sprite3D" parent="World/FrontRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.1256, 2.91545, -28.6619)
+pixel_size = 0.03
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+
+[node name="Achievement3" type="Sprite3D" parent="World/FrontRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.1256, 1.46128, -23.0972)
+pixel_size = 0.03
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_cekco")
+hframes = 6
+frame = 2
+
 [node name="Floor" type="MeshInstance3D" parent="World/FrontRoom"]
 transform = Transform3D(48.3047, 0, 0, 0, 1, 0, 0, 0, 44.1044, 19.3863, -4.70911, -5.18899)
 mesh = SubResource("PlaneMesh_t4o41")
+
+[node name="FrontWall" type="MeshInstance3D" parent="World/FrontRoom"]
+transform = Transform3D(-1.24592e-06, 0, 2.23555, 0, 14.6941, 0, -28.5034, 0, -9.7719e-08, 20.8493, 2.27872, -26.7452)
+mesh = SubResource("BoxMesh_6x73x")
+skeleton = NodePath("../../Hallway")
+
+[node name="POBoxes2" parent="World/FrontRoom/FrontWall" instance=ExtResource("3_pyuv5")]
+transform = Transform3D(-1.53356e-09, 0, 0.0350835, 0, 0.0680546, 0, -0.447317, 0, -1.95529e-08, 0.373344, -0.140975, -0.244209)
+
+[node name="FrontWall2" type="MeshInstance3D" parent="World/FrontRoom"]
+transform = Transform3D(-1.68128e-06, 0, 2.23555, 0, 14.6941, 0, -38.4632, 0, -9.7719e-08, -21.3307, 2.10063, -23.1102)
+mesh = SubResource("BoxMesh_6x73x")
+skeleton = NodePath("../../Hallway")
 
 [node name="Wall" type="MeshInstance3D" parent="World/FrontRoom"]
 transform = Transform3D(1, 0, 0, 0, 14.031, 0, 0, 0, 8.35441, 7.72485, 2.32917, -4.64081)
@@ -181,28 +249,58 @@ mesh = SubResource("BoxMesh_losrk")
 [node name="POBoxes" parent="World/FrontRoom/Wall" instance=ExtResource("3_pyuv5")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.0712708, 0, 1.04643e-08, 0, -0.119697, 0.399579, -0.166001, -0.245324)
 
+[node name="Plant" type="Sprite3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.094, -1.36034, -35.0339)
+pixel_size = 0.1
+billboard = 2
+texture_filter = 0
+texture = ExtResource("6_o5tf4")
+hframes = 2
+
+[node name="Plant2" type="Sprite3D" parent="World/FrontRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3748, -1.36034, -38.156)
+pixel_size = 0.1
+billboard = 2
+texture_filter = 0
+texture = ExtResource("6_o5tf4")
+hframes = 2
+frame = 1
+
+[node name="Ugly_wall" parent="World/FrontRoom" instance=ExtResource("22_0rlda")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 0.817741, 0, 1, 0, -4.37114e-08, -1.0553, 2.54743, -40.6623)
+
+[node name="BackRoom" type="Node" parent="World"]
+
+[node name="WallLeft" type="MeshInstance3D" parent="World/BackRoom"]
+transform = Transform3D(-1.24592e-06, 0, -2.23555, 0, 14.6941, 0, 28.5034, 0, -9.7719e-08, 33.9096, 2.07151, -13.9095)
+mesh = SubResource("BoxMesh_6x73x")
+
+[node name="WallBack" type="MeshInstance3D" parent="World/BackRoom"]
+transform = Transform3D(-28.5034, 0, 1.95438e-07, 0, 14.6941, 0, -2.49185e-06, 0, -2.23555, 46.9851, 2.07151, -13.5389)
+mesh = SubResource("BoxMesh_6x73x")
+
+[node name="WallRight" type="MeshInstance3D" parent="World/BackRoom"]
+transform = Transform3D(3.73777e-06, 0, 2.23555, 0, 14.6941, 0, -28.5034, 0, 2.93157e-07, 59.1463, 2.07151, -0.0711403)
+mesh = SubResource("BoxMesh_6x73x")
+
+[node name="WallTop" type="MeshInstance3D" parent="World/BackRoom"]
+transform = Transform3D(-79.3108, 0, 1.95438e-07, 6.93357e-06, -1.63355e-06, 2.23555, 1.43015e-12, 37.3712, 9.7719e-08, 46.912, 9.88539, 2.65379)
+visible = false
+mesh = SubResource("BoxMesh_6x73x")
+
 [node name="PackageCounterView" type="Node3D" parent="."]
 
 [node name="PackageView" type="Marker3D" parent="PackageCounterView"]
-transform = Transform3D(1, 0, 0, 0, 0.931342, 0.364145, 0, -0.364145, 0.931342, -0.01, 3.9431, 6.22654)
+transform = Transform3D(1, 0, 0, 0, 0.912649, 0.408744, 0, -0.408744, 0.912649, -0.387223, 4.1724, 6.13241)
 gizmo_extents = 0.6
 
 [node name="PackageSpawn" type="Marker3D" parent="PackageCounterView" groups=["package_spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42424, -1.11624)
-
-[node name="Desk" type="StaticBody3D" parent="PackageCounterView" groups=["desk"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.20573, 0)
-script = SubResource("GDScript_7arku")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PackageCounterView/Desk"]
-mesh = SubResource("BoxMesh_4necf")
-skeleton = NodePath("../../../World")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PackageCounterView/Desk"]
-shape = SubResource("BoxShape3D_korm3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04137, 0.188781)
 
 [node name="Scale" parent="PackageCounterView" instance=ExtResource("5_br56s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, 0.0817122)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30855, 0.69068, -0.791453)
+mass = 10.0
+lift_height = 0.8
 
 [node name="CharacterManager" type="Node3D" parent="PackageCounterView" node_paths=PackedStringArray("marker1", "marker2", "marker3", "spawn_countdown", "packages") groups=["character_manager"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
@@ -214,15 +312,15 @@ spawn_countdown = NodePath("SpawnerCountdown")
 packages = NodePath("../Packages")
 
 [node name="Position1" type="Marker3D" parent="PackageCounterView/CharacterManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.83232)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.361715, -6.57613)
 gizmo_extents = 1.85
 
 [node name="Position2" type="Marker3D" parent="PackageCounterView/CharacterManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74598, 0, -13.8667)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74598, -0.469242, -13.8667)
 gizmo_extents = 2.02
 
 [node name="Position3" type="Marker3D" parent="PackageCounterView/CharacterManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05896, 0, -21.9083)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05896, -0.469242, -21.9083)
 gizmo_extents = 1.85
 
 [node name="SpawnerCountdown" type="Timer" parent="PackageCounterView/CharacterManager"]
@@ -230,35 +328,31 @@ autostart = true
 
 [node name="TexturePackage" parent="PackageCounterView" groups=["package_texture"] instance=ExtResource("9_d0rjt")]
 
-[node name="SortingBin" parent="PackageCounterView" instance=ExtResource("14_0vkqf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.21449, 0.502239, 0.117587)
-label_text = "gdfgd"
-
-[node name="StickerDispenser" parent="PackageCounterView" instance=ExtResource("18_okqmw")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -4.37967, 1.06946, -1.86612)
-
-[node name="StickerDispenser2" parent="PackageCounterView" instance=ExtResource("18_okqmw")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -3.18979, 1.06946, -1.74593)
-sprite = 1
-
-[node name="StickerDispenser3" parent="PackageCounterView" instance=ExtResource("18_okqmw")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -3.18979, 1.06946, -0.0943633)
-sprite = 2
-
-[node name="StickerDispenser4" parent="PackageCounterView" instance=ExtResource("18_okqmw")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -2.18841, 1.06946, -0.176409)
-type = 3
-sprite = 4
-lift_height = 1.0
-
-[node name="StickerDispenser5" parent="PackageCounterView" instance=ExtResource("18_okqmw")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -2.18841, 1.06946, -1.60433)
-type = 2
-sprite = 3
-lift_height = 1.0
+[node name="SimpleConveyor" parent="PackageCounterView" instance=ExtResource("9_4n3k8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.93586, -0.749958, 0.126076)
 
 [node name="Packages" type="Node3D" parent="PackageCounterView"]
 script = ExtResource("8_k0h4r")
+
+[node name="Table" parent="PackageCounterView" instance=ExtResource("20_8xc2i")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00788694, -0.161416, 0.253646)
+script = SubResource("GDScript_5hs3f")
+
+[node name="Dispensers" type="Node3D" parent="PackageCounterView"]
+
+[node name="StickerDispenser" parent="PackageCounterView/Dispensers" instance=ExtResource("18_okqmw")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -4.37967, 1.06946, -1.96442)
+color = Color(0.364706, 0.505882, 0.0666667, 1)
+
+[node name="StickerDispenser2" parent="PackageCounterView/Dispensers" instance=ExtResource("18_okqmw")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -3.35586, 1.06946, -1.96324)
+sprite = 1
+color = Color(0.196078, 0.262745, 0.564706, 1)
+
+[node name="StickerDispenser3" parent="PackageCounterView/Dispensers" instance=ExtResource("18_okqmw")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -2.28646, 1.06946, -1.96941)
+sprite = 2
+color = Color(0.368627, 0, 0.47451, 1)
 
 [node name="LetterSortingView" type="Node3D" parent="."]
 
@@ -270,19 +364,19 @@ transform = Transform3D(0.999997, -0.00179787, 0.00185216, 0.000359106, 0.807465
 gizmo_extents = 0.6
 
 [node name="Stamp-Approved" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.7855, 1.75424, 1.61112)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48.7838, 1.75424, 1.61112)
 lift_height = 1.0
 stamp_sprite = ExtResource("7_oc5sq")
 stamp_color = Color(0.160784, 0.364706, 0.152941, 1)
 
 [node name="Stamp-RTS" parent="LetterSortingView" instance=ExtResource("8_4r25i")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 42.1642, 2, 1)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48.7323, 2, 1)
 lift_height = 1.0
 stamp_color = Color(0.45098, 0.0941176, 0.117647, 1)
 stamp_type = 1
 
 [node name="Table" parent="LetterSortingView" instance=ExtResource("14_jb6hl")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.1696, 0, -0.0236025)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.3898, 0, -0.0236025)
 
 [node name="MailChute" parent="LetterSortingView" node_paths=PackedStringArray("letter_group_node") groups=["mail_chute"] instance=ExtResource("12_6pf6y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9131, 3.84741, -0.379074)
@@ -291,45 +385,49 @@ letter_group_node = NodePath("../Letters")
 [node name="Letters" type="Node3D" parent="LetterSortingView"]
 script = ExtResource("8_k0h4r")
 
-[node name="Letter" parent="LetterSortingView/Letters" instance=ExtResource("2_fulo8")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 44.0744, 4.50922, 0.44084)
-
 [node name="LetterTextureGenerator" parent="LetterSortingView" groups=["letter_texture"] instance=ExtResource("2_tms3v")]
 
 [node name="SortingBins" type="Node3D" parent="LetterSortingView"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6201, 0, 0)
 
 [node name="SortingTube_RTS" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1121, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6795, 0.246839, -4.87823)
 label_text = "No Return"
 color = Color(0.854902, 0.0156863, 0.133333, 1)
 
 [node name="SortingTube_Earth" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.373, 0.277196, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9404, 0.277196, -4.87823)
 target_universe = 1
 label_text = "Earth"
 color = Color(0.4, 0.658824, 0.341176, 1)
 
 [node name="SortingTube_Magic" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6001, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1675, 0.246839, -4.87823)
 target_universe = 2
 label_text = "The Yonder Vale"
 color = Color(0, 0.678431, 0.682353, 1)
 
 [node name="SortingTube_Cyber" parent="LetterSortingView/SortingBins" instance=ExtResource("13_8iik1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8607, 0.246839, -4.87823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4281, 0.246839, -4.87823)
 target_universe = 3
 label_text = "Stardock"
 color = Color(0.8, 0.670588, 0.321569, 1)
 
-[node name="Control" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker", "package_group_node") instance=ExtResource("7_awbof")]
-mouse_filter = 2
+[node name="OmniLight3D" type="OmniLight3D" parent="LetterSortingView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.69, 8.27636, 1.06326)
+light_energy = 12.0
+shadow_enabled = true
+shadow_opacity = 0.52
+omni_range = 23.8898
+omni_attenuation = 1.07177
+
+[node name="CameraControl" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker") instance=ExtResource("7_awbof")]
 counter_marker = NodePath("../PackageCounterView/PackageView")
 desk_marker = NodePath("../LetterSortingView/EnvelopeView")
-package_group_node = NodePath("../PackageCounterView/Packages")
 
 [node name="GUI" parent="." instance=ExtResource("19_06uec")]
 
 [node name="Notebook" parent="." instance=ExtResource("12_m60oy")]
 
+[connection signal="timeout" from="DayTimer" to="." method="end_day"]
 [connection signal="timeout" from="PackageCounterView/CharacterManager/SpawnerCountdown" to="PackageCounterView/CharacterManager" method="on_timer_ended"]

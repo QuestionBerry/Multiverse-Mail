@@ -54,7 +54,9 @@ func send_mail(target : Letter):
 
 func send_package(target : Package):
 	var tween = get_tree().create_tween()
-	await tween.tween_property(target, "position", Vector3.LEFT*3, 2).as_relative().finished
+	$AnimationPlayer.play("Moving")
+	await tween.tween_property(target, "position", Vector3.LEFT*4, 2.5).as_relative().finished
+	$AnimationPlayer.play("Idle")
 	target.check_if_correct()
 
 func hold_in_bin( target: RigidBody3D)->void:
