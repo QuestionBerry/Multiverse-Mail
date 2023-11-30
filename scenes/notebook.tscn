@@ -4,21 +4,17 @@
 [ext_resource type="Script" path="res://scripts/notebook.gd" id="1_vwbg2"]
 [ext_resource type="Texture2D" uid="uid://c8y64ulcb15rt" path="res://assets/sprites/TABS.png" id="3_fknqv"]
 
-[node name="Notebook" type="Node2D" node_paths=PackedStringArray("letter", "package", "earth", "yonder", "stardock")]
+[node name="Notebook" type="Node2D"]
 script = ExtResource("1_vwbg2")
-letter = NodePath("Book/Tab-Letter")
-package = NodePath("Book/Tab-Package")
-earth = NodePath("Book/Tab-Earth")
-yonder = NodePath("Book/Tab-Yonder")
-stardock = NodePath("Book/Tab-Stardock")
 
 [node name="Book" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(993, 1527)
 scale = Vector2(2, 2)
 texture = ExtResource("1_v70cr")
-hframes = 3
+hframes = 4
 vframes = 3
+frame = 7
 metadata/_edit_lock_ = true
 
 [node name="Tab-Letter" type="Sprite2D" parent="Book"]
@@ -164,8 +160,8 @@ bus = &"SFX"
 
 [connection signal="gui_input" from="Book/Tab-Letter/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [1]]
 [connection signal="gui_input" from="Book/Tab-Package/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [4]]
-[connection signal="gui_input" from="Book/Tab-Earth/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [6]]
-[connection signal="gui_input" from="Book/Tab-Yonder/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [7]]
-[connection signal="gui_input" from="Book/Tab-Stardock/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [8]]
+[connection signal="gui_input" from="Book/Tab-Earth/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [7]]
+[connection signal="gui_input" from="Book/Tab-Yonder/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [8]]
+[connection signal="gui_input" from="Book/Tab-Stardock/Tab-Button" to="." method="_on_tab_button_gui_input" binds= [9]]
 [connection signal="gui_input" from="Book/NextPage" to="." method="_on_next_page_gui_input"]
 [connection signal="gui_input" from="Book/PreviousPage" to="." method="_on_previous_page_gui_input"]

@@ -15,6 +15,10 @@ func check_letter_correct(letter:Letter) -> bool:
 		if not letter.has_seal and letter.origin_universe == NameList.universe.MAGIC:
 			errors.append("Missing seal")
 	
+	if Global.game_day >= 5:
+		if letter.is_fake:
+			errors.append("Fake origin")
+	
 	#If there are no errors, check if it was stamped Approved
 	if not errors:
 		if not letter.is_approved:
@@ -28,8 +32,10 @@ func check_letter_correct(letter:Letter) -> bool:
 		#If there are errors, stamped RTS, no origin, but not sorted to RTS bin
 		elif not letter.has_origin and letter.sorted_bin_location != NameList.universe.RTS:
 			errors.append("Not returned to RTS")
+		elif letter.is_fake and letter.sorted_bin_location != NameList.universe.RTS:
+			errors.append("Returned to fake origin")
 		#If there are errors and stamped RTS, has origin but returned to wrong bin.
-		elif letter.has_origin and letter.sorted_bin_location != letter.origin_universe:
+		elif letter.has_origin and letter.sorted_bin_location != letter.origin_universe and not letter.is_fake:
 			errors.append("Returned to wrong origin")
 		else:
 			#If there are errors, stamped RTS and placed in RTS bin correctly
@@ -74,7 +80,7 @@ func check_package_correct(package : Package):
 				has_fragile_sticker = true
 				if not package.is_fragile:
 					errors.append("Labeled fragile incorrectly")
-		if Global.game_day >= 5:
+		if Global.game_day >= 6:
 			if sticker.type == Sticker.types.EXPEDITED:
 				has_expedited_sticker = true
 				if not package.is_priority_mail:

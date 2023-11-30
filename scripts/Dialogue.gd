@@ -105,7 +105,7 @@ var cyber_dialogue = [
 	"Need this [shake]*beep*[/shake] shipped. Aw [shake]*beep*[/shake] I'm beeping again.",
 	"I need something sent to myself, in the future!",
 	"Man, I miss the good old days when shipments were slower.",
-	"Hope you're having a Coporation-riffic day!",
+	"Hope you're having a Corporation-riffic day!",
 	"I hope it doesn't cost too much, I worked really hard to save up.",
 	"Can't believe places like this still exist.",
 	"Looking to ship these today.",

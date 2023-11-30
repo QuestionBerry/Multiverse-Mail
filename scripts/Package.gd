@@ -44,6 +44,9 @@ func check_if_correct()->void:
 	else:
 		Global.wrong_packages += 1
 		print("Wrong")
+		if Global.wrong_letters + Global.wrong_packages > 5:
+			Global.day_failed = true
+			get_tree().get_first_node_in_group("main").end_day()
 	
 	self.queue_free()
 	get_tree().get_first_node_in_group("character_manager").move_up_queue()

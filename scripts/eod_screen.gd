@@ -4,6 +4,11 @@ extends Control
 func _ready():
 	hide_labels()
 
+func update_totals():
+	Global.total_correct_letters += Global.correct_letters
+	Global.total_correct_packages += Global.correct_packages
+	Global.total_wrong_letters += Global.wrong_letters
+	Global.total_wrong_packages += Global.wrong_packages
 
 func show_screen() -> void:
 	$ColorRect.visible = true
@@ -12,12 +17,7 @@ func show_screen() -> void:
 	$Title.text = str("End of Day ", Global.game_day)
 	$Title.visible = true
 	
-	if Global.game_day < 7:
-		tally_score()
-	else:
-		######## ADD FINAL SCORE SCREEN ######
-		tally_score()
-		pass
+	tally_score()
 
 func hide_screen() -> void:
 	hide_labels()
@@ -41,12 +41,23 @@ func tally_score() -> void:
 		await show_label_then_wait($GridContainer/PackagesWrong)
 		await animate_number($GridContainer/PackagesWrongNumber, Global.wrong_packages)
 	
+	if Global.game_day >= 5:
+		if Global.correct_letters < 10:
+			Global.day_failed = true
+			$FailCondition.text = "Failed: Didn't meet letters quota"
+	
+	if Global.day_failed:
+		$Button.text = "Retry Day"
+		if Global.excess_customers >= 3:
+			$FailCondition.text = "Failed: Customers line left too long"
+		elif Global.wrong_letters + Global.wrong_packages > 5:
+			$FailCondition.text = "Failed: Too many sorting mistakes"
+	
 	$Button.visible = true
 
 func hide_labels() -> void:
 	$Title.visible = false
 	$Button.visible = false
-	$ColorRect.visible = false
 	for child in $GridContainer.get_children():
 		child.visible = false
 
@@ -66,6 +77,26 @@ func animate_number(target, number) -> void:
 
 
 func _on_button_pressed():
+	#Final screen
+	if Global.game_day == 7 and not Global.day_failed:
+		update_totals()
+		hide_labels()
+		show_final_score()
+		return
+	
 	hide_screen()
-	Global.game_day += 1
+	if not Global.day_failed:
+		update_totals()
+		Global.game_day += 1
 	get_tree().reload_current_scene()
+
+
+func show_final_score():
+	$FinalScore/VBoxContainer/GridContainer/GridContainer2/LettersTotalNumber.text = str(Global.total_correct_letters + Global.total_wrong_letters)
+	$FinalScore/VBoxContainer/GridContainer/GridContainer2/LettersCorrectTotalNumber.text = str(Global.total_correct_letters)
+	$FinalScore/VBoxContainer/GridContainer/GridContainer2/LettersWrongTotalNumber.text = str(Global.total_wrong_letters)
+	
+	$FinalScore/VBoxContainer/GridContainer/GridContainer/PackagesTotalNumber.text = str(Global.total_correct_packages + Global.total_wrong_packages)
+	$FinalScore/VBoxContainer/GridContainer/GridContainer/PackagesCorrectTotalNumber.text = str(Global.total_correct_packages)
+	$FinalScore/VBoxContainer/GridContainer/GridContainer/PackagesWrongTotalNumber.text = str(Global.total_wrong_packages)
+	$FinalScore.visible = true

@@ -18,7 +18,7 @@ var is_processed := false
 var is_approved := false
 var is_returned := false
 
-
+var is_fake := false
 
 func _ready():
 	input_event.connect(on_input_event)
@@ -46,5 +46,8 @@ func check_if_correct()->void:
 	else:
 		Global.wrong_letters += 1
 		print("Wrong")
+		if Global.wrong_letters + Global.wrong_packages > 5:
+			Global.day_failed = true
+			get_tree().get_first_node_in_group("main").end_day()
 	self.queue_free()
 	get_tree().get_first_node_in_group("mail_chute").create_letter()

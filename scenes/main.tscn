@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=37 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Texture2D" uid="uid://i4xt5sghrv60" path="res://assets/sprites/HallDecorations.png" id="1_cekco"]
 [ext_resource type="Material" uid="uid://cg4eo2302bqc1" path="res://assets/Material-Wall.tres" id="1_isret"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ck3tcq6xnc2qu" path="res://scenes/gui.tscn" id="19_06uec"]
 [ext_resource type="PackedScene" uid="uid://xabmhldjoyyg" path="res://scenes/table-front.tscn" id="20_8xc2i"]
 [ext_resource type="PackedScene" uid="uid://c7w7g57rfw1t" path="res://assets/models/Ugly_wall.glb" id="22_0rlda"]
+[ext_resource type="PackedScene" uid="uid://dqmsfx3vw1m2l" path="res://scenes/day_begin.tscn" id="23_slusd"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_n2ps8"]
 dof_blur_far_enabled = true
@@ -75,13 +76,12 @@ script/source = "extends StaticBody3D
 var sticker_offset = 0
 "
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" groups=["main"]]
 script = ExtResource("1_qxsum")
 
 [node name="DayTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 240.0
 one_shot = true
-autostart = true
 
 [node name="World" type="Node3D" parent="."]
 
@@ -324,7 +324,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05896, -0.469242, -21.9083)
 gizmo_extents = 1.85
 
 [node name="SpawnerCountdown" type="Timer" parent="PackageCounterView/CharacterManager"]
-autostart = true
 
 [node name="TexturePackage" parent="PackageCounterView" groups=["package_texture"] instance=ExtResource("9_d0rjt")]
 
@@ -428,6 +427,11 @@ desk_marker = NodePath("../LetterSortingView/EnvelopeView")
 [node name="GUI" parent="." instance=ExtResource("19_06uec")]
 
 [node name="Notebook" parent="." instance=ExtResource("12_m60oy")]
+
+[node name="DayBegin" parent="." instance=ExtResource("23_slusd")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
 
 [connection signal="timeout" from="DayTimer" to="." method="end_day"]
 [connection signal="timeout" from="PackageCounterView/CharacterManager/SpawnerCountdown" to="PackageCounterView/CharacterManager" method="on_timer_ended"]

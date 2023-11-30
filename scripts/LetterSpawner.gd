@@ -18,8 +18,9 @@ class Spawn_Rules:
 	var destination_chance : float
 	var stamp_chance : float
 	var seal_chance : float
+	var fake_origin : float
 	
-	func _init(_earth_chance, _magic_chance, _cyber_chance, _origin_chance, _destination_chance, _stamp_chance, _seal_chance):
+	func _init(_earth_chance, _magic_chance, _cyber_chance, _origin_chance, _destination_chance, _stamp_chance, _seal_chance, _fake_origin):
 		earth_chance = _earth_chance
 		magic_chance = _magic_chance
 		cyber_chance = _cyber_chance
@@ -27,15 +28,16 @@ class Spawn_Rules:
 		destination_chance = _destination_chance
 		stamp_chance = _stamp_chance
 		seal_chance = _seal_chance
+		fake_origin = _fake_origin
 
-								#Earth, magic, cyber, origin, dest, stamp, seal
-var day1rules := Spawn_Rules.new( 1.0,  1.0,    1.0,    1.0,   1.0,   0.75, 0.0)
-var day2rules := Spawn_Rules.new( 0.75,  1.0,    0.6,   0.9,   0.75,  0.8,  0.7)
-var day3rules := Spawn_Rules.new( 0.75, 0.75,   1.0,    0.8,   0.75,  0.75, 0.75)
-var day4rules := Spawn_Rules.new( 1.0,   1.0,    1.0,  0.75,   0.8,   0.6,  0.8)
-var day5rules := Spawn_Rules.new( 0.5,  0.75,    0.8,   0.6,   0.9,   0.8,  0.6)
-var day6rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.9,   1.0,   0.8,  0.75)
-var day7rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.7,   0.8,   0.7,  0.6)
+								#Earth, magic, cyber, origin, dest, stamp, seal, fake
+var day1rules := Spawn_Rules.new( 1.0,  1.0,    1.0,    1.0,   1.0,   0.75, 0.0,  0.0)
+var day2rules := Spawn_Rules.new( 0.75,  1.0,    0.6,   0.9,   0.75,  0.8,  0.7,  0.0)
+var day3rules := Spawn_Rules.new( 0.75, 0.75,   1.0,    0.8,   0.75,  0.75, 0.75, 0.0)
+var day4rules := Spawn_Rules.new( 1.0,   1.0,    1.0,  0.75,   0.8,   0.6,  0.8,  0.0)
+var day5rules := Spawn_Rules.new( 0.5,  0.75,    0.8,   0.85,   0.9,   0.8,  0.6,  0.5)
+var day6rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.9,   1.0,   0.8,  0.75, 0.4)
+var day7rules := Spawn_Rules.new( 1.0,   1.0,    1.0,   0.7,   0.8,   0.7,  0.6,  0.4)
 
 var rules = { 
 	1 : day1rules,
@@ -68,6 +70,13 @@ func roll_letter_properties(rules: Spawn_Rules)->Dictionary:
 		properties.has_seal = true if randf() < rules.seal_chance else false
 	else:
 		properties.has_seal = false
+	
+	#Origin can only be fake if it has one
+	if properties.has_origin and properties.has_stamp:
+		properties.is_fake = true if randf() < rules.fake_origin else false
+	else:
+		properties.is_fake = false
+	
 	print(properties)
 	return properties
 
@@ -83,7 +92,7 @@ func pick_universe_from_chance(earth : float, magic : float, cyber : float)->int
 
 
 func create_letter():
-	var properties := roll_letter_properties(day1rules)
+	var properties := roll_letter_properties(rules[Global.game_day])
 	var new_letter : Letter = letter.instantiate()
 	new_letter.has_origin = properties.has_origin
 	new_letter.origin_universe = properties.origin_universe
@@ -91,6 +100,7 @@ func create_letter():
 	new_letter.destination_universe = properties.destination_universe
 	new_letter.has_stamp = properties.has_stamp
 	new_letter.has_seal = properties.has_seal
+	new_letter.is_fake = properties.is_fake
 	
 	for child in new_letter.get_children():
 		if child is MeshInstance3D:

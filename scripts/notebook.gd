@@ -1,22 +1,28 @@
 extends Node2D
 
-@export var letter : Sprite2D
-@export var package : Sprite2D
-@export var earth : Sprite2D
-@export var yonder : Sprite2D
-@export var stardock : Sprite2D
+@onready var letter : Sprite2D = $"Book/Tab-Letter"
+@onready var package : Sprite2D = $"Book/Tab-Package"
+@onready var earth : Sprite2D = $"Book/Tab-Earth"
+@onready var yonder : Sprite2D = $"Book/Tab-Yonder"
+@onready var stardock : Sprite2D = $"Book/Tab-Stardock"
 
 var is_shown := false
 var speed := 0.75
 
-var pages = [0, 1, 6, 7, 8]
-var tabs = [letter, package, earth, yonder, stardock]
+var pages = [0, 1, 7, 8, 9]
+@onready var tabs = [letter, package, earth, yonder, stardock]
 
 var page_sounds = [
 	"res://assets/audio/SFX/page flip 2.wav",
 	"res://assets/audio/SFX/page flip 3.wav",
 	"res://assets/audio/SFX/pageflip1.wav"
 ]
+
+func _ready():
+	update_available_pages()
+	if Global.game_day >= 4:
+		show_tabs()
+
 
 func update_available_pages()->void:
 	match Global.game_day:
@@ -25,20 +31,32 @@ func update_available_pages()->void:
 			pages.remove_at(index)
 			pages.insert(index, 2)
 		3:
-			var index = pages.find(2)
+			var index = pages.find(1)
+			pages.remove_at(index)
+			pages.insert(index, 2)
+			
+			pages.insert(index+1, 4)
+		4:
+			var index = pages.find(1)
+			pages.remove_at(index)
+			pages.insert(index, 2)
+			
+			pages.insert(index+1, 5)
+		5:
+			var index = pages.find(1)
 			pages.remove_at(index)
 			pages.insert(index, 3)
 			
-			pages.insert(index+1, 4)
-			show_tabs()
-		4:
-			var index = pages.find(4)
+			pages.insert(index+1, 5)
+		6, 7:
+			var index = pages.find(1)
 			pages.remove_at(index)
-			pages.insert(index, 5)
+			pages.insert(index, 3)
+			
+			pages.insert(index+1, 6)
 		_:
 			pass
 	change_page(0)
-
 
 func show_tabs()->void:
 	for tab in tabs:
@@ -86,25 +104,25 @@ func change_page(page):
 			update_tab(earth, true)
 			update_tab(yonder, true)
 			update_tab(stardock, true)
-		4, 5: #Package Rules
+		4, 5, 6: #Package Rules
 			update_tab(letter, false)
 			update_tab(package, true, true)
 			update_tab(earth, true)
 			update_tab(yonder, true)
 			update_tab(stardock, true)
-		6:  #Earth Reference
+		7:  #Earth Reference
 			update_tab(letter, false)
 			update_tab(package, false)
 			update_tab(earth, true, true)
 			update_tab(yonder, true)
 			update_tab(stardock, true)
-		7:   #Yonder Vale Reference
+		8:   #Yonder Vale Reference
 			update_tab(letter, false)
 			update_tab(package, false)
 			update_tab(earth, false, false, true)
 			update_tab(yonder, true, true)
 			update_tab(stardock, true)
-		8:   #Stardock Reference
+		9:   #Stardock Reference
 			update_tab(letter, false)
 			update_tab(package, false)
 			update_tab(earth, false, false, true)

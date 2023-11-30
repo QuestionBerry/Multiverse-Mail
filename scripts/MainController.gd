@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var sticker_dispenser = load("res://scenes/sticker_dispenser.tscn")
+@onready var audio_player = $AudioStreamPlayer
 
 func _ready():
 	#Called here b/c autoload script happens before camera is created
@@ -8,16 +9,14 @@ func _ready():
 	ObjectInteractor.camera = get_tree().get_first_node_in_group("camera")
 	
 	setup_world()
+	show_new_day_screen()
+
 
 func setup_world():
-	#spawn dispencers
-	
-	#enable camera controls per day
-	
 	#reset score
 	Global.reset_score()
 	
-	#set initial camera location
+	#set initial camera location & enable camera controls
 	if Global.game_day < 3:
 		$World/Camera3D.position = $LetterSortingView/EnvelopeView.position
 		$World/Camera3D.rotation = $LetterSortingView/EnvelopeView.rotation
@@ -29,6 +28,7 @@ func setup_world():
 		$CameraControl.visible = true
 		Global.player_at_counter = true
 	
+	#Spawn dispencers
 	if Global.game_day >= 4:
 		var fragile_dispenser = sticker_dispenser.instantiate()
 		fragile_dispenser.type = Sticker.types.FRAGILE
@@ -50,20 +50,31 @@ func setup_world():
 
 func show_new_day_screen():
 	#show new rules
-	#spawn new additions to world
-	#have button to start day
-	pass
+	await $DayBegin.slide_in()
+	$DayBegin.show_paper()
 
 
 func start_day() -> void:
-	#tell systems to update rulesets
 	#spawn first letter
+	$LetterSortingView/MailChute.create_letter()
 	#start person timer
-	#move screen
-	pass
+	if Global.game_day >= 3:
+		$PackageCounterView/CharacterManager/SpawnerCountdown.start()
+		
+		$DayTimer.wait_time = 20
+		$DayTimer.start()
+	else:
+		$DayTimer.start()
 
 func end_day() -> void:
 	#Play sound
+	if Global.day_failed:
+		audio_player.stream = load("res://assets/audio/SFX/Arcade Negative Feedback 01.wav")
+		audio_player.play()
+	else:
+		audio_player.stream = load("res://assets/audio/SFX/Arcade_Positive_Event_01_1.wav")
+		audio_player.play()
+	
 	#stop interacting()
 	Global.can_interact = false
 	ObjectInteractor.stop_interacting()
@@ -73,10 +84,7 @@ func end_day() -> void:
 	await get_tree().create_timer(1).timeout
 	#bring up end of day screen
 	$GUI/EODScreen.show_screen()
-	#check for upgrade
-	
-	#pick decorative upgrade
-	pass
+
 
 func pause_game() -> void:
 	#pause timers

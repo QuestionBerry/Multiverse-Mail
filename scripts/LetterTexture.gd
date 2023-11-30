@@ -23,8 +23,10 @@ func create_letter_texture(letter: Letter):
 		$SubViewport/DestinationName2.text = NameList.get_random_name(letter.destination_universe)
 		$SubViewport/DestinationLocation2.text = NameList.get_random_location(letter.destination_universe, true)
 	
-	if letter.has_stamp:
+	if letter.has_stamp and not letter.is_fake:
 		set_stamp(letter.origin_universe)
+	elif letter.has_stamp and letter.is_fake:
+		set_stamp(pick_other_universe(letter.origin_universe))
 	else:
 		$SubViewport/Stamp.frame = 0
 	
@@ -45,6 +47,19 @@ func create_letter_texture(letter: Letter):
 	var newTexture := ImageTexture.create_from_image(img)
 	return newTexture
 
+func pick_other_universe(universe):
+	var other_universes = []
+	match universe:
+		NameList.universe.EARTH:
+			other_universes.append(NameList.universe.MAGIC)
+			other_universes.append(NameList.universe.CYBER)
+		NameList.universe.MAGIC:
+			other_universes.append(NameList.universe.EARTH)
+			other_universes.append(NameList.universe.CYBER)
+		NameList.universe.CYBER:
+			other_universes.append(NameList.universe.MAGIC)
+			other_universes.append(NameList.universe.EARTH)
+	return other_universes.pick_random()
 
 func set_stamp(universe):
 	match universe:
