@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ck3tcq6xnc2qu"]
+[gd_scene load_steps=14 format=3 uid="uid://ck3tcq6xnc2qu"]
 
 [ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="1_d366s"]
 [ext_resource type="Script" path="res://scripts/Dialogue.gd" id="2_okrwh"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cpt06p40rfxnw" path="res://assets/audio/SFX/Arcade_Negative_Jingle_02.wav" id="5_3ry56"]
 [ext_resource type="PackedScene" uid="uid://c0q1a28fcipbc" path="res://scenes/eod_screen.tscn" id="5_exe7p"]
 [ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="7_vy4qj"]
+[ext_resource type="PackedScene" uid="uid://d1edbbq8i46lk" path="res://scenes/options.tscn" id="8_b2mxp"]
 
 [sub_resource type="Theme" id="Theme_edksr"]
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -24,6 +25,10 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_83ot3"]
 font = ExtResource("3_aox2a")
 font_size = 64
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ys7hj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ht7f"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -83,6 +88,7 @@ mouse_filter = 2
 script = ExtResource("7_vy4qj")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,18 +109,61 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/ColorRect/CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer"]
+[node name="GamePaused" type="Label" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Game Paused"
 label_settings = SubResource("LabelSettings_83ot3")
 
-[node name="ResumeButton" type="Button" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
+
+[node name="HSeparator3" type="HSeparator" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ys7hj")
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_horizontal = 7
+theme_override_fonts/font = ExtResource("1_d366s")
+theme_override_font_sizes/font_size = 42
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ys7hj")
+
+[node name="OptionsButton" type="Button" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+size_flags_horizontal = 7
+theme_override_fonts/font = ExtResource("1_d366s")
+theme_override_font_sizes/font_size = 42
+text = "Options"
+
+[node name="HSeparator2" type="HSeparator" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_1ht7f")
+
+[node name="QuitButton" type="Button" parent="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_horizontal = 7
+theme_override_fonts/font = ExtResource("1_d366s")
+theme_override_font_sizes/font_size = 42
 text = "Quit
 "
+
+[node name="Options" parent="PauseMenu" instance=ExtResource("8_b2mxp")]
+visible = false
+layout_mode = 1
+offset_top = -119.0
+offset_bottom = 296.0
+
+[connection signal="pressed" from="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer/OptionsButton" to="PauseMenu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ColorRect/CenterContainer/VBoxContainer/VBoxContainer/QuitButton" to="PauseMenu" method="_on_quit_button_pressed"]

@@ -57,11 +57,19 @@ func show_new_day_screen():
 func start_day() -> void:
 	#spawn first letter
 	$LetterSortingView/MailChute.create_letter()
+	
+	#start music
+	if Global.game_day%2:
+		$AudioStreamPlayer.stream = load("res://assets/audio/Music/Title 2-Loop.mp3")
+	else:
+		$AudioStreamPlayer.stream = load("res://assets/audio/Music/22-Dark fantasy studio- Reggae time.mp3")
+	$AudioStreamPlayer.play()
+	
 	#start person timer
 	if Global.game_day >= 3:
 		$PackageCounterView/CharacterManager/SpawnerCountdown.start()
 		
-		$DayTimer.wait_time = 20
+		$DayTimer.wait_time = 360
 		$DayTimer.start()
 	else:
 		$DayTimer.start()
@@ -86,9 +94,6 @@ func end_day() -> void:
 	$GUI/EODScreen.show_screen()
 
 
-func pause_game() -> void:
-	#pause timers
-	#pause interaction
-	#bring up pause screen
-	#have option to quit game or resume
-	pass
+func _on_audio_stream_player_finished():
+	await get_tree().create_timer(30).timeout
+	$AudioStreamPlayer.play()

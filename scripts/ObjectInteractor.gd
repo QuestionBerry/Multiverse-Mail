@@ -11,7 +11,6 @@ var prev_object_position : Vector3
 var mouseMotion : Vector2
 
 const RAY_LENGTH := 100
-const ROTATION_SPEED := .05
 
 
 func start_moving_object(object:RigidBody3D)->void:
@@ -77,8 +76,9 @@ func _physics_process(delta):
 			acting_object.position.x = raycast_result.position.x 
 			acting_object.position.z = raycast_result.position.z
 	elif is_rotating_object:
-		acting_object.rotate_y((mouseMotion.x) * ROTATION_SPEED * delta)
-		acting_object.rotate_x((mouseMotion.y) * ROTATION_SPEED * delta)
+		acting_object.rotate_y((mouseMotion.x) * Global.rotate_speed * delta)
+		acting_object.rotate_x((mouseMotion.y) * Global.rotate_speed * delta)
+
 
 func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 4294967295) -> Dictionary:	
 	var parameters = PhysicsRayQueryParameters3D.new()
@@ -87,11 +87,6 @@ func raycast(from:Vector3, to:Vector3, exclusions:Array, collision_mask:int = 42
 	parameters.exclude = exclusions
 	parameters.collision_mask = collision_mask
 	return camera.get_world_3d().direct_space_state.intersect_ray(parameters)
-
-#func is_anything_above() -> bool:
-#	var from = acting_object.position
-#	var to = from + Vector3.UP * RAY_LENGTH
-#	return true if raycast(from, to, [acting_object], 1) else false
 
 func raycast_below(object):
 	var from = object.position

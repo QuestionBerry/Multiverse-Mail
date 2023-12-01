@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1edbbq8i46lk"]
+
+[ext_resource type="Script" path="res://scripts/Options.gd" id="1_1an5p"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="2_tbup3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nl47s"]
+font = ExtResource("2_tbup3")
+font_size = 42
+
+[sub_resource type="Theme" id="Theme_3ncjn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjmc7"]
+
+[node name="Options" type="GridContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.0
+offset_top = 16.0
+offset_right = 295.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1an5p")
+
+[node name="Fullscreen" type="CheckBox" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tbup3")
+theme_override_font_sizes/font_size = 42
+text = "Fullscreen"
+
+[node name="RotateSpeed" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Object Rotate Speed"
+label_settings = SubResource("LabelSettings_nl47s")
+
+[node name="RotateSpeedSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 0.02
+max_value = 0.1
+step = 0.01
+value = 0.05
+tick_count = 11
+
+[node name="MusicLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_nl47s")
+
+[node name="MusicVolume" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
+step = 2.0
+
+[node name="SoundEffects" type="Label" parent="."]
+layout_mode = 2
+text = "Sound Effects"
+label_settings = SubResource("LabelSettings_nl47s")
+
+[node name="SFXVolume" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
+step = 2.0
+
+[node name="SpacerPanel4" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_3ncjn")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
+
+[node name="BackButton" type="Button" parent="."]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_tbup3")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="toggled" from="Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="drag_ended" from="RotateSpeedSlider" to="." method="_on_rotate_speed_slider_drag_ended"]
+[connection signal="drag_ended" from="MusicVolume" to="." method="_on_music_volume_drag_ended"]
+[connection signal="drag_ended" from="SFXVolume" to="." method="_on_sfx_volume_drag_ended"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

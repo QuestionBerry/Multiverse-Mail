@@ -31,11 +31,11 @@ class Character_Rules:
 #                     spawn_chance, spawn_time,    universe,  fragile, priority
 var day1 = Character_Rules.new(0.0, 1000, NameList.universe.EARTH, 0.0, 0.0)
 var day2 = Character_Rules.new(0.0, 1000, NameList.universe.EARTH, 0.0, 0.0)
-var day3 = Character_Rules.new(0.9, 30, NameList.universe.EARTH, 0.0, 0.0)
-var day4 = Character_Rules.new(0.75, 25, NameList.universe.MAGIC, 0.5, 0.0)
+var day3 = Character_Rules.new(0.9, 35, NameList.universe.EARTH, 0.0, 0.0)
+var day4 = Character_Rules.new(0.75, 30, NameList.universe.MAGIC, 0.5, 0.0)
 var day5 = Character_Rules.new(0.8, 35, NameList.universe.CYBER, 0.3, 0.0)
-var day6 = Character_Rules.new(0.7, 30, NameList.universe.EARTH, 0.2, 0.7)
-var day7 = Character_Rules.new(0.7, 20, NameList.universe.MAGIC, 0.5, 0.5)
+var day6 = Character_Rules.new(0.7, 35, NameList.universe.EARTH, 0.2, 0.7)
+var day7 = Character_Rules.new(0.7, 25, NameList.universe.MAGIC, 0.5, 0.5)
 
 var rules = [null, day1, day2, day3, day4, day5, day6, day7]
 

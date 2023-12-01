@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqhrr2x273uj7"]
+[gd_scene load_steps=3 format=3 uid="uid://bqhrr2x273uj7"]
 
 [ext_resource type="Script" path="res://scripts/CameraMover.gd" id="1_mfp05"]
+[ext_resource type="FontFile" uid="uid://bcpe3h8nt1t88" path="res://assets/font/pixelmix.ttf" id="2_cupuu"]
 
 [node name="CameraControl" type="Control"]
 layout_mode = 3
@@ -19,12 +20,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -135.0
-offset_top = -66.0
-offset_right = -15.0
-offset_bottom = -14.0
+offset_left = -336.0
+offset_top = -100.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cupuu")
+theme_override_font_sizes/font_size = 32
 text = "Sorting Desk"
 
 [node name="ToCounter" type="Button" parent="."]
@@ -32,11 +35,13 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -66.0
-offset_right = 134.0
-offset_bottom = -10.0
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 336.0
+offset_bottom = -20.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cupuu")
+theme_override_font_sizes/font_size = 32
 text = "Front Counter"
 
 [connection signal="pressed" from="ToDesk" to="." method="_on_to_desk_pressed"]

@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://db1oev5putyof"]
+[gd_scene load_steps=17 format=3 uid="uid://db1oev5putyof"]
 
 [ext_resource type="FontFile" uid="uid://k1e1whgm4dap" path="res://assets/font/editundo.ttf" id="1_aj0wj"]
 [ext_resource type="Script" path="res://scripts/Title.gd" id="1_b1nfk"]
-[ext_resource type="AudioStream" uid="uid://dccc6ckkpv3tl" path="res://assets/audio/Music/Title.mp3" id="3_23go2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_krrwv"]
-font_size = 72
+[ext_resource type="PackedScene" uid="uid://d1edbbq8i46lk" path="res://scenes/options.tscn" id="2_lff37"]
+[ext_resource type="AudioStream" uid="uid://xsnyucoggdhk" path="res://assets/audio/Music/Title.mp3" id="3_23go2"]
+[ext_resource type="PackedScene" uid="uid://d12sylc7su3xv" path="res://scenes/table.tscn" id="4_5y8db"]
+[ext_resource type="PackedScene" uid="uid://scmw5gq44h8m" path="res://scenes/stamp_3.tscn" id="5_ngn1r"]
+[ext_resource type="PackedScene" uid="uid://dq3jr6cjyhxea" path="res://scenes/letter.tscn" id="6_qcrp4"]
+[ext_resource type="Texture2D" uid="uid://daddhcoptobb" path="res://assets/sprites/letters/Mail_Stamps.png" id="7_035mp"]
+[ext_resource type="Texture2D" uid="uid://dsdc5xqjdhubl" path="res://assets/sprites/TitleStamp.png" id="8_q1lqm"]
+[ext_resource type="AudioStream" uid="uid://0wfaryxut43" path="res://assets/audio/Open Door 4.mp3" id="9_ct46u"]
 
 [sub_resource type="Theme" id="Theme_ja4gv"]
 Button/font_sizes/font_size = 72
@@ -14,6 +18,139 @@ Button/fonts/font = ExtResource("1_aj0wj")
 [sub_resource type="Theme" id="Theme_3ncjn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjmc7"]
+
+[sub_resource type="Animation" id="Animation_p5pf5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Letter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.44981, -1.25383, -2.72022)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Letter:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Stamp:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.173391, 1.71036, -1.57919)]
+}
+
+[sub_resource type="Animation" id="Animation_s6n25"]
+resource_name = "TitleEntry"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Letter:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1.56917),
+"update": 0,
+"values": [Vector3(-3.44981, -1.25383, -2.72022), Vector3(-0.792804, -1.25383, -1.96325), Vector3(0.137149, -1.25383, -1.69832)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Letter:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, -0.687311, 0), Vector3(-1.5708, -0.178192, 0), Vector3(-1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Stamp:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.7, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.173391, 1.71036, -1.57919), Vector3(0.173391, -1.12635, -1.57919), Vector3(0.173391, 0.724012, -1.57919)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdofo"]
+_data = {
+"RESET": SubResource("Animation_p5pf5"),
+"TitleEntry": SubResource("Animation_s6n25")
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -24,32 +161,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b1nfk")
 
-[node name="Label" type="Label" parent="."]
+[node name="Options" parent="." instance=ExtResource("2_lff37")]
+visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -465.0
-offset_top = 165.0
-offset_right = 465.0
-offset_bottom = 267.0
-grow_horizontal = 2
-text = "Hello, I'm your title screen."
-label_settings = SubResource("LabelSettings_krrwv")
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -515.0
+offset_bottom = -100.0
+grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -120.0
-offset_top = -6.0
+offset_top = -372.0
 offset_right = 120.0
-offset_bottom = 218.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -64,21 +197,10 @@ theme = SubResource("Theme_3ncjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 theme = SubResource("Theme_ja4gv")
 text = "Options"
-
-[node name="SpacerPanel2" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-mouse_filter = 2
-theme = SubResource("Theme_3ncjn")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_sjmc7")
-
-[node name="CreditsButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_ja4gv")
-text = "Credits"
 
 [node name="SpacerPanel" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -92,11 +214,56 @@ layout_mode = 2
 theme = SubResource("Theme_ja4gv")
 text = "Quit"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_23go2")
+volume_db = -6.0
 bus = &"Music"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0420675, 0.999115, 0, -0.999115, 0.0420675, 0.120856, 0.405999, -1.10409)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0632608, 0.997997, 0, -0.997997, 0.0632608, 0, -0.318336, 5.02205)
+
+[node name="Stamp" parent="Node3D" instance=ExtResource("5_ngn1r")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.173391, 1.71036, -1.57919)
+
+[node name="Table" parent="Node3D" instance=ExtResource("4_5y8db")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.163704, -3.49306, -1.63113)
+
+[node name="Letter" parent="Node3D" instance=ExtResource("6_qcrp4")]
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, 1, 0, -1, -3.61999e-06, -3.44981, -1.25383, -2.72022)
+freeze = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D/Letter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.792212, 0.421051, 0.0377637)
+texture_filter = 0
+texture = ExtResource("7_035mp")
+hframes = 5
+vframes = 4
+frame = 2
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(1.01, 0, 0, 0, -4.41485e-08, 1.01, 0, -1.01, -4.41485e-08, 0.15412, -1.18679, -1.66804)
+visible = false
+texture_filter = 0
+texture = ExtResource("8_q1lqm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
+libraries = {
+"": SubResource("AnimationLibrary_bdofo")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node3D"]
+stream = ExtResource("9_ct46u")
+volume_db = -15.0
+pitch_scale = 3.0
+bus = &"SFX"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+
+[editable path="Node3D/Letter"]

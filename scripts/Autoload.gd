@@ -1,7 +1,8 @@
 extends Node
 
-var game_day : int = 7
+var game_day : int = 1
 
+var rotate_speed := .05
 var can_interact := true
 var player_at_counter := false
 

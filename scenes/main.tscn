@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://brfoteqvalx36"]
+[gd_scene load_steps=38 format=3 uid="uid://brfoteqvalx36"]
 
 [ext_resource type="Texture2D" uid="uid://i4xt5sghrv60" path="res://assets/sprites/HallDecorations.png" id="1_cekco"]
 [ext_resource type="Material" uid="uid://cg4eo2302bqc1" path="res://assets/Material-Wall.tres" id="1_isret"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://xabmhldjoyyg" path="res://scenes/table-front.tscn" id="20_8xc2i"]
 [ext_resource type="PackedScene" uid="uid://c7w7g57rfw1t" path="res://assets/models/Ugly_wall.glb" id="22_0rlda"]
 [ext_resource type="PackedScene" uid="uid://dqmsfx3vw1m2l" path="res://scenes/day_begin.tscn" id="23_slusd"]
+[ext_resource type="AudioStream" uid="uid://cnym5qygq514r" path="res://assets/audio/Music/Rainy Beat.mp3" id="24_pp3qn"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_n2ps8"]
 dof_blur_far_enabled = true
@@ -80,7 +81,7 @@ var sticker_offset = 0
 script = ExtResource("1_qxsum")
 
 [node name="DayTimer" type="Timer" parent="."]
-wait_time = 240.0
+wait_time = 210.0
 one_shot = true
 
 [node name="World" type="Node3D" parent="."]
@@ -420,18 +421,21 @@ shadow_opacity = 0.52
 omni_range = 23.8898
 omni_attenuation = 1.07177
 
+[node name="Notebook" parent="." instance=ExtResource("12_m60oy")]
+
 [node name="CameraControl" parent="." node_paths=PackedStringArray("counter_marker", "desk_marker") instance=ExtResource("7_awbof")]
 counter_marker = NodePath("../PackageCounterView/PackageView")
 desk_marker = NodePath("../LetterSortingView/EnvelopeView")
 
 [node name="GUI" parent="." instance=ExtResource("19_06uec")]
 
-[node name="Notebook" parent="." instance=ExtResource("12_m60oy")]
-
 [node name="DayBegin" parent="." instance=ExtResource("23_slusd")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -6.0
+stream = ExtResource("24_pp3qn")
+volume_db = -15.0
+bus = &"Music"
 
 [connection signal="timeout" from="DayTimer" to="." method="end_day"]
 [connection signal="timeout" from="PackageCounterView/CharacterManager/SpawnerCountdown" to="PackageCounterView/CharacterManager" method="on_timer_ended"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
