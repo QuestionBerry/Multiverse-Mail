@@ -9,6 +9,8 @@ extends Node2D
 var is_shown := false
 var speed := 0.75
 
+var hint_pressed := false
+
 var pages = [0, 1, 7, 8, 9]
 @onready var tabs = [letter, package, earth, yonder, stardock]
 
@@ -22,6 +24,7 @@ func _ready():
 	update_available_pages()
 	if Global.game_day >= 4:
 		show_tabs()
+	show_hint()
 
 
 func update_available_pages()->void:
@@ -65,6 +68,9 @@ func show_tabs()->void:
 func _input(event): 
 	if event.is_action_pressed("view_notebook"):
 		move_notebook()
+		if not hint_pressed:
+			hint_pressed = true
+			$Hint.queue_free()
 
 func move_notebook()->void:
 	var tween = get_tree().create_tween()
@@ -172,3 +178,14 @@ func _on_tab_button_gui_input(event, page_number):
 			change_page(page_number)
 		else:
 			change_page(page_number)
+
+func show_hint() -> void:
+	if Global.game_day > 1:
+		hint_pressed = true
+		$Hint.queue_free()
+	else:
+		await get_tree().create_timer(15).timeout
+		var tween = get_tree().create_tween()
+		tween.set_parallel(true)
+		tween.tween_property($Hint/ArrowDown, "modulate:a", 1, 3)
+		tween.tween_property($Hint/Spacebar, "modulate:a", 1, 3)

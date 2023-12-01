@@ -81,7 +81,7 @@ var sticker_offset = 0
 script = ExtResource("1_qxsum")
 
 [node name="DayTimer" type="Timer" parent="."]
-wait_time = 210.0
+wait_time = 180.0
 one_shot = true
 
 [node name="World" type="Node3D" parent="."]

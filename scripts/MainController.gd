@@ -3,6 +3,8 @@ extends Node3D
 @onready var sticker_dispenser = load("res://scenes/sticker_dispenser.tscn")
 @onready var audio_player = $AudioStreamPlayer
 
+var day_over := false
+
 func _ready():
 	#Called here b/c autoload script happens before camera is created
 	#creating a null reference otherwise
@@ -65,16 +67,18 @@ func start_day() -> void:
 		$AudioStreamPlayer.stream = load("res://assets/audio/Music/22-Dark fantasy studio- Reggae time.mp3")
 	$AudioStreamPlayer.play()
 	
+	
 	#start person timer
 	if Global.game_day >= 3:
 		$PackageCounterView/CharacterManager/SpawnerCountdown.start()
 		
-		$DayTimer.wait_time = 360
+		$DayTimer.wait_time = 300
 		$DayTimer.start()
 	else:
 		$DayTimer.start()
 
 func end_day() -> void:
+	day_over = true
 	#Play sound
 	if Global.day_failed:
 		audio_player.stream = load("res://assets/audio/SFX/Arcade Negative Feedback 01.wav")
@@ -95,5 +99,6 @@ func end_day() -> void:
 
 
 func _on_audio_stream_player_finished():
-	await get_tree().create_timer(30).timeout
-	$AudioStreamPlayer.play()
+	if not day_over:
+		await get_tree().create_timer(30).timeout
+		$AudioStreamPlayer.play()

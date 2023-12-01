@@ -44,7 +44,6 @@ min_value = 0.02
 max_value = 0.1
 step = 0.01
 value = 0.05
-tick_count = 11
 
 [node name="MusicLabel" type="Label" parent="."]
 layout_mode = 2

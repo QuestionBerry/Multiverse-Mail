@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name Stamp
 
 @export var lift_height := 0.5
 
@@ -45,8 +46,7 @@ func stamp_animation():
 	$AnimationPlayer.play("stamp_up")
 
 func _on_stamp_area_body_entered(body):
-	if body is RigidBody3D and body != self:
-		stamp_animation()
+	if body is RigidBody3D and not body is Stamp:
 		print(str("Stamped ", body))
 		var new_decal :Decal= stamp_decal.instantiate()
 		new_decal.texture_albedo = stamp_sprite
@@ -54,6 +54,7 @@ func _on_stamp_area_body_entered(body):
 		body.add_child(new_decal)
 		new_decal.global_position = $Marker3D.global_position
 		new_decal.global_rotation = $Marker3D.global_rotation
+		stamp_animation()
 		if body is Letter:
 			body.is_processed = true
 			match stamp_type:
